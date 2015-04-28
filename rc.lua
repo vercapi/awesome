@@ -63,15 +63,15 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/nitro/theme.lua")
 -- common
 modkey     = "Mod4"
 altkey     = "Mod1"
-terminal   = "urxvt"
-editor     = os.getenv("EDITOR") or "nano" or "vi"
+terminal   = "xterm"
+editor     = "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
 -- user defined
 browser    = "chromium"
 myTerminal   = terminal
 gui_editor = "emacs"
-graphics   = "gimp"
+graphics   = "insckape"
 
 -- lain
 lain.layout.termfair.nmaster   = 3
@@ -436,8 +436,11 @@ globalkeys = awful.util.table.join(
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+
+    -- Currently not using these, not sure what they do
+    -- awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
+    -- awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -448,10 +451,15 @@ globalkeys = awful.util.table.join(
         end),
     -- awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
     -- awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
-    awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
-    awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1)       end),
-    awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),
-    awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1)          end),
+
+    -- Currentl I use only one master window, so I don't use these
+    --awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
+    --awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1)       end),
+
+    -- Currently using only the standard layout so I don't need these
+    --awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),
+    --awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1)          end),
+
     awful.key({ modkey,           }, "space",  function () awful.layout.inc(layouts,  1)  end),
     awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1)  end),
     awful.key({ modkey, "Control" }, "n",      awful.client.restore),
@@ -466,7 +474,7 @@ globalkeys = awful.util.table.join(
 
     -- Widgets popups
     -- awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
-    awful.key({ modkey,           }, "d",      function () fshomeupd.show(7) end),
+    -- awful.key({ modkey,           }, "d",      function () fshomeupd.show(7) end),
 --    awful.key({ altkey,           }, "w",      function () yawn.show(7) end),
 
     -- ALSA volume control
@@ -518,9 +526,7 @@ globalkeys = awful.util.table.join(
 
     -- User programs
     awful.key({ modkey }, "i", function () awful.util.spawn(browser) end),
-    awful.key({ modkey }, "x", function () awful.util.spawn(myTerminal) end),
     awful.key({ modkey }, "e", function () awful.util.spawn(gui_editor) end),
-    awful.key({ modkey }, "g", function () awful.util.spawn(graphics) end),
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),

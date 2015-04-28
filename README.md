@@ -1,1 +1,1 @@
-# nil
+# awesome wm configuration

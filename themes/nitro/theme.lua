@@ -7,7 +7,7 @@
 
 theme                                           = {}
 
-theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
+theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/nitro"
 theme.wallpaper                                 = "/home/vercapi/backgrounds/theme_ntp_background.png"
 
 theme.font                                      = "Squared Display 14"
