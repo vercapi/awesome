@@ -1,0 +1,91 @@
+* Documentation
+** TODO Key bindings
+
+   (Modkey is windows key "W")
+
+| Key binding | Explanation                           |
+|-------------+---------------------------------------|
+|             | Layout manipulaption                  |
+| W-S-j       | Swap window with next window          |
+| W-S-k       | Swap window wih previous window       |
+| W-SPACE     | Cycle layout                          |
+| W-S-SPACE   | Cycle layout inverse                  |
+| W-C-n       | Client restore (unminimize)           |
+|             |                                       |
+|             | Change Focus                          |
+| W-j         | Focus window down                     |
+| W-k         | Focus window up                       |
+| W-h         | Focus window left                     |
+| W-l         | Focus window right                    |
+| W-u         | Jump to the the window flagged urgent |
+| W-Tab       | Cycle to previously selected windows  |
+|             |                                       |
+|             | Control surroundings                  |
+| W-b         | Hide top bar                          |
+| W-C-r       | Restart awesome                       |
+| W-S-q       | Quit awesome                          |
+| W-r         | start prompt                          |
+| W-x         | Run lua code                          |
+|             |                                       |
+|             | Start programs                        |
+| W-RETURN    | Spawn terminal                        |
+| W-e         | Start editor                          |
+| W-i         | Start browser                         |
+|             |                                       |
+   
+** TODO Required packages 
+
+*** Eminent
+
+[[https://awesome.naquadah.org/wiki/Eminent][Awesome wiki eminent]]
+This is for version 3.5. 
+
+#+BEGIN_SRC sh
+git clone https://github.com/guotsuan/eminent.git
+cp eminent/eminent.lua ~/.config/awesome/
+#+END_SRC
+
+** ice package
+
+ice is a package for LUA that aims to sepparate data and UI. This should work more flexible for creating what I need.
+
+ice/data -> contains all the functions to retreive data
+ice/view -> contains functionallity for showing things
+
+* Functionallity
+** System info
+*** TODO Network
+
+    
+   Show only current trafic on bar (up and down)
+   Create a detail window
+   - with a hisotry graph
+   - With total amount of MBs transferd up and down
+
+   Show wireless icon and show list available networks
+   Conenct via command line (xterm)
+ 
+*** TODO Memory
+   Add a drop down with a bar
+   
+*** TODO CPU
+   Show detail with all CPU's
+*** TODO Disk
+   Show /home as first disk
+   Drop down with all other disks
+*** TODO Calendar
+    Calendar should look 
+** Keybiding
+*** TODO clear up key bindings 
+    How are things flagged urgent?
+    W-C-j and W-C-k seem useless now?
+    W-Tab should handle more as useually
+** Automate actions
+*** TODO shutdown
+*** TODO start netflix full screen
+** Notifications
+*** TODO Battery 
+*** TODO USB
+** Applications
+** Screen behavior
+*** TODO Set window to not go transparent
