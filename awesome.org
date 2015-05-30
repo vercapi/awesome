@@ -32,7 +32,7 @@
 | W-e         | Start editor                          |
 | W-i         | Start browser                         |
 |             |                                       |
-   
+
 ** TODO Required packages 
 
 *** Eminent
@@ -52,15 +52,26 @@ ice is a package for LUA that aims to sepparate data and UI. This should work mo
 ice/data -> contains all the functions to retreive data
 ice/view -> contains functionallity for showing things
 
+** Colors
+   Base colors are based on [[https://github.com/altercation/solarized][solarized]]
+
+   - [[https://raw.githubusercontent.com/altercation/solarized/master/img/solarized-palette.png][The pallet]]
+   - [[https://github.com/altercation/solarized/tree/master/gimp-palette-solarized][Color codes (gimp)]]
+
 * Functionallity
 ** System info
 *** TODO Network
+  
+   Show only current trafic on graph (up and down)
+   - Show wireless/wired
+   - Show alternative connection if possible
+   - Show disconnected
+     - Hide all graphs
+     - Show alert
 
-    
-   Show only current trafic on bar (up and down)
-   Create a detail window
+   Create a detail window with a list of every interface
    - with a hisotry graph
-   - With total amount of MBs transferd up and down
+   - With total amount of MBs transferd up and down 
 
    Show wireless icon and show list available networks
    Conenct via command line (xterm)
@@ -80,12 +91,29 @@ ice/view -> contains functionallity for showing things
     How are things flagged urgent?
     W-C-j and W-C-k seem useless now?
     W-Tab should handle more as useually
-** Automate actions
-*** TODO shutdown
-*** TODO start netflix full screen
 ** Notifications
 *** TODO Battery 
 *** TODO USB
 ** Applications
+** TODO Icon bar
+   A  list of use applications/actions on a side bar on the left.
+   Should also correctly set screen
+   Needs to appear/hide
+
+   Actions
+   - Netflix full screen
+   - Shutdown
+
 ** Screen behavior
 *** TODO Set window to not go transparent
+** Notifications
+   Something android like
+** Graphics
+   
+   Info Top Right
+   \N [...|.||] [.....] \M
+   Different colors for every section
+
+   Popup 
+   Animated?
+   Thick bar floatig a bit under the top of the screen

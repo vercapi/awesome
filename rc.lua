@@ -17,6 +17,8 @@ local drop      = require("scratchdrop")
 local lain      = require("lain")
 local eminent   = require("eminent")
 local vicious   = require("vicious")
+local ice       = require("ice")
+
 -- }}}
 
 -- {{{ Error handling
@@ -140,6 +142,7 @@ cpuwidget = lain.widgets.cpu({
         widget:set_text(" " .. cpu_now.usage .. "% ")
     end
 })
+
 
 -- Network
 neticon = wibox.widget.imagebox(beautiful.net)
@@ -329,8 +332,14 @@ for s = 1, screen.count() do
     -- right_layout:add(mpdwidget)
     right_layout:add(bar_spr)
     right_layout:add(batwidget)
-    right_layout:add(neticon)
-    right_layout:add(neticonup)
+    -- right_layout:add(neticon)
+    -- right_layout:add(neticonup)
+
+    -- New Network
+    testWidget = ice.view.networkView.create(right_layout)
+    testWidget:setIface("wlp6s0")
+    testWidget:start()
+
     right_layout:add(netwidget)
     right_layout:add(neticondown)
     right_layout:add(bar_spr)
