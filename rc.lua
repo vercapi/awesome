@@ -194,11 +194,12 @@ diskbar = awful.widget.progressbar()
 diskbar:set_color(beautiful.fg_normal)
 diskbar:set_background_color("#313131")
 diskbar:set_width(55)
+diskbar:set_height(22)
 diskbar:set_ticks(true)
 diskbar:set_ticks_size(6)
 diskmargin = wibox.layout.margin(diskbar, 2, 7)
 diskmargin:set_top(6)
-diskmargin:set_bottom(6)
+diskmargin:set_bottom(32)
 fshomeupd = lain.widgets.fs({
     partition = "/home",
     settings  = function()
@@ -313,7 +314,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 22 })
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 44 })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
