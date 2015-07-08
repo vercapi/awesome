@@ -4,6 +4,7 @@ local beautiful   = require("beautiful")
 local runner      = require("ice.core.Runner")
 local networkData = require("ice.data.Interface")
 local awful       = require("awful")
+local util        = require("ice.util")
 
 local networkView = {}
 networkView.__index = networkView
@@ -65,6 +66,7 @@ function networkView:start()
 end
 
 function networkView:setIface(pIface)
+   self.ifaceName = pIface
    self.iface=self.devices[pIface]
 end
 
@@ -72,7 +74,7 @@ function networkView.updator(pNetwork)
    function update()
       vCurrentDownRate = pNetwork.iface:getCurrentRate("RX")
       pNetwork.downloadWidget:add_value(vCurrentDownRate)
-
+      
       vCurrentUpRate = pNetwork.iface:getCurrentRate("SX")
       pNetwork.uploadWidget:add_value(vCurrentUpRate)
 
@@ -86,10 +88,15 @@ function networkView:updateState()
    vState = self.iface:getState()
    if vState ~= "UP" then
       self.devices = networkData.getDevices()
-      vAnyIf = self.iface:getAnyConnected()
-      self:setIface(vAnyIf)
+      if(util.tablelength(self.devices) > 0) then
+         self:setIface(self.ifaceName)
+         if(self.ifaceName == nil) then
+            vAnyIf = self.iface:getAnyConnected()
+            self:setIface(vAnyIf)
+         end
+      end
    end
-
+   
    if self.iface:isWireless() then
       self.netIcon:set_image(beautiful.net_wireless)
    else
