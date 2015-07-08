@@ -27,7 +27,7 @@ function Interface:getState()
    return state
 end
 
-function Interface:getAnyConnected()
+function Interface.getAnyConnected()
    vResult = io.popen("ip link show | cut -d' ' -f2,9")
    vList = vResult:read("*all")
    vResult:close()
@@ -35,7 +35,7 @@ function Interface:getAnyConnected()
 
    vNetwork = nil
    if vList ~= nil then
-      vNetwork =  ws:gsub(": UP", "")
+      vNetwork =  vList:gsub(": UP", "")
    end
 
    return vNetwork
@@ -101,3 +101,5 @@ function Interface.getDevices()
 end
 
 return Interface
+
+

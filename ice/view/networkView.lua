@@ -25,7 +25,7 @@ function networkView.create(pLayout)
 end
 
 function networkView:showNetIcon()
-   self.netIcon = wibox.widget.imagebox()
+   self.netIcon = wibox.widget.imagebox(beautiful.disk)
    self.layout:add(self.netIcon)   
 end
 
@@ -66,18 +66,19 @@ function networkView:start()
 end
 
 function networkView:setIface(pIface)
-   self.ifaceName = pIface
    self.iface=self.devices[pIface]
 end
 
 function networkView.updator(pNetwork)
    function update()
-      vCurrentDownRate = pNetwork.iface:getCurrentRate("RX")
-      pNetwork.downloadWidget:add_value(vCurrentDownRate)
+      if(pNetwork.iface ~= nil) then
+         vCurrentDownRate = pNetwork.iface:getCurrentRate("RX")
+         pNetwork.downloadWidget:add_value(vCurrentDownRate)
+         
+         vCurrentUpRate = pNetwork.iface:getCurrentRate("SX")
+         pNetwork.uploadWidget:add_value(vCurrentUpRate)
+      end
       
-      vCurrentUpRate = pNetwork.iface:getCurrentRate("SX")
-      pNetwork.uploadWidget:add_value(vCurrentUpRate)
-
       pNetwork:updateState()
    end
 
@@ -85,23 +86,21 @@ function networkView.updator(pNetwork)
 end
 
 function networkView:updateState()
-   vState = self.iface:getState()
    if vState ~= "UP" then
-      self.devices = networkData.getDevices()
-      if(util.tablelength(self.devices) > 0) then
-         self:setIface(self.ifaceName)
-         if(self.ifaceName == nil) then
-            vAnyIf = self.iface:getAnyConnected()
-            self:setIface(vAnyIf)
-         end
+      vAnyIf = networkData.getAnyConnected()
+      self:setIface(vAnyIf)
+   end
+
+   if(self.iface ~= nil) then
+      if self.iface:isWireless() then
+         self.netIcon:set_image(beautiful.net_wireless)
+      else
+         self.netIcon:set_image(beautiful.net_wired)
       end
+   else
+      self.netIcon:set_image(beautiful.awesome_icon)
    end
    
-   if self.iface:isWireless() then
-      self.netIcon:set_image(beautiful.net_wireless)
-   else
-      self.netIcon:set_image(beautiful.net_wired)
-   end
 end
 
 return networkView
