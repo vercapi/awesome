@@ -11,4 +11,33 @@ function util.tablelength(T)
    return count
 end
 
+function util.cairoColorRGB(pRGBValue)
+   return pRGBValue/255
+end
+
+function util.cairoColorHEX(pHexValue)
+   return util.cairoColorRGB(tonumber(pHexValue, 16))
+end
+
+function util.createColor(pHexValue)
+   local self = {hexValue = pHexValue}
+
+   local red = function()
+      vHex = string.sub(self.hexValue, 2, 3)
+      return util.cairoColorHEX(vHex)
+   end
+
+   local green = function()
+      vHex = string.sub(self.hexValue, 4, 5)
+      return util.cairoColorHEX(vHex)
+   end
+
+   local blue = function()
+      vHex = string.sub(self.hexValue, 6, 7)
+      return util.cairoColorHEX(vHex)
+  end
+
+  return {red = red, green = green, blue = blue}
+end
+
 return util

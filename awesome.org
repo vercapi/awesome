@@ -117,3 +117,47 @@ ice/view -> contains functionallity for showing things
    Popup 
    Animated?
    Thick bar floatig a bit under the top of the screen
+* Technical documentation
+
+This is all in context of awesome wm.
+
+** widget
+
+- fit: Return the dimensions, the dimension parameters are the space available
+- draw: Should contaion the code that does the drawing
+  - wibox
+  - cr: cairo object
+  - width of the object
+  - height of the object
+
+#+BEGIN_SRC lua
+  local myWidget = wibox.widget.base.make_widget()
+     
+  myWidget.fit = function(myWidget, width, height)
+     return height, height
+  end
+
+  myWidget.draw = function(myWidget, wibox, cr, width, height)
+     -- cairo drawing code goes here   
+  end
+#+END_SRC
+
+** cairo lua
+*** Draw text
+
+#+BEGIN_SRC lua
+  font="SquareFont"
+  font_size=28
+  text=os.date('%H:%M')
+  xpos,ypos=0,22
+  red,green,blue,alpha=1,1,1,1
+  font_slant=CAIRO_FONT_SLANT_NORMAL
+  font_face=CAIRO_FONT_WEIGHT_NORMAL
+  ----------------------------------
+  cr:select_font_face (font, font_slant, font_face);
+  cr:set_font_size (font_size)
+  cr:set_source_rgba (red,green,blue,alpha)
+  cr:move_to (xpos,ypos)
+  cr:show_text (text)
+  cr:stroke ()
+#+END_SRC

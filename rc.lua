@@ -122,10 +122,11 @@ markup = lain.util.markup
 blue   = beautiful.fg_focus
 
 -- Textclock
-mytextclock = awful.widget.textclock("<span font='Squared Display 12'> %H:%M </span>")
+--mytextclock = awful.widget.textclock("<span font='Squared Display 12'> %H:%M </span>")
+
 
 -- Calendar
-lain.widgets.calendar:attach(mytextclock)
+--lain.widgets.calendar:attach(mytextclock)
 
 -- Memory
 memicon = wibox.widget.imagebox(beautiful.mem)
@@ -356,7 +357,8 @@ for s = 1, screen.count() do
     --right_layout:add(volicon)
     --right_layout:add(volumewidget)
     --right_layout:add(bar_spr)
-    right_layout:add(mytextclock)
+    ice.view.clockView.create(right_layout)
+--    right_layout:add(mytextclock)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
