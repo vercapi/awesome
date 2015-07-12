@@ -58,6 +58,8 @@ theme.netup                                      = theme.dir .. "/icons/net_up.p
 theme.netdown                                    = theme.dir .. "/icons/net_down.png"
 theme.net_wireless                               = theme.dir .. "/icons/pause.png"
 
+theme.clock                                      = theme.dir .. "/icons/clock.svg"
+
 theme.layout_tile                                = theme.dir .. "/icons/tile.png"
 theme.layout_tileleft                            = theme.dir .. "/icons/tileleft.png"
 theme.layout_tilebottom                          = theme.dir .. "/icons/tilebottom.png"

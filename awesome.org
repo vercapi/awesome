@@ -121,7 +121,9 @@ ice/view -> contains functionallity for showing things
 
 This is all in context of awesome wm.
 
-** widget
+[[https://awesome.naquadah.org/doc/api/][awesome API]]
+
+** Custom widget
 
 - fit: Return the dimensions, the dimension parameters are the space available
 - draw: Should contaion the code that does the drawing
@@ -140,6 +142,14 @@ This is all in context of awesome wm.
   myWidget.draw = function(myWidget, wibox, cr, width, height)
      -- cairo drawing code goes here   
   end
+#+END_SRC
+
+** Awesome
+*** Add image
+
+#+BEGIN_SRC lua
+ myicon = wibox.widget.imagebox()
+ myicon:set_image(awful.util.getdir("config") .. "/myicon.png")
 #+END_SRC
 
 ** cairo lua
