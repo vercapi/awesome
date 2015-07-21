@@ -118,7 +118,6 @@ ice/view -> contains functionallity for showing things
    Animated?
    Thick bar floatig a bit under the top of the screen
 * Technical documentation
-
 This is all in context of awesome wm.
 
 [[https://awesome.naquadah.org/doc/api/][awesome API]]
@@ -152,6 +151,14 @@ This is all in context of awesome wm.
  myicon:set_image(awful.util.getdir("config") .. "/myicon.png")
 #+END_SRC
 
+*** Resize, layout component instead of using all available space
+#+BEGIN_SRC lua
+  iconMargin = wibox.layout.margin(clockIcon, 0, 0)
+  iconMargin:set_top(3)
+  iconMargin:set_bottom(3)
+  iconMargin:set_right(5)
+  iconMargin:set_left(5)
+#+END_SRCfa
 ** cairo lua
 *** Draw text
 
@@ -171,3 +178,54 @@ This is all in context of awesome wm.
   cr:show_text (text)
   cr:stroke ()
 #+END_SRC
+*** Draw line
+
+#+BEGIN_SRC lua
+  line_width=10
+  line_cap=CAIRO_LINE_CAP_BUTT
+  red,green,blue,alpha=pColor.red(),pColor.green(),pColor.blue(),1
+  startx=0
+  starty=0
+  ----------------------------
+  cr:set_line_width(line_width)
+  cr:set_line_cap(line_cap)
+  cr:set_source_rgba(red,green,blue,alpha)
+  cr:move_to(startx,starty)
+  cr:line_to(10,20)
+  cr:stroke()
+#+END_SRC
+*** Draw rectangle
+
+#+BEGIN_SRC lua
+  line_width=5
+  top_left_x=20
+  top_left_y=20
+  rec_width=100
+  rec_height=50
+  red=1
+  green=0
+  blue=0
+  alpha=1
+    ----------------------------
+  cairo_set_line_width (cr,line_width)
+  cairo_rectangle (cr,top_left_x,top_left_y,rec_width,rec_height)
+  cairo_set_source_rgba (cr,red,green,blue,alpha)
+#+END_SRC
+** Testing
+   lua-testy, because simple for small projects like this
+   It supports lua 5.3
+   
+   [[https://github.com/siffiejoe/lua-testy][lua-testy on github]]
+   
+   #+BEGIN_SRC sh
+   git clone https://github.com/siffiejoe/lua-testy.git
+   #+END_SRC
+   
+   Tests can be found in the ice/test dir, subdirectories follow the normal hierarchy
+   
+*** Creating tests
+    inlcude line that points to the parent of the ice folder
+    #+BEGIN_SRC lua
+    package.path = package.path .. ';../../../?.lua'
+    #+END_SRC   
+    

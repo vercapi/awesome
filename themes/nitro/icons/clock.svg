@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="13.39781mm"
+   height="13.39781mm"
+   viewBox="0 0 47.472555 47.472555"
+   id="svg7591"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="clock.svg">
+  <defs
+     id="defs7593" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="36.897045"
+     inkscape:cy="-281.59779"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="3198"
+     inkscape:window-height="1738"
+     inkscape:window-x="0"
+     inkscape:window-y="44"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7596">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-110.54946,-128.62592)">
+    <g
+       id="g17745"
+       transform="matrix(0.51600604,0,0,0.51600604,110.54946,128.62592)"
+       style="fill:#006395;fill-opacity:1">
+      <g
+         id="g17699"
+         style="fill:#006395;fill-opacity:1">
+        <g
+           id="g17701"
+           style="fill:#006395;fill-opacity:1">
+          <g
+             id="g17703"
+             style="fill:#006395;fill-opacity:1">
+            <path
+               id="path17705"
+               d="M 45.998,0 C 20.596,0 0,20.597 0,46 0,71.405 20.596,92 45.998,92 71.404,92 92,71.405 92,46 92,20.597 71.404,0 45.998,0 Z m 0,82 C 26.119,82 10,65.882 10,46 10,26.117 26.119,10 45.998,10 65.883,10 82,26.117 82,46 82,65.882 65.883,82 45.998,82 Z"
+               style="fill:#006395;fill-opacity:1"
+               inkscape:connector-curvature="0" />
+            <polygon
+               id="polygon17707"
+               points="64.475,59.526 49.5,44.55 49.5,20 42.498,20 42.498,47.451 59.525,64.475 "
+               style="fill:#006395;fill-opacity:1" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g17709"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17711"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17713"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17715"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17717"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17719"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17721"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17723"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17725"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17727"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17729"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17731"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17733"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17735"
+         style="fill:#006395;fill-opacity:1" />
+      <g
+         id="g17737"
+         style="fill:#006395;fill-opacity:1" />
+    </g>
+  </g>
+</svg>

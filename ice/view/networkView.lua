@@ -1,4 +1,3 @@
-
 local wibox       = require("wibox")
 local beautiful   = require("beautiful")
 local runner      = require("ice.core.Runner")
@@ -39,7 +38,7 @@ function networkView:showDownload()
    vGraph:set_scale(true)
 
    -- Needs to be available on object scope for updating the values
-   self.downloadWidget= vGraph
+   self .downloadWidget= vGraph
 
    self.layout:add(vIcon)
    self.layout:add(self.downloadWidget)
@@ -77,6 +76,7 @@ function networkView.updator(pNetwork)
          
          vCurrentUpRate = pNetwork.iface:getCurrentRate("SX")
          pNetwork.uploadWidget:add_value(vCurrentUpRate)
+
       end
       
       pNetwork:updateState()
@@ -86,6 +86,12 @@ function networkView.updator(pNetwork)
 end
 
 function networkView:updateState()
+   if self.iface ~= nil then
+      vState = self.iface:getState()
+   else
+      vState = nil
+   end
+   
    if vState ~= "UP" then
       vAnyIf = networkData.getAnyConnected()
       self:setIface(vAnyIf)

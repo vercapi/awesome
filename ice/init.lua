@@ -4,7 +4,8 @@ local ice =
    {
       core = require("ice.core"),
       date = require("ice.data"),
-      view = require("ice.view")
+      view = require("ice.view"),
+      widgets = require("ice.widgets")
    }
 
 return ice

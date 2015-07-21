@@ -24,6 +24,7 @@ function Interface:getState()
    result:close()
 
    state, numReplaced = rawState:gsub("state ", "")
+   state, numReplaced = state:gsub("\n", "")
    return state
 end
 
@@ -61,8 +62,12 @@ function Interface:getCurrentRate(pRXTX)
    else
       result = results[1]
    end
+
+   if result == nil then
+      result = 0
+   end
    
-   return result
+   return tonumber(result)
 end
 
 function Interface:WirelessStrenght()
