@@ -1,7 +1,7 @@
 package.path = package.path .. ';../../../?.lua'
 
 local Interface = require("ice.data.Interface")
-local util        = require("ice.util")
+local util      = require("ice.util")
 
 -- Test to see if we can find devices
 local function test_getDevices()
