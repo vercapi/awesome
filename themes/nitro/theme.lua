@@ -44,7 +44,7 @@ theme.vol                                        = theme.dir .. "/icons/vol.png"
 theme.vol_low                                    = theme.dir .. "/icons/vol_low.png"
 theme.vol_no                                     = theme.dir .. "/icons/vol_no.png"
 theme.vol_mute                                   = theme.dir .. "/icons/vol_mute.png"
-theme.disk                                       = theme.dir .. "/icons/hdd.png"
+theme.disk                                       = theme.dir .. "/icons/disk.svg"
 theme.ac                                         = theme.dir .. "/icons/ac.png"
 theme.bat                                        = theme.dir .. "/icons/bat.png"
 theme.bat_low                                    = theme.dir .. "/icons/bat_low.png"
@@ -59,6 +59,8 @@ theme.netdown                                    = theme.dir .. "/icons/net_down
 theme.net_wireless                               = theme.dir .. "/icons/pause.png"
 
 theme.clock                                      = theme.dir .. "/icons/clock.svg"
+
+theme.warning                                    = theme.dir .. "/icons/warning.svg"
 
 theme.layout_tile                                = theme.dir .. "/icons/tile.png"
 theme.layout_tileleft                            = theme.dir .. "/icons/tileleft.png"

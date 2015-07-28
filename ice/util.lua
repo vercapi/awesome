@@ -11,6 +11,11 @@ function util.tablelength(T)
    return count
 end
 
+function util.round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
+
 function util.cairoColorRGB(pRGBValue)
    return pRGBValue/255
 end

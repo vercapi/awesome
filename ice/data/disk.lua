@@ -1,3 +1,5 @@
+local util      = require("ice.util")
+
 local disk = {}
 disk.__index = disk
 
@@ -17,8 +19,8 @@ function disk:setSpaceUsed(pSpaceUsed)
 end
 
 function disk:getPercentagFull()
-   -- TODO: round this to 2 decimals
-   return self.spaceUsed/self.totalSpace
+   result = self.spaceUsed/self.totalSpace
+   return util.round(result, 2)
 end
 
 function disk.getAllDisks()

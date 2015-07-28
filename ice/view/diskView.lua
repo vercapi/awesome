@@ -17,10 +17,14 @@ function disk.create(pLayout)
 
    l_disk.disks = diskData.getAllDisks()
 
+   graphLayout = wibox.layout.fixed.vertical()
+   
    l_disk:showSeparator()
    l_disk:showDiskIcon()
-   l_disk:showPercentage()
-   l_disk:showDiskGraph()
+   l_disk:showStatus()
+   l_disk:showDiskGraph(graphLayout)
+   l_disk:showPercentage(graphLayout)
+   l_disk.layout:add(graphLayout)
    
   return l_disk
 end
@@ -31,19 +35,31 @@ function disk:setCurrentDisk(pMountPoint)
 end
 
 function disk:showDiskIcon()
+   local iconLayout = wibox.layout.fixed.vertical()
+   
    self.diskIcon = wibox.widget.imagebox(theme.disk)
-   self.layout:add(self.diskIcon)
+   self.diskName = wibox.widget.textbox("HD")
+   self.diskName:set_font('SquareFont 5')
+
+   iconLayout:add(self.diskIcon)
+   iconLayout:add(self.diskName)
+
+   iconMargin = wibox.layout.margin(iconLayout, 2, 2)
+   iconMargin:set_top(2)
+   iconMargin:set_bottom(2)
+   
+   self.layout:add(iconMargin)
 end
 
 
-function disk:showDiskGraph()
+function disk:showDiskGraph(pLayout)
    self.diskGraph = awful.widget.progressbar()
    self.diskGraph:set_color(beautiful.fg_normal)
    self.diskGraph:set_background_color(theme.bg_normal)
    self.diskGraph:set_width(100)
-   self.diskGraph:set_height(22)
+   self.diskGraph:set_height(15)
    self.diskGraph:set_ticks(true)
-   self.diskGraph:set_ticks_size(20)
+   self.diskGraph:set_ticks_size(15)
 
    -- Create a whitespacing between the graph and the box
    innerBox = wibox.layout.margin(self.diskGraph, 1, 1)
@@ -57,21 +73,17 @@ function disk:showDiskGraph()
    box:set_color(beautiful.fg_normal)
 
    -- Ensuring the correct placement of the graph+box
-   diskmargin = wibox.layout.margin(box, 2, 7)
-   diskmargin:set_top(6)
-   diskmargin:set_bottom(20)
-      
-   self.layout:add(diskmargin)
+   diskmargin = wibox.layout.margin(box, 0, 0)
+   diskmargin:set_top(2)
+   diskmargin:set_bottom(0)
+
+   pLayout:add(diskmargin)
 end
 
-function disk:showPercentage()
+function disk:showPercentage(pLayout)
    self.percentage = wibox.widget.textbox()
-   self.percentage:set_text("60%")
 
-   textMargin = wibox.layout.margin(self.percentage, 0, 0)
-   textMargin:set_bottom(16)
-
-   self.layout:add(textMargin)   
+   pLayout:add(self.percentage)
 end
 
 
@@ -81,10 +93,19 @@ function disk:showSeparator()
    self.layout:add(vWidget)
 end
 
+function disk:showStatus()
+   image = wibox.widget.imagebox(theme.warning)
+   imageMargin = wibox.layout.margin(image, 2, 2)
+   imageMargin:set_top(2)
+   imageMargin:set_bottom(25)
+   self.layout:add(imageMargin)
+end
+
 
 function disk:start()
    value = self.disks[self.diskMountPoint]:getPercentagFull()
    self.diskGraph:set_value(value)
+   self.percentage:set_text(string.format("%u", value*100) .. '%')
    
    runner.create(120, disk.updator(self))
 end
