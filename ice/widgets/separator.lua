@@ -50,16 +50,17 @@ function separator:draw(wibox, cr, width, height)
    drawSurface(0,self._color1)
    
    drawLine(0,self._color2)
-   drawLine(10,self._color1)
+   drawLine(10,self._color3)
 end
 
 
-function separator:setColors(pColor1, pColor2)
+function separator:setColors(pColor1, pColor2, pColor3)
    self._color1 = pColor1
    self._color2 = pColor2
+   self._color3 = pColor3
 end
 
-local function new(pColor1, pColor2)
+local function new(pColor1, pColor2, pColor3)
 
    local widget = wibox.widget.base.make_widget()
 
@@ -70,7 +71,7 @@ local function new(pColor1, pColor2)
       end
    end
 
-   widget:setColors(pColor1, pColor2)
+   widget:setColors(pColor1, pColor2, pColor3)
 
    return widget
 end

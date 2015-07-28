@@ -76,7 +76,7 @@ end
 
 
 function disk:showSeparator()
-   vWidget = separator(util.createColor("#002b36"), util.createColor("#eee8d5"))
+   vWidget = separator(util.createColor("#002b36"), util.createColor(theme.bg_normal), util.createColor(theme.fg_normal))
 
    self.layout:add(vWidget)
 end

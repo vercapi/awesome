@@ -54,9 +54,6 @@ function clockView.create(pLayout)
    iconMargin:set_right(5)
    iconMargin:set_left(5)
 
-   vWidget = separator(util.createColor("#002b36"), util.createColor("#eee8d5"))
-   pLayout:add(vWidget)
-   
    pLayout:add(iconMargin)
    
    pLayout:add(clockWidget)
