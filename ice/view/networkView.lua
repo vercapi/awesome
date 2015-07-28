@@ -19,7 +19,7 @@ function networkView.create(pLayout)
    network:showNetIcon()
    network:showDownload()
    network:showUpload()
-   
+  
    return network
 end
 

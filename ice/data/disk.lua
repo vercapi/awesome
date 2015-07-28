@@ -16,10 +16,15 @@ function disk:setSpaceUsed(pSpaceUsed)
    self.spaceUsed = pSpaceUsed
 end
 
+function disk:getPercentagFull()
+   -- TODO: round this to 2 decimals
+   return self.spaceUsed/self.totalSpace
+end
+
 function disk.getAllDisks()
    disks = {}
 
-   result = io.popen("df | grep '/' | awk '{print $1\" \"$2\" \"$3}'")
+   result = io.popen("df | grep '/' | awk '{print $6\" \"$2\" \"$3}'")
    list = result:read("*all")
    result:close()
 

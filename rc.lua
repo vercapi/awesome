@@ -3,7 +3,7 @@
      Copland Awesome WM config 
      github.com/copycat-killer 
                                
---]]
+--]] 
 
 -- {{{ Required libraries
 local gears     = require("gears")
@@ -189,31 +189,31 @@ batwidget = lain.widgets.bat({
 -- }
 --)
 
--- /home fs
-diskicon = wibox.widget.imagebox(beautiful.disk)
-diskbar = awful.widget.progressbar()
-diskbar:set_color(beautiful.fg_normal)
-diskbar:set_background_color("#313131")
-diskbar:set_width(55)
-diskbar:set_height(22)
-diskbar:set_ticks(true)
-diskbar:set_ticks_size(6)
-diskmargin = wibox.layout.margin(diskbar, 2, 7)
-diskmargin:set_top(6)
-diskmargin:set_bottom(32)
-fshomeupd = lain.widgets.fs({
-    partition = "/home",
-    settings  = function()
-        if fs_now.used < 90 then
-            diskbar:set_color(beautiful.fg_normal)
-        else
-            diskbar:set_color("#EB8F8F")
-        end
-        diskbar:set_value(fs_now.used / 100)
-    end
-})
-diskwidget = wibox.widget.background(diskmargin)
-diskwidget:set_bgimage(beautiful.widget_bg)
+-- -- /home fs
+-- diskicon = wibox.widget.imagebox(beautiful.disk)
+-- diskbar = awful.widget.progressbar()
+-- diskbar:set_color(beautiful.fg_normal)
+-- diskbar:set_background_color("#313131")
+-- diskbar:set_width(55)
+-- diskbar:set_height(22)
+-- diskbar:set_ticks(true)
+-- diskbar:set_ticks_size(6)
+-- diskmargin = wibox.layout.margin(diskbar, 2, 7)
+-- diskmargin:set_top(6)
+-- diskmargin:set_bottom(32)
+-- fshomeupd = lain.widgets.fs({
+--     partition = "/home",
+--     settings  = function()
+--         if fs_now.used < 90 then
+--             diskbar:set_color(beautiful.fg_normal)
+--         else
+--             diskbar:set_color("#EB8F8F")
+--         end
+--         diskbar:set_value(fs_now.used / 100)
+--     end
+-- })
+-- diskwidget = wibox.widget.background(diskmargin)
+-- diskwidget:set_bgimage(beautiful.widget_bg)
 
 -- ALSA volume bar
 -- volicon = wibox.widget.imagebox(beautiful.vol)
@@ -342,6 +342,8 @@ for s = 1, screen.count() do
     testWidget:setIface("wlp6s0")
     testWidget:start()
 
+   
+
     right_layout:add(netwidget)
     right_layout:add(neticondown)
     right_layout:add(bar_spr)
@@ -351,12 +353,15 @@ for s = 1, screen.count() do
     right_layout:add(cpuicon)
     right_layout:add(cpuwidget)
     right_layout:add(bar_spr)
-    right_layout:add(diskicon)
-    right_layout:add(diskwidget)
+    --right_layout:add(diskicon)
+    -- right_layout:add(diskwidget)
     right_layout:add(bar_spr)
     --right_layout:add(volicon)
     --right_layout:add(volumewidget)
     --right_layout:add(bar_spr)
+    disk_view = ice.view.diskView.create(right_layout)
+    disk_view:setCurrentDisk("/home")
+    disk_view:start()
     ice.view.clockView.create(right_layout)
 --    right_layout:add(mytextclock)
 

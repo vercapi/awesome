@@ -158,8 +158,11 @@ This is all in context of awesome wm.
   iconMargin:set_bottom(3)
   iconMargin:set_right(5)
   iconMargin:set_left(5)
-#+END_SRCfa
+#+END_SRC
 ** cairo lua
+[[http://www.dynaset.org/dogusanh/download/luacairo.html][lua cairo API]]
+[[http://crunchbang.org/forums/viewtopic.php?id%3D17246][lua cairo examples]] examples are actually for conky
+
 *** Draw text
 
 #+BEGIN_SRC lua
@@ -222,8 +225,11 @@ This is all in context of awesome wm.
    #+END_SRC
    
    Tests can be found in the ice/test dir, subdirectories follow the normal hierarchy
+
+   run tests: lua testy.lua <file-to-test>
    
 *** Creating tests
+
     inlcude line that points to the parent of the ice folder
     #+BEGIN_SRC lua
     package.path = package.path .. ';../../../?.lua'

@@ -8,6 +8,7 @@ local SIGNAL = "timeout"
 local Runner = {}
 Runner.__index = Runner
 
+-- pTimeout for the refresh in seconds
 function Runner.create(pTimeout, pFunction)
    local runner = {}
    setmetatable(runner, Runner)
