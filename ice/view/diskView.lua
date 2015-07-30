@@ -1,10 +1,8 @@
 local wibox     = require("wibox")
 local awful     = require("awful")
 local beautiful = require("beautiful")
-local runner    = require("ice.core.Runner")
 local diskData  = require("ice.data.disk")
 local util      = require("ice.util")
-local base      = require("ice.view.baseView")
 
 local disk = {}
 disk.__index = disk
@@ -13,25 +11,18 @@ function disk.create(pLayout)
    local l_disk = {}
    setmetatable(l_disk, disk)
 
-   l_disk.base = base.create(pLayout, theme.bg_normal, theme.fg_normal, "#002b36", disk:getContentFunction(), theme.disk)
-   l_disk.base:init()
-
    l_disk.disks = diskData.getAllDisks()
    
   return l_disk
 end
 
-function disk.getContentFunction(pDisk)
-   function drawContent()
-      graphLayout = wibox.layout.fixed.vertical()
-      
-      pDisk:showDiskGraph(graphLayout)
-      pDisk:showPercentage(graphLayout)
+function disk:drawContent()
+   graphLayout = wibox.layout.fixed.vertical()
+   
+   self:showDiskGraph(graphLayout)
+   self:showPercentage(graphLayout)
 
-      return graphLayout
-   end
-
-   return drawContent
+   return graphLayout   
 end
 
 function disk:setCurrentDisk(pMountPoint)
@@ -73,23 +64,15 @@ function disk:showPercentage(pLayout)
    pLayout:add(self.percentage)
 end
 
-function disk:start()
+function disk:init()
    value = self.disks[self.diskMountPoint]:getPercentagFull()
    self.diskGraph:set_value(value)
    self.percentage:set_text(string.format("%u", value*100) .. '% ')
-   
-   runner.create(120, disk.updator(self))
 end
 
-function disk.updator(pDisk)
-   function update()
-      value = pDisk.disks[pDisk.diskMountPoint]:getPercentagFull()
-      pDisk.diskGraph:set_value(value)
-      base.updator(pDisk.base)
-   end
-
-   return update
+function disk:update()
+   value = self.disks[self.diskMountPoint]:getPercentagFull()
+   self.diskGraph:set_value(value)
 end
 
 return disk
-

@@ -358,10 +358,15 @@ for s = 1, screen.count() do
     right_layout:add(bar_spr)
     --right_layout:add(volicon)
     --right_layout:add(volumewidget)
-    --right_layout:add(bar_spr)
+    --right_layout:add(bar_
     disk_view = ice.view.diskView.create(right_layout)
     disk_view:setCurrentDisk("/home")
-    disk_view:start()
+    base = ice.view.baseView.create(right_layout, disk_view)
+    base:setBgColor(beautiful.bg_normal)
+    base:setFgColor(beautiful.fg_normal)
+    base:setNextColor("#002b36")
+    base:setIcon(beautiful.disk)
+    base:init()
     ice.view.clockView.create(right_layout)
 --    right_layout:add(mytextclock)
 
