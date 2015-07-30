@@ -1,5 +1,9 @@
 local util = {}
 
+util.WARNING = "WARNING"
+util.ERROR = "ERROR"
+util.OK = "OK"
+
 function util.wrequire(table, key)
    local module = rawget(table, key)
    return module or require(table._NAME .. '.' .. key)

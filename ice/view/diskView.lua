@@ -75,4 +75,8 @@ function disk:update()
    self.diskGraph:set_value(value)
 end
 
+function disk:getState()
+   return util.OK
+end
+
 return disk

@@ -11,7 +11,7 @@ function base.create(pLayout, pContent)
    local l_base = {}
    setmetatable(l_base, base)
 
-   if pContent.drawContent == nil and pContent.init == nil and pContent.update == nil then
+   if pContent.drawContent == nil and pContent.init == nil and pContent.update == nil and pContent.getState == nil then
       l_base.content = nil -- if these methods don't exist it is not a valid view and the object is unusable
    else
       l_base.content = pContent
@@ -91,8 +91,14 @@ function base.updator(pBase)
    return update
 end
 
-function base:showStatus() 
-   image = wibox.widget.imagebox(theme.warning)
+function base:showStatus()
+   if(util.WARNING == self.content:getState()) then
+      image = wibox.widget.imagebox(theme.warning)
+   end
+   if(util.ERROR == self.content:getState()) then
+      image = wibox.widget.imagebox(theme.error)
+   end
+
    imageMargin = wibox.layout.margin(image, 2, 2)
    imageMargin:set_top(2)
    imageMargin:set_bottom(25)
