@@ -7,7 +7,7 @@ local util      = require("ice.util")
 local disk = {}
 disk.__index = disk
 
-function disk.create(pLayout)
+function disk.create()
    local l_disk = {}
    setmetatable(l_disk, disk)
 
@@ -65,14 +65,20 @@ function disk:showPercentage(pLayout)
 end
 
 function disk:init()
-   value = self.disks[self.diskMountPoint]:getPercentagFull()
+   local value = self.disks[self.diskMountPoint]:getPercentagFull()
    self.diskGraph:set_value(value)
-   self.percentage:set_text(string.format("%u", value*100) .. '% ')
+   self:setText(value)
 end
 
 function disk:update()
-   value = self.disks[self.diskMountPoint]:getPercentagFull()
+   self.disks[self.diskMountPoint]:updateDisk()
+   local value = self.disks[self.diskMountPoint]:getPercentagFull()
    self.diskGraph:set_value(value)
+   self:setText(value)
+end
+
+function disk:setText(pValue)
+   self.percentage:set_text(string.format("%u", pValue*100) .. '% ')
 end
 
 function disk:getState()

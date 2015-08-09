@@ -7,7 +7,7 @@ local runner    = require("ice.core.Runner")
 local base = {}
 base.__index = base
 
-function base.create(pLayout, pContent)
+function base.create(pLayout, pContent, pCycle)
    local l_base = {}
    setmetatable(l_base, base)
 
@@ -17,7 +17,9 @@ function base.create(pLayout, pContent)
       l_base.content = pContent
    end
    
-   l_base.layout = pLayout
+   l_base.layout = wibox.layout.fixed.horizontal()
+   l_base.globalLayout = pLayout
+   l_base.cycle = pCycle
    
    return l_base
 end
@@ -54,9 +56,13 @@ function base:getNextColor()
    return self.nextColor
 end
 
+function base:addToLayout(pWidget)
+   self:getLayout():add(pWidget)
+end
+
 function base:showIcon()
    local iconLayout = wibox.layout.fixed.vertical()
-   
+
    self.diskIcon = wibox.widget.imagebox(self.icon)
 
    iconLayout:add(self.diskIcon)
@@ -64,8 +70,9 @@ function base:showIcon()
    iconMargin = wibox.layout.margin(iconLayout, 2, 2)
    iconMargin:set_top(2)
    iconMargin:set_bottom(2)
-   
-   self:getLayout():add(iconMargin)
+   iconMargin:set_color(self:getBgColor())
+
+   self:addToLayout(iconMargin)
 end
 
 function base:init()
@@ -75,12 +82,15 @@ function base:init()
 
    if self.content ~= nil then
       vContent = self.content:drawContent()
-      self.layout:add(vContent)
+      self:addToLayout(vContent)
       self.content:init()
    end
 
    
-   runner.create(120, base.updator(self))
+   runner.create(self.cycle, base.updator(self))
+
+   --add everything to the correct background
+   self.globalLayout:add(wibox.widget.background(self:getLayout(), self:getBgColor()))
 end
 
 function base.updator(pBase)
@@ -102,13 +112,15 @@ function base:showStatus()
    imageMargin = wibox.layout.margin(image, 2, 2)
    imageMargin:set_top(2)
    imageMargin:set_bottom(25)
-   self.layout:add(imageMargin)
+   imageMargin:set_color(self:getBgColor())
+   
+   self:addToLayout(imageMargin)
 end
 
 function base:showSeparator()
-   vWidget = separator(util.createColor("#002b36"), util.createColor(theme.bg_normal), util.createColor(theme.fg_normal))
+   vWidget = separator(util.createColor(self:getNextColor()), util.createColor(self:getBgColor()), util.createColor(self:getFgColor()))
 
-   self:getLayout():add(vWidget)
+   self:addToLayout(vWidget)
 end
 
 return base

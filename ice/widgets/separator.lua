@@ -3,9 +3,6 @@ local util  = require("ice.util")
 
 local separator = { mt = {} }
 
--- Fix this class forowing te example
--- https://github.com/awesomeWM/awesome/blob/d4d5bbcd5d0206c86d390d5aaa1579e00177c85d/lib/wibox/widget/imagebox.lua
-
 function separator:fit(width, height)
    return height, height
 end
@@ -35,13 +32,13 @@ function separator:draw(wibox, cr, width, height)
       top_left_x=0
       top_left_y=0
       rec_width=25
-      rec_height=50
+      rec_height=height
       red=pColor.red()
       green=pColor.green()
       blue=pColor.blue()
       alpha=1
       ----------------------------
-      cr:set_line_width(line_width)
+      cr:set_line_width(0)
       cr:rectangle(top_left_x,top_left_y,rec_width,rec_height)
       cr:set_source_rgba(red,green,blue,alpha)
       cr:fill()

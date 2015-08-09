@@ -10,7 +10,7 @@ theme                                            = {}
 theme.dir                                        = os.getenv("HOME") .. "/.config/awesome/themes/nitro"
 theme.wallpaper                                  = "/home/vercapi/backgrounds/theme_ntp_background.png"
 
-theme.font                                       = "Squared Display 14"
+theme.font                                       = "SquareFont 14"
 theme.fg_normal                                  = "#cb4b16"
 theme.fg_focus                                   = "#cb4b16"
 theme.bg_normal                                  = "#eee8d5"
@@ -52,7 +52,7 @@ theme.bat_no                                     = theme.dir .. "/icons/bat_no.p
 theme.play                                       = theme.dir .. "/icons/play.png"
 theme.pause                                      = theme.dir .. "/icons/pause.png"
 theme.mem                                        = theme.dir .. "/icons/mem.png"
-theme.cpu                                        = theme.dir .. "/icons/cpu.png"
+theme.cpu                                        = theme.dir .. "/icons/cpu.svg"
 theme.net_wired                                  = theme.dir .. "/icons/net_wired.png"
 theme.netup                                      = theme.dir .. "/icons/net_up.png"
 theme.netdown                                    = theme.dir .. "/icons/net_down.png"

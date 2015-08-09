@@ -136,15 +136,6 @@ memwidget = lain.widgets.mem({
     end
 })
 
--- CPU
-cpuicon = wibox.widget.imagebox(beautiful.cpu)
-cpuwidget = lain.widgets.cpu({
-    settings = function()
-        widget:set_text(" " .. cpu_now.usage .. "% ")
-    end
-})
-
-
 -- Network
 neticon = wibox.widget.imagebox(beautiful.net)
 neticonup = wibox.widget.imagebox(beautiful.netup)
@@ -188,32 +179,6 @@ batwidget = lain.widgets.bat({
 --     end
 -- }
 --)
-
--- -- /home fs
--- diskicon = wibox.widget.imagebox(beautiful.disk)
--- diskbar = awful.widget.progressbar()
--- diskbar:set_color(beautiful.fg_normal)
--- diskbar:set_background_color("#313131")
--- diskbar:set_width(55)
--- diskbar:set_height(22)
--- diskbar:set_ticks(true)
--- diskbar:set_ticks_size(6)
--- diskmargin = wibox.layout.margin(diskbar, 2, 7)
--- diskmargin:set_top(6)
--- diskmargin:set_bottom(32)
--- fshomeupd = lain.widgets.fs({
---     partition = "/home",
---     settings  = function()
---         if fs_now.used < 90 then
---             diskbar:set_color(beautiful.fg_normal)
---         else
---             diskbar:set_color("#EB8F8F")
---         end
---         diskbar:set_value(fs_now.used / 100)
---     end
--- })
--- diskwidget = wibox.widget.background(diskmargin)
--- diskwidget:set_bgimage(beautiful.widget_bg)
 
 -- ALSA volume bar
 -- volicon = wibox.widget.imagebox(beautiful.vol)
@@ -349,24 +314,27 @@ for s = 1, screen.count() do
     right_layout:add(bar_spr)
     right_layout:add(memicon)
     right_layout:add(memwidget)
-    right_layout:add(bar_spr)
-    right_layout:add(cpuicon)
-    right_layout:add(cpuwidget)
-    right_layout:add(bar_spr)
-    --right_layout:add(diskicon)
-    -- right_layout:add(diskwidget)
-    right_layout:add(bar_spr)
     --right_layout:add(volicon)
     --right_layout:add(volumewidget)
     --right_layout:add(bar_
-    disk_view = ice.view.diskView.create(right_layout)
+
+    cpu_view = ice.view.cpuView.create("#002b36", "#268bd2")
+    cpuBase = ice.view.baseView.create(right_layout, cpu_view, 1)
+    cpuBase:setBgColor("#002b36")
+    cpuBase:setFgColor("#268bd2")
+    cpuBase:setNextColor(beautiful.bg_normal)
+    cpuBase:setIcon(beautiful.cpu)
+    cpuBase:init()
+    
+    disk_view = ice.view.diskView.create()
     disk_view:setCurrentDisk("/home")
-    base = ice.view.baseView.create(right_layout, disk_view)
-    base:setBgColor(beautiful.bg_normal)
-    base:setFgColor(beautiful.fg_normal)
-    base:setNextColor("#002b36")
-    base:setIcon(beautiful.disk)
-    base:init()
+    diskBase = ice.view.baseView.create(right_layout, disk_view, 120)
+    diskBase:setBgColor(beautiful.bg_normal)
+    diskBase:setFgColor(beautiful.fg_normal)
+    diskBase:setNextColor("#002b36")
+    diskBase:setIcon(beautiful.disk)
+    diskBase:init()
+    
     ice.view.clockView.create(right_layout)
 --    right_layout:add(mytextclock)
 
@@ -549,7 +517,8 @@ globalkeys = awful.util.table.join(
     -- User programs
     awful.key({ modkey }, "i", function () awful.util.spawn(browser) end),
     awful.key({ modkey }, "e", function () awful.util.spawn(gui_editor) end),
-
+    awful.key({ modkey }, "$", function () awful.util.spawn("xset dpms force off") end),
+    
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "x",

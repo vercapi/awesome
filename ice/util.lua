@@ -1,4 +1,5 @@
 local util = {}
+local io   = { open = io.open, lines = io.lines }
 
 util.WARNING = "WARNING"
 util.ERROR = "ERROR"
@@ -47,6 +48,16 @@ function util.createColor(pHexValue)
   end
 
   return {red = red, green = green, blue = blue}
+end
+
+function util.linesFromFile(pFile)
+   lines = {}
+
+   for line in io.lines(pFile) do
+      lines[#lines + 1] = line
+   end
+
+   return lines
 end
 
 return util
