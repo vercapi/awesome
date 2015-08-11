@@ -1,7 +1,7 @@
 local wibox     = require("wibox")
 local awful     = require("awful")
-local beautiful   = require("beautiful")
-local cpu  = require("ice.data.cpu")
+local beautiful = require("beautiful")
+local cpu       = require("ice.data.cpu")
 local util      = require("ice.util")
 
 local cpuView = {}
