@@ -61,18 +61,19 @@ function base:addToLayout(pWidget)
 end
 
 function base:showIcon()
-   local iconLayout = wibox.layout.fixed.vertical()
-
    self.diskIcon = wibox.widget.imagebox(self.icon)
+   
+   self:addToLayout(base.createIcon(self.diskIcon, self:getBgColor()))
+end
 
-   iconLayout:add(self.diskIcon)
+function base.createIcon(pIcon, pBgColor)
 
-   iconMargin = wibox.layout.margin(iconLayout, 2, 2)
+   iconMargin = wibox.layout.margin(pIcon, 2, 2)
    iconMargin:set_top(2)
    iconMargin:set_bottom(2)
-   iconMargin:set_color(self:getBgColor())
+   iconMargin:set_color(pBgColor)
 
-   self:addToLayout(iconMargin)
+   return iconMargin
 end
 
 function base:init()

@@ -128,19 +128,6 @@ blue   = beautiful.fg_focus
 -- Calendar
 --lain.widgets.calendar:attach(mytextclock)
 
--- Network
-neticon = wibox.widget.imagebox(beautiful.net)
-neticonup = wibox.widget.imagebox(beautiful.netup)
-neticondown = wibox.widget.imagebox(beautiful.netdown)
-neticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(iptraf) end)))
-netwidget = lain.widgets.net({
-    settings = function()
-       widget:set_markup(markup("#BBBBBB", " " .. net_now.received .. "(" .. net_now.total_received .. ")")
-                          .. " " ..
-                          markup("#BBBBBB", " " .. net_now.sent .. "(" .. net_now.total_sent .. ")"))
-    end
-})
-
 -- Battery
 batwidget = lain.widgets.bat({
       battery = "BAT1",
@@ -286,24 +273,17 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    -- right_layout:add(small_spr)
-    -- right_layout:add(mpdicon)
-    -- right_layout:add(mpdwidget)
-    right_layout:add(bar_spr)
-    right_layout:add(batwidget)
-    -- right_layout:add(neticon)
-    -- right_layout:add(neticonup)
 
     -- New Network
-    testWidget = ice.view.networkView.create(right_layout)
-    testWidget:setIface("wlp6s0")
-    testWidget:start()
+    net_view = ice.view.networkView.create()
+    net_view:setIface("wlp6s0")
+    netBase = ice.view.baseView.create(right_layout, net_view, 2)
+    netBase:setBgColor("#002b36")
+    netBase:setFgColor("#b58900")
+    netBase:setNextColor(beautiful.bg_normal)
+    netBase:setIcon(beautiful.net_wireless)
+    netBase:init()
 
-   
-
-    right_layout:add(netwidget)
-    right_layout:add(neticondown)
-    right_layout:add(bar_spr)
     --right_layout:add(volicon)
     --right_layout:add(volumewidget)
     --right_layout:add(bar_

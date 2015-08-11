@@ -54,9 +54,8 @@ theme.pause                                      = theme.dir .. "/icons/pause.pn
 theme.memory                                     = theme.dir .. "/icons/memory.svg"
 theme.cpu                                        = theme.dir .. "/icons/cpu.svg"
 theme.net_wired                                  = theme.dir .. "/icons/net_wired.png"
-theme.netup                                      = theme.dir .. "/icons/net_up.png"
-theme.netdown                                    = theme.dir .. "/icons/net_down.png"
-theme.net_wireless                               = theme.dir .. "/icons/pause.png"
+theme.netupdown                                  = theme.dir .. "/icons/netupdown.svg"
+theme.net_wireless                               = theme.dir .. "/icons/net.svg"
 
 theme.clock                                      = theme.dir .. "/icons/clock.svg"
 
