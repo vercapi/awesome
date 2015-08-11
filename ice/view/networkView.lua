@@ -26,7 +26,7 @@ function networkView:drawContent()
    networkView.addGraph(self.downloadGraph, layout)
    
    updownIcon = wibox.widget.imagebox(theme.netupdown)
-   layout:add(baseView.createIcon(updownIcon))
+   layout:add(baseView.createIcon(updownIcon, "#002b36"))
    
    self.uploadGraph = networkView.createGraph()
    networkView.addGraph(self.uploadGraph, layout)
