@@ -128,14 +128,6 @@ blue   = beautiful.fg_focus
 -- Calendar
 --lain.widgets.calendar:attach(mytextclock)
 
--- Memory
-memicon = wibox.widget.imagebox(beautiful.mem)
-memwidget = lain.widgets.mem({
-    settings = function()
-        widget:set_text(" " .. mem_now.free .. " MB ")
-    end
-})
-
 -- Network
 neticon = wibox.widget.imagebox(beautiful.net)
 neticonup = wibox.widget.imagebox(beautiful.netup)
@@ -312,12 +304,18 @@ for s = 1, screen.count() do
     right_layout:add(netwidget)
     right_layout:add(neticondown)
     right_layout:add(bar_spr)
-    right_layout:add(memicon)
-    right_layout:add(memwidget)
     --right_layout:add(volicon)
     --right_layout:add(volumewidget)
     --right_layout:add(bar_
-
+    
+    memory_view = ice.view.memoryView.create()
+    memoryBase = ice.view.baseView.create(right_layout, memory_view, 120)
+    memoryBase:setBgColor(beautiful.bg_normal)
+    memoryBase:setFgColor("#2aa198")
+    memoryBase:setNextColor("#002b36")
+    memoryBase:setIcon(beautiful.memory)
+    memoryBase:init()
+    
     cpu_view = ice.view.cpuView.create("#002b36", "#268bd2")
     cpuBase = ice.view.baseView.create(right_layout, cpu_view, 1)
     cpuBase:setBgColor("#002b36")
