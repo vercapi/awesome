@@ -37,7 +37,7 @@ end
 function disk.getAllDisks()
    disks = {}
 
-   local result = disk.getRawDiskInfo("/")
+   local result = disk.getRawDiskInfo("")
    local list = result:read("*all")
    result:close()
 
@@ -54,7 +54,7 @@ function disk.getAllDisks()
 end
 
 function disk.getRawDiskInfo(pMountPoint)
-   local result = io.popen("df | grep '".. pMountPoint  .."' | awk '{print $6\" \"$2\" \"$3}'")
+   local result = io.popen("df ".. pMountPoint ..  "| grep '/' | awk '{print $6\" \"$2\" \"$3}'")
    return result
 end
 
