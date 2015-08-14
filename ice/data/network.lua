@@ -1,13 +1,13 @@
 local util = require("ice.util")
 
-local Interface = {}
-Interface.__index = Interface
+local network = {}
+network.__index = network
 
---- Constructor object for creating network Interface objects
+--- Constructor object for creating network network objects
 -- @param pName the name of the network interface
-function Interface.create(p_name, p_type)
+function network.create(p_name, p_type)
    local inet = {}
-   setmetatable(inet, Interface)
+   setmetatable(inet, network)
    
    inet.name = p_name
    inet.type = p_type
@@ -17,47 +17,49 @@ function Interface.create(p_name, p_type)
    return inet
 end
 
-function Interface:isDown()
+function network:isDown()
    return not self:isUp()
 end
 
-function Interface:isUp()
+function network:isUp()
    return 'connected' == self.state
 end
 
-function Interface:getState()   
+function network:getState()   
    return self.state
 end
 
-function Interface:getType()
+function network:getType()
    return self.type
 end
    
-function Interface:isWireless()
+function network:isWireless()
    return self.type == 'wifi'
 end
 
-function Interface:update()
-   self.state = Interface.calculateState(self.name)
-   self.rx_rate, self.tx_rate = Interface.calculateCurrentRate(self.name)
+function network:update()
+   self.state = network.collectState(self.name)
+   self.rx_rate, self.tx_rate = network.collectCurrentRate(self.name)
    if self:isWireless() then
-      self.wireless_strength = Interface.calculateWirelessStrenght("wlp6s0")
+      self.wireless_strength = network.collectWirelessStrenght("wlp6s0")
    end
 end
 
-function Interface:getCurrentTXRate()
+function network:getCurrentTXRate()
    return self.tx_rate
 end
 
-function Interface:getCurrentRXRate()
+function network:getCurrentRXRate()
    return self.rx_rate
 end
 
-function Interface:getWirelessStrenght()
+function network:getWirelessStrenght()
    return self.wireless_strength
 end
 
-function Interface.getAnyConnected()
+--- Static Device finders ---
+
+function network.getAnyConnected()
    local result = io.popen("ip link show | cut -d' ' -f2,9")
    list = result:read("*all")
    result:close()
@@ -73,8 +75,8 @@ end
 
 --- Get all devices.
 -- @parameter pDeviceName if it is not nil it will be used in the command to specify a device
--- @return A table of all devices in Interface objects.
-function Interface.getDevices()
+-- @return A table of all devices in network objects.
+function network.getDevices()
    if p_device == nil then device_name = "" else device_name = p_device.name end
    
    local interfaces = {}
@@ -90,7 +92,7 @@ function Interface.getDevices()
       end
       
       local name = items[0]
-      local interface = Interface.create(name, items[1])
+      local interface = network.create(name, items[1])
       
       interfaces[name] = interface
    end
@@ -98,8 +100,9 @@ function Interface.getDevices()
    return interfaces
 end
 
+--- Static data collectors
 
-function Interface.calculateWirelessStrenght(p_device)
+function network.collectWirelessStrenght(p_device)
    local result = io.popen("nmcli d wifi list ifname " .. p_device .. " | grep '^*' | grep -v \"SSID\" | awk '{ print $7}'")
    local stringNumber = result:read("*all")
    result:close()
@@ -112,7 +115,7 @@ end
 -- @param pRXTX set RX or TX
 -- @param p_device is the name of device you want the current rate from
 -- @return the rate
-function Interface.calculateCurrentRate(p_device)
+function network.collectCurrentRate(p_device)
    local file_result = io.popen("ifstat | grep " .. p_device .. " | awk '{ print $6\" \"$8}'")
    allText = file_result:read("*all")
    file_result:close()
@@ -128,7 +131,7 @@ function Interface.calculateCurrentRate(p_device)
    return tonumber(results[0]), tonumber(results[1])
 end
 
-function Interface.calculateState(p_device)
+function network.collectState(p_device)
    local result = io.popen("nmcli d status | grep '".. p_device  .."' | awk '{print $3}'")
    local state = result:read("*all")
    result:close()
@@ -136,4 +139,4 @@ function Interface.calculateState(p_device)
    return util.trim(state)
 end
 
-return Interface
+return network
