@@ -7,6 +7,7 @@ function cpu.countCores()
 
    local result = io.popen("nproc")
    local stringCount = result:read("*all")
+   result:close()
    
    local count = tonumber(stringCount)
       

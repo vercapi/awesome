@@ -680,8 +680,6 @@ client.connect_signal("manage", function (c, startup)
     awful.rules.apply(c)
 end)
 
-run_once("/home/vercapi/bin/whatpulse --closedwindow")
-
 -- No border for maximized clients
 client.connect_signal("focus",
     function(c)

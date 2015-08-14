@@ -15,7 +15,7 @@
    id="svg8043"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="net.svg">
+   sodipodi:docname="net_min.svg">
   <defs
      id="defs8045" />
   <sodipodi:namedview
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -69,63 +69,75 @@
          x="-137.22517"
          y="-275.22232">NET</tspan></text>
     <g
-       id="g7423"
-       transform="matrix(0.65014641,0,0,0.65014641,-154.09625,-335.05616)"
+       id="g8970"
+       transform="translate(-173.61955,-872.94166)"
        style="fill:#b58900;fill-opacity:1">
       <g
-         id="_x37_7_Essential_Icons_60_"
+         transform="matrix(0.65014641,0,0,0.65014641,18.380439,537.8855)"
+         id="g7423-2"
          style="fill:#b58900;fill-opacity:1">
-        <path
-           d="m 44,24 -16,0 c -1.1,0 -2,0.9 -2,2 l 0,40 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 l 0,-40 c 0,-1.1 -0.9,-2 -2,-2 z m -2,40 -12,0 0,-36 12,0 0,36 z M 18,44 2,44 c -1.1,0 -2,0.9 -2,2 l 0,20 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 l 0,-20 c 0,-1.1 -0.9,-2 -2,-2 z M 16,64 4,64 4,48 16,48 16,64 Z M 70,4 54,4 c -1.1,0 -2,0.9 -2,2 l 0,60 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 L 72,6 C 72,4.9 71.1,4 70,4 Z m -2,60 -12,0 0,-56 12,0 0,56 z"
-           id="Signal"
-           inkscape:connector-curvature="0"
+        <g
+           id="_x37_7_Essential_Icons_60_-1"
+           style="fill:#b58900;fill-opacity:1">
+          <path
+             inkscape:connector-curvature="0"
+             id="Signal-8"
+             d="m 44,24 -16,0 c -1.1,0 -2,0.9 -2,2 l 0,40 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 l 0,-40 c 0,-1.1 -0.9,-2 -2,-2 z m -2,40 -12,0 0,-36 12,0 0,36 z M 18,44 2,44 c -1.1,0 -2,0.9 -2,2 l 0,20 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 l 0,-20 c 0,-1.1 -0.9,-2 -2,-2 z M 16,64 4,64 4,48 16,48 16,64 Z M 70,4 54,4 c -1.1,0 -2,0.9 -2,2 l 0,60 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 L 72,6 C 72,4.9 71.1,4 70,4 Z m -2,60 -12,0 0,-56 12,0 0,56 z"
+             style="fill:#b58900;fill-opacity:1" />
+        </g>
+        <g
+           id="g7387-8"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7389-9"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7391-2"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7393-8"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7395-22"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7397-0"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7399-3"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7401-24"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7403-5"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7405-2"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7407-47"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7409-4"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7411-4"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7413-0"
+           style="fill:#b58900;fill-opacity:1" />
+        <g
+           id="g7415-6"
            style="fill:#b58900;fill-opacity:1" />
       </g>
-      <g
-         id="g7387"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7389"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7391"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7393"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7395"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7397"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7399"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7401"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7403"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7405"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7407"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7409"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7411"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7413"
-         style="fill:#b58900;fill-opacity:1" />
-      <g
-         id="g7415"
-         style="fill:#b58900;fill-opacity:1" />
+      <rect
+         y="568.07648"
+         x="19.642857"
+         height="12.142858"
+         width="11.785714"
+         id="rect8968"
+         style="fill:#b58900;fill-opacity:1;stroke:none;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
   </g>
 </svg>

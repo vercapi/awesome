@@ -52,27 +52,11 @@ function networkView.addGraph(pGraph, pLayout)
    pLayout:add(margin)
 end
 
-function networkView:showUpload()
-   vIcon = wibox.widget.imagebox(beautiful.netup)
-
-   vGraph = awful.widget.graph()   
-   vGraph:set_width(70)
-   vGraph:set_background_color(beautiful.bg_normal)
-   vGraph:set_color(beautiful.fg_normal)
-   vGraph:set_scale(true)
-
-   -- Needs to be available on object scope for updating the values
-   self.uploadWidget= vGraph
-
-   self.layout:add(vIcon)
-   self.layout:add(self.uploadWidget)
-end
-
 function networkView:init()
-   networkView:update()
+   networkView:update(nil)
 end
 
-function networkView:update()
+function networkView:update(pBase) 
    if(self.iface ~= nil) then
       vCurrentDownRate = self.iface:getCurrentRate("RX")
       self.downloadGraph:add_value(vCurrentDownRate)
@@ -81,38 +65,67 @@ function networkView:update()
       self.uploadGraph:add_value(vCurrentUpRate)   
    end
 
-   networkView:updateState()   
+   self:updateState()
+   self:updateIcon(pBase)
 end
 
 function networkView:setIface(pIface)
-   self.iface = self.devices[pIface]
+   if(pIface ~= nil) then
+      self.iface = self.devices[pIface]
+   end
 end
-      
+
 function networkView:updateState()
    if self.iface ~= nil then
-      vState = self.iface:getState()
+      self.iface:update()
+      connected = self.iface:isUp()
    else
-      vState = nil
+      connected = false
    end
    
-   if vState ~= "UP" then
+   if not connected then
+      self.devices = networkData.getDevices()
       vAnyIf = networkData.getAnyConnected()
-      --self:setIface(vAnyIf)
+      self:setIface(vAnyIf)
    end
+end
 
-   -- if(self.iface ~= nil) then
-   --    if self.iface:isWireless() then
-   --       self.netIcon:set_image(beautiful.net_wireless)
-   --    else
-   --       self.netIcon:set_image(beautiful.net_wired)
-   --    end
-   -- else
-   --    self.netIcon:set_image(beautiful.awesome_icon)
-   -- end   
+function networkView:updateIcon(pBase)
+   if(pBase ~= nil and self.iface ~= nil) then
+      if self.iface:isWireless() then
+         self:updateIconStrenght(pBase)
+      else
+         pBase:set_image(beautiful.net_wired)
+      end
+   end
+end
+
+function networkView:updateIconStrenght(pBase)
+   local strength = self.iface:getWirelessStrenght()
+   if strength == nil then strength = 0 end
+   
+   if strength >= 90 then
+      pBase:set_image(beautiful.net_wireless_max)
+   elseif strength >= 60 then
+      pBase:set_image(beautiful.net_wireless_mid)
+   elseif strength >= 30 then
+      pBase:set_image(beautiful.net_wireless_min)
+   else
+      pBase:set_image(beautiful.net_wireless)
+   end
 end
 
 function networkView:getState()
-   return util.OK
+   state = util.OK
+
+   if self.iface == nil or self.iface:isDown() then
+      state = util.ERROR
+   elseif self.iface:getWirelessStrenght() == nil or self.iface:getWirelessStrenght() < 30 then
+      state = util.WARNING
+   end
+
+   return state
+      
 end
 
 return networkView

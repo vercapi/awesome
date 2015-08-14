@@ -1,9 +1,3 @@
---[[
-
--- This contains all the method to get information back from the network interfaces
-
---]]
-
 local Interface = {}
 Interface.__index = Interface
 
@@ -16,31 +10,30 @@ function Interface.create(pName)
    return inet
 end
 
---- Get the state of a network Interface
--- @return State of network Interface
+function Interface:isDown()
+   return not self:isUp()
+end
+
+function Interface:isUp()
+   return 'connected' == self:getState()
+end
+
 function Interface:getState()   
-   result = io.popen("ip link show " .. self.name  .. " | grep -oh 'state [A-Z]*'")
-   rawState = result:read("*all")
-   result:close()
-
-   state, numReplaced = rawState:gsub("state ", "")
-   state, numReplaced = state:gsub("\n", "")
-   return state
+   return self.state
 end
 
-function Interface.getAnyConnected()
-   vResult = io.popen("ip link show | cut -d' ' -f2,9")
-   vList = vResult:read("*all")
-   vResult:close()
-   vList = vList:match("%w+: UP")
-
-   vNetwork = nil
-   if vList ~= nil then
-      vNetwork =  vList:gsub(": UP", "")
-   end
-
-   return vNetwork
+function Interface:setState(pState)
+   self.state = pState
 end
+
+function Interface:setType(pType)
+   self.type = pType
+end
+
+function Interface:getType()
+   return self.type
+end
+
 --- Get the current Receive or Transmission data rate in bytes
 -- @param pRXTX set RX or TX
 -- @return the rate
@@ -70,35 +63,63 @@ function Interface:getCurrentRate(pRXTX)
    return tonumber(result)
 end
 
-function Interface:WirelessStrenght()
-   result = io.popen("nmcli d wifi list ifname " .. self.name .. " | grep '^*' | grep -v \"SSID\" | awk '{ print $2\" \"$7}'")
-   list = result:read("*all")
+function Interface:getWirelessStrenght()
+   -- TODO:only when this actually is a wireless connection
+   local result = io.popen("nmcli d wifi list ifname " .. self.name .. " | grep '^*' | grep -v \"SSID\" | awk '{ print $7}'")
+   local stringNumber = result:read("*all")
    result:close()
+
+
+   
+   if stringNumber ~= nil then return tonumber(stringNumber) else return 0 end
 end
    
 function Interface:isWireless()
-   vResult = io.popen("nmcli d wifi list ifname " .. self.name)
-   vText = vResult:read("*all")
-   vResult:close()
+   return self:getType() == 'wifi'
+end
 
-   vIsWireless = false
-   if not string.find(vText, "Error") then
-      vIsWireless = true
+function Interface:update()
+   device = Interface.getDevices(self.device)[0]
+   self = device
+end
+
+function Interface.getAnyConnected()
+   vResult = io.popen("ip link show | cut -d' ' -f2,9")
+   vList = vResult:read("*all")
+   vResult:close()
+   vList = vList:match("%w+: UP")
+
+   vNetwork = nil
+   if vList ~= nil then
+      vNetwork =  vList:gsub(": UP", "")
    end
 
-   return vIsWireless
+   return vNetwork
 end
 
 --- Get all devices.
+-- @parameter pDeviceName if it is not nil it will be used in the command to specify a device
 -- @return A table of all devices in Interface objects.
-function Interface.getDevices()
-   interfaces = {}
-   result = io.popen("ip link show | cut -d' ' -f2")
-   list = result:read("*all")
+function Interface.getDevices(pDeviceName)
+   if pDeviceName == nil then pDeviceName = "" end
+   
+   local interfaces = {}
+   local result = io.popen("nmcli d status | grep '".. pDeviceName  .."' | awk '{print $1\" \"$2\" \"$3}' | tail -n+2")
+   local list = result:read("*all")
    result:close()
-   for ifName in list:gmatch("%w+:") do
-      name, numReplaced = ifName:gsub(":", "")
+   for info in list:gmatch("%g+ %g+ %g+") do
+      local items = {}
+      local pos = 0
+      for item in info:gmatch("%w+") do
+         items[pos] = item
+         pos = pos +1
+      end
+
+      local name = items[0]
       interface = Interface.create(name)
+      interface:setType(items[1])
+      interface:setState(items[2])
+      
       interfaces[name] = interface
    end
    

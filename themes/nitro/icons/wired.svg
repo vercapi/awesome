@@ -15,7 +15,7 @@
    id="svg8043"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="net.svg">
+   sodipodi:docname="wired.svg">
   <defs
      id="defs8045" />
   <sodipodi:namedview
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="139.53052"
+     inkscape:cx="254.53052"
      inkscape:cy="-278.37766"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -69,62 +69,62 @@
          x="-137.22517"
          y="-275.22232">NET</tspan></text>
     <g
-       id="g7423"
-       transform="matrix(0.65014641,0,0,0.65014641,-154.09625,-335.05616)"
+       id="g8883"
+       transform="matrix(2.7117647,0,0,2.7117647,-154.7078,-331.52587)"
        style="fill:#b58900;fill-opacity:1">
       <g
-         id="_x37_7_Essential_Icons_60_"
+         id="g8843"
          style="fill:#b58900;fill-opacity:1">
         <path
-           d="m 44,24 -16,0 c -1.1,0 -2,0.9 -2,2 l 0,40 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 l 0,-40 c 0,-1.1 -0.9,-2 -2,-2 z m -2,40 -12,0 0,-36 12,0 0,36 z M 18,44 2,44 c -1.1,0 -2,0.9 -2,2 l 0,20 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 l 0,-20 c 0,-1.1 -0.9,-2 -2,-2 z M 16,64 4,64 4,48 16,48 16,64 Z M 70,4 54,4 c -1.1,0 -2,0.9 -2,2 l 0,60 c 0,1.1 0.9,2 2,2 l 16,0 c 1.1,0 2,-0.9 2,-2 L 72,6 C 72,4.9 71.1,4 70,4 Z m -2,60 -12,0 0,-56 12,0 0,56 z"
-           id="Signal"
-           inkscape:connector-curvature="0"
-           style="fill:#b58900;fill-opacity:1" />
+           id="path8845"
+           d="m 13.473,4.02 0,-2.687 -0.663,0 L 9.73,0 9.558,0.398 l 2.158,0.935 -2.669,0 0,0.496 c -1.756,0.038 -4.226,0.205 -4.83,2.01 -0.48,1.43 1.178,2.908 2.032,3.811 1.129,1.19 2.844,2.55 3.229,4.228 0.488,2.128 -5.333,2.334 -6.372,2.427 -0.68,0.06 -1.312,1.48 -0.449,1.404 2.412,-0.214 6.232,-0.357 7.752,-2.642 C 11.388,11.596 10.433,10.009 9.467,8.83 8.307,7.414 6.805,6.237 5.803,4.697 5.532,4.279 5.374,3.884 5.553,3.778 6.515,3.205 7.928,3.236 9.046,3.224 l 0,0.797 4.427,0 0,-0.001 z"
+           style="fill:#b58900;fill-opacity:1"
+           inkscape:connector-curvature="0" />
       </g>
       <g
-         id="g7387"
+         id="g8847"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7389"
+         id="g8849"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7391"
+         id="g8851"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7393"
+         id="g8853"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7395"
+         id="g8855"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7397"
+         id="g8857"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7399"
+         id="g8859"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7401"
+         id="g8861"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7403"
+         id="g8863"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7405"
+         id="g8865"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7407"
+         id="g8867"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7409"
+         id="g8869"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7411"
+         id="g8871"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7413"
+         id="g8873"
          style="fill:#b58900;fill-opacity:1" />
       <g
-         id="g7415"
+         id="g8875"
          style="fill:#b58900;fill-opacity:1" />
     </g>
   </g>

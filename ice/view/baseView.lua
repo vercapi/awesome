@@ -56,6 +56,10 @@ function base:getNextColor()
    return self.nextColor
 end
 
+function base:getImage()
+   return self.diskIcon
+end
+
 function base:addToLayout(pWidget)
    self:getLayout():add(pWidget)
 end
@@ -80,6 +84,7 @@ function base:init()
    self:showSeparator()
    self:showIcon()
    self:showStatus()
+   self:updateStatus()
 
    if self.content ~= nil then
       vContent = self.content:drawContent()
@@ -96,21 +101,27 @@ end
 
 function base.updator(pBase)
    function update()
-      if pBase.content ~= nil then pBase.content:update() end
+      if pBase.content ~= nil then pBase.content:update(pBase:getImage()) end
+      pBase:updateStatus()
    end
 
    return update
 end
 
-function base:showStatus()
+function base:updateStatus()
    if(util.WARNING == self.content:getState()) then
-      image = wibox.widget.imagebox(theme.warning)
+      self.statusImage:set_image(theme.warning)
+   elseif(util.ERROR == self.content:getState()) then
+      self.statusImage:set_image(theme.error)
+   else
+      self.statusImage:set_image(nil)
    end
-   if(util.ERROR == self.content:getState()) then
-      image = wibox.widget.imagebox(theme.error)
-   end
+end
 
-   imageMargin = wibox.layout.margin(image, 2, 2)
+function base:showStatus()
+   self.statusImage = wibox.widget.imagebox()
+
+   imageMargin = wibox.layout.margin(self.statusImage, 2, 2)
    imageMargin:set_top(2)
    imageMargin:set_bottom(25)
    imageMargin:set_color(self:getBgColor())

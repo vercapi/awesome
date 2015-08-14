@@ -53,13 +53,17 @@ theme.play                                       = theme.dir .. "/icons/play.png
 theme.pause                                      = theme.dir .. "/icons/pause.png"
 theme.memory                                     = theme.dir .. "/icons/memory.svg"
 theme.cpu                                        = theme.dir .. "/icons/cpu.svg"
-theme.net_wired                                  = theme.dir .. "/icons/net_wired.png"
+theme.net_wired                                  = theme.dir .. "/icons/wired.svg"
 theme.netupdown                                  = theme.dir .. "/icons/netupdown.svg"
 theme.net_wireless                               = theme.dir .. "/icons/net.svg"
+theme.net_wireless_min                           = theme.dir .. "/icons/net_min.svg"
+theme.net_wireless_mid                           = theme.dir .. "/icons/net_mid.svg"
+theme.net_wireless_max                           = theme.dir .. "/icons/net_max.svg"
 
 theme.clock                                      = theme.dir .. "/icons/clock.svg"
 
 theme.warning                                    = theme.dir .. "/icons/warning.svg"
+theme.error                                      = theme.dir .. "/icons/error.svg"
 
 theme.layout_tile                                = theme.dir .. "/icons/tile.png"
 theme.layout_tileleft                            = theme.dir .. "/icons/tileleft.png"
