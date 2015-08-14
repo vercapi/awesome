@@ -16,6 +16,10 @@ function util.tablelength(T)
    return count
 end
 
+function util.trim(s)
+  return (s:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 function util.round(num, idp)
   local mult = 10^(idp or 0)
   return math.floor(num * mult + 0.5) / mult

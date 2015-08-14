@@ -56,12 +56,13 @@ function networkView:init()
    networkView:update(nil)
 end
 
-function networkView:update(pBase) 
+function networkView:update(pBase)  
    if(self.iface ~= nil) then
-      vCurrentDownRate = self.iface:getCurrentRate("RX")
+      self.iface:update()
+      vCurrentDownRate = self.iface:getCurrentRXRate()
       self.downloadGraph:add_value(vCurrentDownRate)
       
-      vCurrentUpRate = self.iface:getCurrentRate("SX")
+      vCurrentUpRate = self.iface:getCurrentTXRate()
       self.uploadGraph:add_value(vCurrentUpRate)   
    end
 
@@ -77,7 +78,6 @@ end
 
 function networkView:updateState()
    if self.iface ~= nil then
-      self.iface:update()
       connected = self.iface:isUp()
    else
       connected = false

@@ -29,9 +29,10 @@ local function test_isup()
 end
 
 local function test_getCurrentRate()
-   vDevice = Interface.create('wlp6s0')
-   assert(vDevice:getCurrentRate(true) >= 0, 'Rate needs to be a possitve number')
-   assert(vDevice:getCurrentRate(false) >= 0, 'Rate needs to be a possitve number')
+   devices = Interface.getDevices() 
+   vDevice = devices['wlp6s0']
+   assert(vDevice:getCurrentRXRate() >= 0, 'Rate needs to be a possitve number')
+   assert(vDevice:getCurrentTXRate() >= 0, 'Rate needs to be a possitve number')
 end
 
 -- Test environmcannot be fixed towards other machines
@@ -41,17 +42,8 @@ local function test_isWireless()
    assert(vDevice:isWireless(), 'device should be wireless')
 end
 
-local function test_update()
-   devices = Interface.getDevices() 
-   vDevice = devices['wlp6s0']
-   vDevice:update()
-
-   assert(vDevice.name == "wlp6s0", "Device should be the same, but it is " .. vDevice.name)
-end
-
 local function test_getWirelessStrenght()
    devices = Interface.getDevices() 
    vDevice = devices['wlp6s0']
-
    assert(vDevice:getWirelessStrenght() > 0, "Wireless strenght should be bigger then 0")
 end
