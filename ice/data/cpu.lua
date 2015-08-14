@@ -19,7 +19,7 @@ function cpu.getLoad()
 
    local result = io.popen("cat /proc/loadavg | awk '{print $1}'")
    local stringLoad = result:read("*all")
-   result.close()
+   result:close()
 
    load = tonumber(stringLoad)
 
