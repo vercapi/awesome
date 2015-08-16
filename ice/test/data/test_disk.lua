@@ -9,9 +9,7 @@ local function test_getAllDisks()
 end
 
 local function test_getPercentage()
-   disk = disk.create("/test")
-   disk:setSpaceUsed(140)
-   disk:setTotalSpace(200)
+   disk = disk.create("/test", 200, 140)
    assert(disk:getPercentagFull() == 0.7, 'Should be 70 percent')
 end
 
@@ -23,6 +21,6 @@ end
 
 local function test_update()
    disks = disk.getAllDisks()
-   disks["/home"]:updateDisk()
+   disks["/home"]:update()
    assert(disk:getPercentagFull() > 0, 'Value should be bigger then 0')
 end

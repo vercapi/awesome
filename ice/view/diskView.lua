@@ -71,7 +71,7 @@ function disk:init()
 end
 
 function disk:update()
-   self.disks[self.diskMountPoint]:updateDisk()
+   self.disks[self.diskMountPoint]:update()
    local value = self.disks[self.diskMountPoint]:getPercentagFull()
    self.diskGraph:set_value(value)
    self:setText(value)

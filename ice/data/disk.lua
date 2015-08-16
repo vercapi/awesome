@@ -3,34 +3,30 @@ local util      = require("ice.util")
 local disk = {}
 disk.__index = disk
 
-function disk.create(pMountPoint)
+function disk.create(pMountPoint, p_total_space, p_used_space)
    local myDisk = {}
    setmetatable(myDisk, disk)
    myDisk.mountPoint = pMountPoint
+   myDisk.total_space = p_total_space
+   myDisk.used_space = p_used_space
    
    return myDisk
 end
 
-function disk:setTotalSpace(pTotalSpace)
-   self.totalSpace = pTotalSpace
-end
-
-function disk:setSpaceUsed(pSpaceUsed)
-   self.spaceUsed = pSpaceUsed
-end
-
 function disk:getPercentagFull()
-   local result = self.spaceUsed/self.totalSpace
+   local result = self.used_space/self.total_space
    return util.round(result, 2)
 end
 
-function disk:updateDisk()
-   local result = disk.getRawDiskInfo(self.mountPoint)
+function disk:update()
+   name, self.total_space, self.used_space = disk.getOneDiskInfo(self.mountPoint)
+end
+
+function disk.getOneDiskInfo(p_mount_point)
+   local result = disk.getRawDiskInfo(p_mount_point)
    line = result:read("*all")
    for mountPoint in line:gmatch("%g+ %w+ %w+") do
-      name, totalSpace, usedSpace = disk.parseRawDiskInfo(mountPoint)
-      self:setTotalSpace(totalSpace)
-      self:setSpaceUsed(usedSpace)
+      return disk.parseRawDiskInfo(mountPoint)
    end
 end
 
@@ -44,9 +40,7 @@ function disk.getAllDisks()
    for mountPoint in list:gmatch("%g+ %w+ %w+") do
       
       local name, totalSpace, usedSpace = disk.parseRawDiskInfo(mountPoint)
-      local currentDisk = disk.create(name)
-      currentDisk:setTotalSpace(totalSpace)
-      currentDisk:setSpaceUsed(usedSpace)
+      local currentDisk = disk.create(name, totalSpace, usedSpace)
       disks[name] = currentDisk   
    end
 
