@@ -13,6 +13,11 @@ local function test_getPercentage()
    assert(disk:getPercentagFull() == 0.7, 'Should be 70 percent')
 end
 
+local function test_getPercentage()
+   disk = disk.getAllDisks()["/home"]
+   assert(disk:getPercentagFull() >= 0, 'Home should not be 0')
+end
+
 local function test_getHome()
    disks = disk.getAllDisks()
    assert(disks["/home"] ~= nil, '/home should exist')

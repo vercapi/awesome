@@ -78,7 +78,7 @@ function disk:update()
 end
 
 function disk:setText(pValue)
-   self.percentage:set_text(string.format("%u", pValue*100) .. '% ')
+   self.percentage:set_text(string.format("%g", pValue*100) .. '% ')
 end
 
 function disk:getState()
