@@ -59,10 +59,10 @@ end
 function networkView:update(pBase)  
    if(self.iface ~= nil) then
       self.iface:update()
-      vCurrentDownRate = self.iface:getCurrentRXRate()
+      vCurrentDownRate = self.iface:getCurrentTXRate()
       self.downloadGraph:add_value(vCurrentDownRate)
       
-      vCurrentUpRate = self.iface:getCurrentTXRate()
+      vCurrentUpRate = self.iface:getCurrentRXRate()
       self.uploadGraph:add_value(vCurrentUpRate)   
    end
 
