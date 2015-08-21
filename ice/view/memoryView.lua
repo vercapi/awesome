@@ -10,6 +10,8 @@ memoryView.__index = memoryView
 function memoryView.create()
    local l_memoryView = {}
    setmetatable(l_memoryView, memoryView)
+
+   l_memoryView.data = memory.create()
    
    return l_memoryView
 end
@@ -24,7 +26,8 @@ function memoryView:init()
 end
 
 function memoryView:update()
-   local free_mem = memory.getFreeMemory()
+   self.data:update()
+   local free_mem = self.data:getFreeMemory()
    self.percentage:set_markup("<span color='#2aa198'>" .. string.format("%u", free_mem) .. ' MB </span>')
    
 end

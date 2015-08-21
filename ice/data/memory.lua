@@ -2,26 +2,50 @@ local util      = require("ice.util")
 
 local memory = {}
 memory.__index = memory
-   
 
-function memory.getFreeMemory()
-   return memory.getMemoryInfo("MemFree")
+
+function memory.create()
+   local l_memory = {}
+   setmetatable(l_memory, memory)
+
+   l_memory.total, l_memory.free = memory.getMemoryInfo()
+
+   return l_memory
 end
 
-function memory.getTotalMemory()
-   return memory.getMemoryInfo("MemTotal")
+function memory:getFreeMemory()
+   return self.free
 end
 
+function memory:getTotalMemory()
+   return self.total
+end
 
-function memory.getMemoryInfo(pParameter)
+function memory:update()
+   self.total, self.free = memory.getMemoryInfo()
+end
 
-   local result = io.popen("cat /proc/meminfo | grep '" .. pParameter  .. "' | awk '{print $2}'")
+function memory.getMemoryInfo()
+
+   local result = io.popen("cat /proc/meminfo | grep 'MemFree\\|MemTotal' | awk '{print $2}'")
    local stringInfo = result:read("*all")
    result:close()
 
-   number = tonumber(stringInfo)/1024 -- Information is in kb chaning it to mb
-   return util.round(number, 0)
-   
+   local values = {}
+   local pos = 0
+   for value in stringInfo:gmatch("%g+") do
+      values[pos] = value
+      pos = pos +1
+   end
+
+   totalMemory = memory.format(values[0])
+   freeMemory = memory.format(values[1])
+
+   return totalMemory, freeMemory
+end
+
+function memory.format(pString)
+   return util.round(tonumber(pString)/1024)
 end
 
 return memory
