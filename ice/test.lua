@@ -4,3 +4,9 @@ local test = {
 }
 
 
+local cpu = require("ice.data.battery")
+local util = require("ice.util")
+
+local function test_getBattery()
+   
+end

@@ -52,6 +52,9 @@ ice is a package for LUA that aims to sepparate data and UI. This should work mo
 ice/data -> contains all the functions to retreive data
 ice/view -> contains functionallity for showing things
 
+*** Battery
+    Installed upower
+
 ** Colors
    Base colors are based on [[https://github.com/altercation/solarized][solarized]]
 
@@ -86,7 +89,7 @@ ice/view -> contains functionallity for showing things
    Drop down with all other disks
 *** TODO Calendar
     Calendar should look 
-** Keybiding
+** Keybinding
 *** TODO clear up key bindings 
     How are things flagged urgent?
     W-C-j and W-C-k seem useless now?
@@ -214,6 +217,78 @@ This is all in context of awesome wm.
   cairo_rectangle (cr,top_left_x,top_left_y,rec_width,rec_height)
   cairo_set_source_rgba (cr,red,green,blue,alpha)
 #+END_SRC
+** dbus lua
+   
+   The standard lib seemed a bit dificult, especially because running standalone (outside of awesome) tests wasn't as strait foreward as I had hoped.
+   
+   [[https://github.com/dodo/lua-dbus][lua dbus]]
+   
+   Install the package luarocks on your system and then
+   #+BEGIN_SRC sh
+   sudo luarocks install --server=http://luarocks.org/dev ldbus DBUS_ARCH_DIR=/usr/lib/dbus-1.0/ DBUS_INCDIR=/usr/include/dbus-1.0/ DBUS_LIBDIR=/usr/lib
+   sudo luarocks install --server=http://luarocks.org/dev lua-dbus DBUS_ARCH_DIR=/usr/lib/dbus-1.0/ DBUS_INCDIR=/usr/include/dbus-1.0/ DBUS_LIBDIR=/usr/lib
+   #+END_SRC
+
+   list of available services
+   --system vs --session
+   #+BEGIN_SRC sh
+   dbus-send --system --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames
+   #+END_SRC
+
+   #+RESULTS:
+   | method | return                          | time=1441923228.109391 | sender=org.freedesktop.DBus | -> | destination=:1.12924 | serial=3 | reply_serial=2 |
+   | array  | [                               |                        |                             |    |                      |          |                |
+   | string | org.freedesktop.DBus            |                        |                             |    |                      |          |                |
+   | string | :1.7                            |                        |                             |    |                      |          |                |
+   | string | org.freedesktop.login1          |                        |                             |    |                      |          |                |
+   | string | :1.8                            |                        |                             |    |                      |          |                |
+   | string | :1.9                            |                        |                             |    |                      |          |                |
+   | string | :1.12924                        |                        |                             |    |                      |          |                |
+   | string | org.freedesktop.DisplayManager  |                        |                             |    |                      |          |                |
+   | string | org.freedesktop.systemd1        |                        |                             |    |                      |          |                |
+   | string | org.freedesktop.PolicyKit1      |                        |                             |    |                      |          |                |
+   | string | org.freedesktop.NetworkManager  |                        |                             |    |                      |          |                |
+   | string | org.freedesktop.UPower          |                        |                             |    |                      |          |                |
+   | string | :1.0                            |                        |                             |    |                      |          |                |
+   | string | :1.7071                         |                        |                             |    |                      |          |                |
+   | string | :1.14                           |                        |                             |    |                      |          |                |
+   | string | :1.1                            |                        |                             |    |                      |          |                |
+   | string | :1.2                            |                        |                             |    |                      |          |                |
+   | string | :1.3                            |                        |                             |    |                      |          |                |
+   | string | :1.17                           |                        |                             |    |                      |          |                |
+   | string | fi.epitest.hostap.WPASupplicant |                        |                             |    |                      |          |                |
+   | string | :1.4                            |                        |                             |    |                      |          |                |
+   | string | :1.1437                         |                        |                             |    |                      |          |                |
+   | string | org.freedesktop.RealtimeKit1    |                        |                             |    |                      |          |                |
+   | string | :1.18                           |                        |                             |    |                      |          |                |
+   | string | :1.5                            |                        |                             |    |                      |          |                |
+   | string | fi.w1.wpa_supplicant1           |                        |                             |    |                      |          |                |
+   | string | :1.19                           |                        |                             |    |                      |          |                |
+   | string | :1.6                            |                        |                             |    |                      |          |                |
+   | ]      |                                 |                        |                             |    |                      |          |                |
+
+   Introspect specific server
+
+   It's the /org/freedesjtop/DBus that controls what service is printed out (Doesn't work in org babel)
+   #+BEGIN_SRC sh
+   dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.Introspectable.Introspect
+   #+END_SRC
+
+   #+RESULTS:
+
+   example for getting all power devices: [[http://upower.freedesktop.org/docs/UPower.html][UPower documenation]]
+   #+BEGIN_SRC sh
+   dbus-send --system --dest=org.freedesktop.UPower --type=method_call --print-reply /org/freedesktop/UPower  org.freedesktop.UPower.EnumerateDevices
+   #+END_SRC
+
+   #+RESULTS:
+   | method | return | time=1441923556.512057                          | sender=:1.3 | -> | destination=:1.13257 | serial=331 | reply_serial=2 |
+   | array  | [      |                                                 |             |    |                      |            |                |
+   | object | path   | /org/freedesktop/UPower/devices/line_power_ACAD |             |    |                      |            |                |
+   | object | path   | /org/freedesktop/UPower/devices/battery_BAT1    |             |    |                      |            |                |
+   | ]      |        |                                                 |             |    |                      |            |                |
+
+ 
 ** Testing
    lua-testy, because simple for small projects like this
    It supports lua 5.3
