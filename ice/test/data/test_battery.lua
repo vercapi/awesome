@@ -33,12 +33,12 @@ end
 local function test_battery()
    init()
 
-   v_battery = battery.create()
-   v_battery:on_battery_listener(printer)
+   v_battery = battery.create("/org/freedesktop/UPower/devices/battery_BAT1")
+   v_battery:on_event_listener(printer)
    v_battery:registerSignal()
+--   v_battery:get_parameters()
    while true do
       loop()
-
    end
    stop()
 end

@@ -289,6 +289,10 @@ This is all in context of awesome wm.
    | ]      |        |                                                 |             |    |                      |            |                |
 
  
+   #+BEGIN_SRC sh
+   dbus-send --print-reply --system  --dest=org.freedesktop.UPower /org/freedesktop/UPower/devices/battery_BAT1 org.freedesktop.DBus.Properties.GetAll string:org.freedesktop.UPower.Device
+   #+END_SRC
+
 ** Testing
    lua-testy, because simple for small projects like this
    It supports lua 5.3
