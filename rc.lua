@@ -18,6 +18,7 @@ local lain      = require("lain")
 local eminent   = require("eminent")
 local vicious   = require("vicious")
 local ice       = require("ice")
+local dbus      = require("lua-dbus")
 
 -- }}}
 
@@ -273,7 +274,16 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-
+    
+    -- Battery view
+    bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
+    bat_base = ice.view.baseView.create(right_layout, bat_view, 0)
+    -- bat_base:setBgColor("#002b36")
+    -- bat_base:setFgColor("#b58900")
+    -- bat_base:setNextColor(beautiful.bg_normal)
+    -- bat_base:setIcon(beautiful.net_wireless)
+    bat_base:init()
+    
     -- New Network
     net_view = ice.view.networkView.create()
     net_view:setIface("wlp6s0")
@@ -421,8 +431,8 @@ globalkeys = awful.util.table.join(
     -- awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
 
     -- Currentl I use only one master window, so I don't use these
-    --awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
-    --awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1)       end),
+    awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incmwfact(-1)       end),
+    awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incmwfact( 1)       end),
 
     -- Currently using only the standard layout so I don't need these
     --awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),

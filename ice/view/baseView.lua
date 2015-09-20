@@ -92,8 +92,10 @@ function base:init()
       self.content:init()
    end
 
-   
-   runner.create(self.cycle, base.updator(self))
+
+   if(self.cycle > 0) then
+      runner.create(self.cycle, base.updator(self))
+   end
 
    --add everything to the correct background
    self.globalLayout:add(wibox.widget.background(self:getLayout(), self:getBgColor()))

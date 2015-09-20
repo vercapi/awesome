@@ -1,6 +1,7 @@
 local dbus      = require("lua-dbus")
 local util      = require("ice.util")
 
+
 local battery = {}
 battery.__index = battery
 
@@ -9,6 +10,8 @@ function battery.create(p_device)
    setmetatable(l_battery, battery)
 
    l_battery.listeners = {}
+   l_battery.parameters = {}
+
    l_battery.device = p_device
    
    return l_battery
@@ -18,11 +21,11 @@ function battery:on_event_listener(p_listener)
    table.insert(self.listeners, p_listener)
 end
 
-
 function battery.get_param_callback(p_battery, p_param)
    function param_callback(p_statistic)
       for key, listener in pairs(p_battery.listeners) do
-         listener({p_param, p_statistic})
+         p_battery.parameters[p_param]=p_statistic
+         listener(p_battery.parameters)
       end
    end
 
@@ -53,8 +56,9 @@ function battery:get_parameters()
 end
 
 function battery:registerSignal()
-   -- TODO: This needs to be parameterized
-   local batter_opts =  {bus = 'system', interface='org.freedesktop.DBus.Properties', path=self.device}
+   local batter_opts =  {bus = 'system',
+                         interface='org.freedesktop.DBus.Properties',
+                         path=self.device}
    dbus.on('PropertiesChanged', battery.battery_dbus(self), batter_opts)
 end
 
