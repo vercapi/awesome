@@ -31,15 +31,17 @@ end
 
 do
     local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = err })
-        in_error = false
-    end)
+    awesome.connect_signal("debug::error",
+                           function (err)
+                              if in_error then return end
+                              in_error = true
+                              
+                              naughty.notify({ preset = naughty.config.presets.critical,
+                                               title = "Oops, an error happened!",
+                                               text = err })
+                              in_error = false
+                           end
+                           )
 end
 -- }}}
 
@@ -68,19 +70,12 @@ modkey     = "Mod4"
 altkey     = "Mod1"
 terminal   = "xterm"
 editor     = "emacs"
-editor_cmd = terminal .. " -e " .. editor
+editor_cmd = editor
 
 -- user defined
 browser    = "chromium"
-myTerminal   = terminal
 gui_editor = "emacs"
 graphics   = "insckape"
-
--- lain
-lain.layout.termfair.nmaster   = 3
-lain.layout.termfair.ncol      = 1
-lain.layout.centerfair.nmaster = 3
-lain.layout.centerfair.ncol    = 1
 
 local layouts = {
     awful.layout.suit.floating,
@@ -113,81 +108,9 @@ if beautiful.wallpaper then
 end
 -- }}}
 
--- {{{ Menu
--- For now no menu, I don't use it anyway
--- require("freedesktop/freedesktop")
--- }}}
-
 -- {{{ Wibox
 markup = lain.util.markup
 blue   = beautiful.fg_focus
-
--- Textclock
---mytextclock = awful.widget.textclock("<span font='Squared Display 12'> %H:%M </span>")
-
-
--- Calendar
---lain.widgets.calendar:attach(mytextclock)
-
--- Battery
-batwidget = lain.widgets.bat({
-      battery = "BAT1",
-      settings = function()
-         widget:set_markup("B: " .. bat_now.perc)
-      end
-})
-
--- MPD
--- mpdicon = wibox.widget.imagebox(beautiful.play)
--- mpdwidget = lain.widgets.mpd({
---     settings = function()
---         if mpd_now.state == "play" then
---             title = mpd_now.title
---             artist  = " - " .. mpd_now.artist  .. markup("#333333", " |<span font='Tamsyn 3'> </span>")
---             mpdicon:set_image(beautiful.play)
---         elseif mpd_now.state == "pause" then
---             title = "mpd "
---             artist  = "paused" .. markup("#333333", " |<span font='Tamsyn 3'> </span>")
---             mpdicon:set_image(beautiful.pause)
---         else
---             title  = ""
---             artist = ""
---             mpdicon:set_image()
---         end
-
---         widget:set_markup(markup(blue, title) .. artist)
---     end
--- }
---)
-
--- ALSA volume bar
--- volicon = wibox.widget.imagebox(beautiful.vol)
--- volume = lain.widgets.alsabar({width = 55, ticks = true, ticks_size = 6,
--- settings = function()
---     if volume_now.status == "off" then
---         volicon:set_image(beautiful.vol_mute)
---     elseif volume_now.level == 0 then
---         volicon:set_image(beautiful.vol_no)
---     elseif volume_now.level <= 50 then
---         volicon:set_image(beautiful.vol_low)
---     else
---         volicon:set_image(beautiful.vol)
---     end
--- end,
--- colors = 
--- {
---     background = beautiful.bg_normal,
---     mute = "#EB8F8F",
---     unmute = beautiful.fg_normal
--- }})
--- volmargin = wibox.layout.margin(volume.bar, 2, 7)
--- volmargin:set_top(6)
--- volmargin:set_bottom(6)
--- volumewidget = wibox.widget.background(volmargin)
--- volumewidget:set_bgimage(beautiful.widget_bg)
-
--- Weather
-yawn = lain.widgets.yawn(123456)
 
 -- Separators
 spr = wibox.widget.textbox(' ')
@@ -278,10 +201,6 @@ for s = 1, screen.count() do
     -- Battery view
     bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
     bat_base = ice.view.baseView.create(right_layout, bat_view, 10)
-    -- bat_base:setBgColor("#002b36")
-    -- bat_base:setFgColor("#b58900")
-    -- bat_base:setNextColor(beautiful.bg_normal)
-    -- bat_base:setIcon(beautiful.net_wireless)
     bat_base:init()
     
     -- New Network
@@ -294,10 +213,6 @@ for s = 1, screen.count() do
     netBase:setIcon(beautiful.net_wireless)
     netBase:init()
 
-    --right_layout:add(volicon)
-    --right_layout:add(volumewidget)
-    --right_layout:add(bar_
-    
     memory_view = ice.view.memoryView.create()
     memoryBase = ice.view.baseView.create(right_layout, memory_view, 120)
     memoryBase:setBgColor(beautiful.bg_normal)
@@ -324,7 +239,6 @@ for s = 1, screen.count() do
     diskBase:init()
     
     ice.view.clockView.create(right_layout)
---    right_layout:add(mytextclock)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
