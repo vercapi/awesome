@@ -64,4 +64,9 @@ function util.linesFromFile(pFile)
    return lines
 end
 
+-- Remove leading and trailing whitespace
+function util.trim(p_string)
+   return p_string:gsub("^%s*(.-)%s*$", "%1")
+end
+
 return util

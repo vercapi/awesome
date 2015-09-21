@@ -2,44 +2,19 @@ package.path = package.path .. ';../../../?.lua'
 
 local battery = require("ice.data.battery")
 local util    = require("ice.util")
-local dbus    = require("lua-dbus")
-local clock   = os.clock
 
-local function init()
-   dbus.init()
+local function test_get_percentage()
+   local battery = battery.create('/org/freedesktop/UPower/devices/battery_BAT1')
+
+   local perc = battery:get_percentage()
+   assert(perc <= 100 and perc >= 0, "Should be number between 0 and 100: " .. tostring(perc))
 end
 
-function sleep(n)
-   local t0 = clock()
-   while clock() - t0 <= n do end
+local function test_is_on_battery()
+   local battery = battery.create('/org/freedesktop/UPower/devices/battery_BAT1')
+
+   local is_battery = battery:is_on_battery()
+   assert(is_battery, "Should be on battery, when on powersupply expect this to fail")
 end
 
 
-local function stop()
-   dbus.exit()
-end
-
-local loop = function ()
-    dbus.poll()
-    sleep(0.3)
-end
-
-local function printer(p_table)
-   for key, value in pairs(p_table) do
-      print(key, value)
-   end
-end
-
-local function test_battery()
-   init()
-
-   v_battery = battery.create("/org/freedesktop/UPower/devices/battery_BAT1")
-   v_battery:on_event_listener(printer)
-   v_battery:registerSignal()
-   while true do
-      loop()
-   end
-   stop()
-end
-
-test_battery()

@@ -1,42 +1,16 @@
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local battery   = require("ice.data.battery")
+local util      = require("ice.util")
 
 local batteryView = {}
 batteryView.__index = batteryView
-
-function batteryView:update(p_parameters)
-   
-   if(p_parameters.OnBattery ~= nil) then
-      self.on_battery = p_parameters.OnBattery
-   end
-   
-   if(self.on_battery == 'false') then
-      self.batteryIcon:set_image(beautiful.bat_power)
-   else
-      self.batteryIcon:set_image(beautiful.bat_half)
-   end
-end
-
-function batteryView:get_update(p_battery_view)
-   function updator(p_parameters)
-      p_battery_view:update(p_parameters)
-   end
-
-   return updator
-end
 
 function batteryView.create(p_device)
    local l_batteryView = {}
    setmetatable(l_batteryView, batteryView)
 
    l_batteryView.battery = battery.create(p_device)
-   l_batteryView.battery:on_event_listener(l_batteryView:get_update(self))
-   --   l_batteryView.battery:registerSignal()
-   l_batteryView.battery:get_upower_param("OnBattery")
-
-   l_batteryView.percentage = 0
-   l_batteryView.on_battery = 'true'
   
    return l_batteryView
 end
@@ -56,11 +30,44 @@ function batteryView:drawContent()
 end
 
 function batteryView:init()
+   self:update()
+end
+
+function batteryView:update()
+   self.battery:update()
    
+   local on_battery = self.battery:is_on_battery()
+   local percentage = self.battery:get_percentage()
+   
+   if(not on_battery) then
+      self.batteryIcon:set_image(beautiful.bat_power)
+   else
+      if percentage >= 90 then
+         self.batteryIcon:set_image(beautiful.bat_full)
+      elseif percentage >= 50 then
+         self.batteryIcon:set_image(beautiful.bat_half)
+      elseif percentage >= 25 then
+         self.batteryIcon:set_image(beautiful.bat_low)
+      else
+         self.batteryIcon:set_image(beautiful.bat_empty)
+      end
+   end
 end
 
 function batteryView:getState()
-   
+   local on_battery = self.battery:is_on_battery()
+   local percentage = self.battery:get_percentage()
+
+   local state = util.OK
+   if(on_battery) then
+      if(percentage <= 10) then
+         state = util.ERROR
+      elseif(percentage <= 15) then
+         state = util.WARNING
+      end
+   end
+
+   return state
 end
 
 return batteryView
