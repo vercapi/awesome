@@ -65,9 +65,10 @@ function base:addToLayout(pWidget)
 end
 
 function base:showIcon()
-   self.diskIcon = wibox.widget.imagebox(self.icon)
-   
-   self:addToLayout(base.createIcon(self.diskIcon, self:getBgColor()))
+   if(self.icon) then
+      self.diskIcon = wibox.widget.imagebox(self.icon)
+      self:addToLayout(base.createIcon(self.diskIcon, self:getBgColor()))
+   end
 end
 
 function base.createIcon(pIcon, pBgColor)
