@@ -19,6 +19,8 @@ local eminent   = require("eminent")
 local vicious   = require("vicious")
 local ice       = require("ice")
 local dbus      = require("lua-dbus")
+local separator  = require("ice.widgets.separator")
+local util      = require("ice.util")
 
 -- }}}
 
@@ -176,8 +178,10 @@ for s = 1, screen.count() do
                            awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
                            awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
-    -- Create a taglist widget
-    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
+
+    -- Create a taglist widget with backrounds
+    tag_bg = wibox.widget.background(awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons), beautiful.dark_bg)
+    mytaglist[s] = tag_bg
 
     -- Create a tasklist widget
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
@@ -187,11 +191,20 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(small_spr)
-    left_layout:add(mylayoutbox[s])
     left_layout:add(bar_spr)
+    left_layout:add(mylayoutbox[s])
+    left_layout:add(wibox.widget.background(
+                       separator(util.createColor(beautiful.light_bg),
+                                 util.createColor(beautiful.red),
+                                 util.createColor(beautiful.blue)),
+                       beautiful.dark_bg))
     left_layout:add(mytaglist[s])
-    left_layout:add(spr)
+    -- TODO: this needs to change based on what folows (unfocused window, run box, ...)
+    left_layout:add(wibox.widget.background(
+                       separator(util.createColor(beautiful.dark_bg),
+                                 util.createColor(beautiful.red),
+                                 util.createColor(beautiful.blue)),
+                       beautiful.dark_bg))
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right

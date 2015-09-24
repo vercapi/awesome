@@ -10,19 +10,26 @@ theme                                           = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/nitro"
 theme.wallpaper                                 = "/home/vercapi/backgrounds/theme_ntp_background.png"
 
+theme.dark_bg                                   = "#002b36"
+theme.light_bg                                  = "#eee8d5"
+theme.red                                       = "#cb4b16"
+theme.green                                     = "#2aa198"
+theme.blue                                      = "#268bd2"
+theme.yellow                                    = "#b58900"
+
 theme.font                                      = "SquareFont 14"
-theme.fg_normal                                 = "#cb4b16"
-theme.fg_focus                                  = "#cb4b16"
-theme.bg_normal                                 = "#eee8d5"
-theme.bg_focus                                  = "#eee8d5"
+theme.fg_normal                                 = theme.red
+theme.fg_focus                                  = theme.blue
+theme.bg_normal                                 = theme.light_bg
+theme.bg_focus                                  = theme.dark_bg
 theme.fg_urgent                                 = "#000000"
 theme.bg_urgent                                 = "#FFFFFF"
 theme.border_width                              = 1
 theme.border_normal                             = "#141414"
 theme.border_focus                              = "#93B6FF"
-theme.taglist_fg_focus                          = "#eee8d5"
-theme.taglist_bg_focus                          = "#eee8d5"
-theme.taglist_bg_normal                         = "#eee8d5"
+theme.taglist_fg_focus                          = theme.blue
+theme.taglist_bg_focus                          = theme.dark_bg
+
 theme.titlebar_bg_normal                        = "#eee8d5"
 theme.titlebar_bg_focus                         = "#eee8d5"
 theme.menu_height                               = "15"
