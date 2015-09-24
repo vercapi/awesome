@@ -201,6 +201,7 @@ for s = 1, screen.count() do
     -- Battery view
     bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
     bat_base = ice.view.baseView.create(right_layout, bat_view, 10)
+    bat_base:set_use_separator(false)
     bat_base:init()
     
     -- New Network

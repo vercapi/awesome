@@ -20,6 +20,7 @@ function base.create(pLayout, pContent, pCycle)
    l_base.layout = wibox.layout.fixed.horizontal()
    l_base.globalLayout = pLayout
    l_base.cycle = pCycle
+   l_base.use_separator = true
    
    return l_base
 end
@@ -38,6 +39,10 @@ end
 
 function base:setIcon(pIcon)
    self.icon = pIcon   
+end
+
+function base:set_use_separator(pBool)
+   self.use_separator = pBool
 end
 
 function base:getLayout()
@@ -133,9 +138,10 @@ function base:showStatus()
 end
 
 function base:showSeparator()
-   vWidget = separator(util.createColor(self:getNextColor()), util.createColor(self:getBgColor()), util.createColor(self:getFgColor()))
-
-   self:addToLayout(vWidget)
+   if(self.use_separator) then
+      vWidget = separator(util.createColor(self:getNextColor()), util.createColor(self:getBgColor()), util.createColor(self:getFgColor()))
+      self:addToLayout(vWidget)
+   end
 end
 
 return base
