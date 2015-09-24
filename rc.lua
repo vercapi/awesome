@@ -184,7 +184,13 @@ for s = 1, screen.count() do
     mytaglist[s] = tag_bg
 
     -- Create a tasklist widget
-    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
+    tasks_margin = wibox.layout.margin(
+       awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons),
+       6, 100)
+    tasks_margin:set_top(6)
+    tasks_margin:set_bottom(0)
+    tasklist = wibox.widget.background(tasks_margin, beautiful.dark_bg)
+    mytasklist[s] = tasklist
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s, height = 44 })
@@ -199,7 +205,6 @@ for s = 1, screen.count() do
                                  util.createColor(beautiful.blue)),
                        beautiful.dark_bg))
     left_layout:add(mytaglist[s])
-    -- TODO: this needs to change based on what folows (unfocused window, run box, ...)
     left_layout:add(wibox.widget.background(
                        separator(util.createColor(beautiful.dark_bg),
                                  util.createColor(beautiful.red),

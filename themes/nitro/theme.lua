@@ -10,6 +10,7 @@ theme                                           = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/nitro"
 theme.wallpaper                                 = "/home/vercapi/backgrounds/theme_ntp_background.png"
 
+-- theme base colors
 theme.dark_bg                                   = "#002b36"
 theme.light_bg                                  = "#eee8d5"
 theme.red                                       = "#cb4b16"
@@ -41,6 +42,9 @@ theme.tasklist_floating                         = ""
 theme.tasklist_maximized_horizontal             = ""
 theme.tasklist_maximized_vertical               = ""
 theme.tasklist_disable_icon                     = true
+theme.tasklist_bg_normal                        = theme.dark_bg
+theme.tasklist_bg_focus                         = "#003d4f"
+theme.tasklist_fg_normal                        = "#657b83"
 
 theme.awesome_icon                              = theme.dir .."/icons/awesome.png"
 theme.menu_submenu_icon                         = theme.dir .."/icons/submenu.png"
