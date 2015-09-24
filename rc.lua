@@ -209,7 +209,15 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    if s == 1 then
+       right_layout:add(separator(util.createColor(beautiful.dark_bg),
+                                  util.createColor(beautiful.yellow),
+                                  util.createColor(beautiful.dark_bg)))
+       systray = wibox.layout.margin(wibox.widget.systray(), 0, 10)
+       systray:set_top(4)
+       systray:set_bottom(20)
+       right_layout:add(systray)
+    end
     
     -- Battery view
     bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
