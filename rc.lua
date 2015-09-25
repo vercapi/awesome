@@ -114,11 +114,6 @@ end
 markup = lain.util.markup
 blue   = beautiful.fg_focus
 
--- Separators
-spr = wibox.widget.textbox(' ')
-small_spr = wibox.widget.textbox('<span font="Tamsyn 4"> </span>')
-bar_spr = wibox.widget.textbox('<span font="Tamsyn 3"> </span>' .. markup(beautiful.fg_focus, "|") .. '<span font="Tamsyn 3"> </span>')
-
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
@@ -172,7 +167,7 @@ for s = 1, screen.count() do
     mypromptbox[s] = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
-    mylayoutbox[s] = awful.widget.layoutbox(s)
+    mylayoutbox[s] = wibox.widget.background(awful.widget.layoutbox(s), beautiful.dark_bg)
     mylayoutbox[s]:buttons(awful.util.table.join(
                            awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
@@ -180,7 +175,7 @@ for s = 1, screen.count() do
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
 
     -- Create a taglist widget with backrounds
-    tag_bg = wibox.widget.background(awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons), beautiful.dark_bg)
+    tag_bg = wibox.widget.background(awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons), beautiful.light_bg)
     mytaglist[s] = tag_bg
 
     -- Create a tasklist widget
@@ -197,16 +192,15 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(bar_spr)
     left_layout:add(mylayoutbox[s])
     left_layout:add(wibox.widget.background(
-                       separator(util.createColor(beautiful.light_bg),
-                                 util.createColor(beautiful.dark_bg),
+                       separator(util.createColor(beautiful.dark_bg),
+                                 util.createColor(beautiful.light_bg),
                                  util.createColor(beautiful.red)),
-                       beautiful.dark_bg))
+                       beautiful.light_bg))
     left_layout:add(mytaglist[s])
     left_layout:add(wibox.widget.background(
-                       separator(util.createColor(beautiful.dark_bg),
+                       separator(util.createColor(beautiful.light_bg),
                                  util.createColor(beautiful.tasklist_bg_focus),
                                  util.createColor(beautiful.dark_bg)),
                       beautiful.dark_bg))
