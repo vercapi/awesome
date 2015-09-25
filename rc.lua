@@ -201,22 +201,22 @@ for s = 1, screen.count() do
     left_layout:add(mylayoutbox[s])
     left_layout:add(wibox.widget.background(
                        separator(util.createColor(beautiful.light_bg),
-                                 util.createColor(beautiful.red),
-                                 util.createColor(beautiful.blue)),
+                                 util.createColor(beautiful.dark_bg),
+                                 util.createColor(beautiful.red)),
                        beautiful.dark_bg))
     left_layout:add(mytaglist[s])
     left_layout:add(wibox.widget.background(
                        separator(util.createColor(beautiful.dark_bg),
-                                 util.createColor(beautiful.red),
-                                 util.createColor(beautiful.blue)),
-                       beautiful.dark_bg))
+                                 util.createColor(beautiful.tasklist_bg_focus),
+                                 util.createColor(beautiful.dark_bg)),
+                      beautiful.dark_bg))
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then
        right_layout:add(separator(util.createColor(beautiful.dark_bg),
-                                  util.createColor(beautiful.yellow),
+                                  util.createColor(beautiful.inactive_fg),
                                   util.createColor(beautiful.dark_bg)))
        systray = wibox.layout.margin(wibox.widget.systray(), 0, 10)
        systray:set_top(4)
