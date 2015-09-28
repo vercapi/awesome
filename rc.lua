@@ -164,7 +164,7 @@ mytasklist.buttons = awful.util.table.join(
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
-    mypromptbox[s] = awful.widget.prompt()
+   mypromptbox[s] = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = wibox.widget.background(awful.widget.layoutbox(s), beautiful.dark_bg)
@@ -204,7 +204,7 @@ for s = 1, screen.count() do
                                  util.createColor(beautiful.tasklist_bg_focus),
                                  util.createColor(beautiful.dark_bg)),
                       beautiful.dark_bg))
-    left_layout:add(mypromptbox[s])
+    left_layout:add(wibox.widget.background(mypromptbox[s], beautiful.dark_bg))
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
