@@ -11,12 +11,13 @@
 | W-SPACE     | Cycle layout                          |
 | W-S-SPACE   | Cycle layout inverse                  |
 | W-C-n       | Client restore (unminimize)           |
+| W-n         | Minimize                              |
 |             |                                       |
 |             | Change Focus                          |
-| W-j         | Focus window down                     |
-| W-k         | Focus window up                       |
-| W-h         | Focus window left                     |
-| W-l         | Focus window right                    |
+| W-down      | Focus window down                     |
+| W-up        | Focus window up                       |
+| W-left      | Focus window left                     |
+| W-right     | Focus window right                    |
 | W-u         | Jump to the the window flagged urgent |
 | W-Tab       | Cycle to previously selected windows  |
 |             |                                       |
@@ -121,7 +122,9 @@ ice/view -> contains functionallity for showing things
    Animated?
    Thick bar floatig a bit under the top of the screen
 * Technical documentation
-This is all in context of awesome wm.
+  Documentation on tools, libraries, etc. that are used in this awesom configuratio
+
+  This is all in context of awesome wm. 
 
 [[https://awesome.naquadah.org/doc/api/][awesome API]]
 
@@ -313,4 +316,3 @@ This is all in context of awesome wm.
     #+BEGIN_SRC lua
     package.path = package.path .. ';../../../?.lua'
     #+END_SRC   
-    

@@ -9,12 +9,11 @@
 local gears     = require("gears")
 local awful     = require("awful")
 awful.rules     = require("awful.rules")
-require("awful.autofocus")
+                  require("awful.autofocus")
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local naughty   = require("naughty")
 local drop      = require("scratchdrop")
-local lain      = require("lain")
 local eminent   = require("eminent")
 local vicious   = require("vicious")
 local ice       = require("ice")
@@ -80,16 +79,19 @@ gui_editor = "emacs"
 graphics   = "insckape"
 
 local layouts = {
-    awful.layout.suit.floating,
-    awful.layout.suit.fair,
-    awful.layout.suit.tile,
-    lain.layout.uselessfair.horizontal,
-    lain.layout.uselesstile,
-    lain.layout.uselessfair,
-    lain.layout.termfair,
-    lain.layout.centerfair,
-    lain.layout.uselesspiral.dwindle
+   awful.layout.suit.floating,
+   awful.layout.suit.tile,
+   awful.layout.suit.tile.left,
+   awful.layout.suit.tile.bottom,
+   awful.layout.suit.tile.top,
+   awful.layout.suit.fair,
+   awful.layout.suit.fair.horizontal,
+   awful.layout.suit.spiral,
+   awful.layout.suit.spiral.dwindle,
+   awful.layout.suit.max,
+   awful.layout.suit.magnifier
 }
+
 -- }}}
 
 -- {{{ Tags
@@ -111,8 +113,6 @@ end
 -- }}}
 
 -- {{{ Wibox
-markup = lain.util.markup
-blue   = beautiful.fg_focus
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -175,8 +175,7 @@ for s = 1, screen.count() do
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
 
     -- Create a taglist widget with backrounds
-    tag_bg = wibox.widget.background(awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons), beautiful.light_bg)
-    mytaglist[s] = tag_bg
+    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
     -- Create a tasklist widget
     tasks_margin = wibox.layout.margin(
@@ -198,7 +197,7 @@ for s = 1, screen.count() do
                                  util.createColor(beautiful.light_bg),
                                  util.createColor(beautiful.red)),
                        beautiful.light_bg))
-    left_layout:add(mytaglist[s])
+    left_layout:add(wibox.widget.background(mytaglist[s], beautiful.light_bg))
     left_layout:add(wibox.widget.background(
                        separator(util.createColor(beautiful.light_bg),
                                  util.createColor(beautiful.tasklist_bg_focus),
@@ -281,78 +280,54 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    -- Take a screenshot
-    -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    -- awful.key({ altkey }, "p", function() os.execute("screenshot") end),
 
-    -- Tag browsing
-    awful.key({ modkey }, "Left",   awful.tag.viewprev       ),
-    awful.key({ modkey }, "Right",  awful.tag.viewnext       ),
+   -- Tag browsing
+    awful.key({ modkey, "Control" }, "Left",   awful.tag.viewprev       ),
+    awful.key({ modkey, "Control" }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey }, "Escape", awful.tag.history.restore),
 
-    -- Non-empty tag browsing
-    -- awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end),
-    -- awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
-
     -- Default client focus
-    -- awful.key({ altkey }, "k",
-    --     function ()
-    --         awful.client.focus.byidx( 1)
-    --         if client.focus then client.focus:raise() end
-    --     end),
-    -- awful.key({ altkey }, "j",
-    --     function ()
-    --         awful.client.focus.byidx(-1)
-    --         if client.focus then client.focus:raise() end
-    --     end),
+    awful.key({ modkey }, "k",
+        function ()
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ modkey }, "j",
+        function ()
+            awful.client.focus.byidx(-1)
+            if client.focus then client.focus:raise() end
+        end),
 
     -- By direction client focus
-    awful.key({ modkey }, "j",
+    awful.key({ modkey }, "Down",
         function()
             awful.client.focus.bydirection("down")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey }, "k",
+    awful.key({ modkey }, "Up",
         function()
             awful.client.focus.bydirection("up")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey }, "h",
+    awful.key({ modkey }, "Left",
         function()
             awful.client.focus.bydirection("left")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey }, "l",
+    awful.key({ modkey }, "Right",
         function()
             awful.client.focus.bydirection("right")
             if client.focus then client.focus:raise() end
         end),
-
-    -- Show Menu
-    -- awful.key({ modkey }, "w",
-    --     function ()
-    --         mymainmenu:show({ keygrabber = true })
-    --     end),
 
     -- Show/Hide Wibox
     awful.key({ modkey }, "b", function ()
         mywibox[mouse.screen].visible = not mywibox[mouse.screen].visible
     end),
 
-    -- On the fly useless gaps change
-    -- awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end),
-    -- awful.key({ altkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end),
-
-    -- Rename tag
-    -- awful.key({ altkey, "Shift"   }, "r", function () lain.util.rename_tag(mypromptbox) end),
-
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-
-    -- Currently not using these, not sure what they do
-    -- awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    -- awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
 
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
@@ -365,13 +340,9 @@ globalkeys = awful.util.table.join(
     -- awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
     -- awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
 
-    -- Currentl I use only one master window, so I don't use these
-    awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incmwfact(-1)       end),
-    awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incmwfact( 1)       end),
-
-    -- Currently using only the standard layout so I don't need these
-    --awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),
-    --awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1)          end),
+    -- They should resize things, doesn't seem to work...
+    awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incmwfact(0.01) end),
+    awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.01) end),
 
     awful.key({ modkey,           }, "space",  function () awful.layout.inc(layouts,  1)  end),
     awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1)  end),
@@ -382,57 +353,17 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
+    -- Resize clients in layouts, doesn't seem to work
+    awful.key({ modkey,  }, "v", function() awful.client.incwfact(0.01) end),
+    awful.key({ modkey, "Shift"}, "v", function() awful.client.incwfact(-0.01) end),
+    
     -- Dropdown terminal
     awful.key({ modkey,	          }, "z",      function () drop(terminal) end),
 
     -- Widgets popups
     -- awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
     -- awful.key({ modkey,           }, "d",      function () fshomeupd.show(7) end),
---    awful.key({ altkey,           }, "w",      function () yawn.show(7) end),
-
-    -- ALSA volume control
-    -- awful.key({ altkey }, "Up",
-    --     function ()
-    --         awful.util.spawn("amixer -q set " .. volume.channel .. " " .. volume.step .. "+")
-    --         volume.notify()
-    --     end),
-    -- awful.key({ altkey }, "Down",
-    --     function ()
-    --         awful.util.spawn("amixer -q set " .. volume.channel .. " " .. volume.step .. "-")
-    --         volume.notify()
-    --     end),
-    -- awful.key({ altkey }, "m",
-    --     function ()
-    --         awful.util.spawn("amixer -q set " .. volume.channel .. " playback toggle")
-    --         volume.notify()
-    --     end),
-    -- awful.key({ altkey, "Control" }, "m",
-    --     function ()
-    --         awful.util.spawn("amixer -q set " .. volume.channel .. " playback 100%")
-    --         volume.notify()
-    --     end),
-
-    -- -- MPD control
-    -- awful.key({ altkey, "Control" }, "Up",
-    --     function ()
-    --         awful.util.spawn_with_shell("mpc toggle || ncmpcpp toggle || ncmpc toggle || pms toggle")
-    --         mpdwidget.update()
-    --     end),
-    -- awful.key({ altkey, "Control" }, "Down",
-    --     function ()
-    --         awful.util.spawn_with_shell("mpc stop || ncmpcpp stop || ncmpc stop || pms stop")
-    --         mpdwidget.update()
-    --     end),
-    -- awful.key({ altkey, "Control" }, "Left",
-    --     function ()
-    --         awful.util.spawn_with_shell("mpc prev || ncmpcpp prev || ncmpc prev || pms prev")
-    --         mpdwidget.update()
-    --     end),
-    -- awful.key({ altkey, "Control" }, "Right",
-    --     function ()
-    --         awful.util.spawn_with_shell("mpc next || ncmpcpp next || ncmpc next || pms next")
-    --         mpdwidget.update()
-    --     end),
+    -- awful.key({ altkey,           }, "w",      function () yawn.show(7) end),
 
     -- Copy to clipboard
     awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
@@ -557,11 +488,11 @@ awful.rules.rules = {
           properties = { maximized_horizontal = true,
                          maximized_vertical = true } },
     { rule = { class = "Chromium"},
-      properties = {maximized = true,
+      properties = {maximized = false,
                     border_width = 0,
                     callback = cleanTitleBar }},
       { rule = { class = "Emacs"},
-        properties = {maximized = true,
+        properties = {maximized = false,
                       border_width = 0,
                       callback = cleanTitleBar}}
 }
