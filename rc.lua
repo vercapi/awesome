@@ -97,7 +97,7 @@ local layouts = {
 -- {{{ Tags
 tags = {
     names = { "x01", "x02", "x03", "x04", "x05" },
-    layout = { layouts[1], layouts[2], layouts[3], layouts[4], layouts[5] }
+    layout = { layouts[1], layouts[2], layouts[2], layouts[2], layouts[2] }
 }
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
