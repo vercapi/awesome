@@ -1,9 +1,9 @@
 * Documentation
-** TODO Key bindings
+** Key bindings
 
    (Modkey is windows key "W")
 
-| Key binding | Explanation                           |
+| Key binding | Function                              |
 |-------------+---------------------------------------|
 |             | Layout manipulaption                  |
 | W-S-j       | Swap window with next window          |
@@ -12,6 +12,19 @@
 | W-S-SPACE   | Cycle layout inverse                  |
 | W-C-n       | Client restore (unminimize)           |
 | W-n         | Minimize                              |
+| W-C-RET     | Make current window master            |
+|             |                                       |
+|             | Changing layout size                  |
+| W-S-l       | Increase master size                  |
+| W-S-h       | Decrease master size                  |
+| W-v         | Increase window size                  |
+| W-S-v       | Decrease window size                  |
+|             |                                       |
+|             | Change window                         |
+| W-f         | Fullscreen                            |
+| W-S-c       | Kill window                           |
+| W-C-SPACE   | Toggle floating behavior              |
+| W-t         | Set window "on top"                   |
 |             |                                       |
 |             | Change Focus                          |
 | W-down      | Focus window down                     |
@@ -33,6 +46,11 @@
 | W-e         | Start editor                          |
 | W-i         | Start browser                         |
 |             |                                       |
+|             | Tags                                  |
+| W-[0-9]     | Move to tag                           |
+| W-C-[0-9]   | What tags to show at the same time    |
+| W-S-[0-9]   | Move window to tag                    |
+
 
 ** TODO Required packages 
 
@@ -61,6 +79,8 @@ ice/view -> contains functionallity for showing things
 
    - [[https://raw.githubusercontent.com/altercation/solarized/master/img/solarized-palette.png][The pallet]]
    - [[https://github.com/altercation/solarized/tree/master/gimp-palette-solarized][Color codes (gimp)]]
+
+*** TODO Create a grey scale version
 
 * Functionallity
 ** System info
@@ -94,33 +114,41 @@ ice/view -> contains functionallity for showing things
 *** TODO clear up key bindings 
     How are things flagged urgent?
     W-C-j and W-C-k seem useless now?
-    W-Tab should handle more as useually
-** Notifications
-*** TODO Battery 
-*** TODO USB
+    W-Tab should handle more as useual
+** Notification
+*** TODO General notifications
+    Anroid like messaging
+    Keep a list with all messages. Messages need to be dismissed. Or actions can be taken
+*** Battery 
+    
+    Battery will show dialog when the battery is empty.
+    Warning and error icons will be shown on the battert icon
+
+*** TODO USB connection
 ** Applications
 ** TODO Icon bar
    A  list of use applications/actions on a side bar on the left.
-   Should also correctly set screen
+   Should also correctly set screen. If application open it should go to the application instead of opening it
    Needs to appear/hide
 
    Actions
    - Netflix full screen
    - Shutdown
+   - Emacs
+   - Chromium
+   - Spotify
 
 ** Screen behavior
 *** TODO Set window to not go transparent
-** Notifications
-   Something android like
 ** Graphics
-   
-   Info Top Right
-   \N [...|.||] [.....] \M
-   Different colors for every section
-
-   Popup 
-   Animated?
-   Thick bar floatig a bit under the top of the screen
+*** TODO Theme based
+    Make it possible to switch between colors and grey scale
+*** TODO Changable
+    
+    - Small and thick bar -> icons and sepators need to scale
+    - Hide aditional info so only the icons remain with the warning message
+*** TODO Popup with additional info
+    
 * Technical documentation
   Documentation on tools, libraries, etc. that are used in this awesom configuratio
 
@@ -315,4 +343,4 @@ ice/view -> contains functionallity for showing things
     inlcude line that points to the parent of the ice folder
     #+BEGIN_SRC lua
     package.path = package.path .. ';../../../?.lua'
-    #+END_SRC   
+    #+END_SRC  
