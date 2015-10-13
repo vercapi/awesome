@@ -1,11 +1,12 @@
---[[
-                               
-     Copland Awesome WM config 
-     github.com/copycat-killer 
-                               
---]] 
+----------------------------------------
+-- Nitro Awesome config
+-- https://github.com/vercapi/awesome
+----------------------------------------
 
--- {{{ Required libraries
+------------------------
+-- Required libraries --
+------------------------
+
 local gears     = require("gears")
 local awful     = require("awful")
 awful.rules     = require("awful.rules")
@@ -21,9 +22,10 @@ local dbus      = require("lua-dbus")
 local separator  = require("ice.widgets.separator")
 local util      = require("ice.util")
 
--- }}}
+--------------------
+-- Error handling --
+--------------------
 
--- {{{ Error handling
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Oops, there were errors during startup!",
@@ -36,7 +38,7 @@ do
                            function (err)
                               if in_error then return end
                               in_error = true
-                              
+
                               naughty.notify({ preset = naughty.config.presets.critical,
                                                title = "Oops, an error happened!",
                                                text = err })
@@ -44,9 +46,11 @@ do
                            end
                            )
 end
--- }}}
 
--- {{{ Autostart applications
+----------------------------
+-- Autostart applications --
+----------------------------
+
 function run_once(cmd)
   findme = cmd
   firstspace = cmd:find(" ")
@@ -56,10 +60,13 @@ function run_once(cmd)
   awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
+-- Start the composer for transparency etc.
 run_once("compton --config ~/.config/compton.cfg")
--- }}}
 
--- {{{ Variable definitions
+-----------------
+-- definitions --
+-----------------
+
 -- localization
 os.setlocale(os.getenv("LANG"))
 
@@ -92,9 +99,10 @@ local layouts = {
    awful.layout.suit.magnifier
 }
 
--- }}}
+----------
+-- Tags --
+----------
 
--- {{{ Tags
 tags = {
     names = { "x01", "x02", "x03", "x04", "x05" },
     layout = { layouts[1], layouts[2], layouts[2], layouts[2], layouts[2] }
@@ -102,17 +110,20 @@ tags = {
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
--- }}}
 
--- {{{ Wallpaper
+---------------
+-- Wallpaper --
+---------------
+
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
     end
 end
--- }}}
 
--- {{{ Wibox
+-----------
+-- Wibox --
+-----------
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -216,48 +227,48 @@ for s = 1, screen.count() do
        systray:set_bottom(20)
        right_layout:add(systray)
     end
-    
+
     -- Battery view
     bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
     bat_base = ice.view.baseView.create(right_layout, bat_view, 10)
     bat_base:set_use_separator(false)
     bat_base:init()
-    
+
     -- New Network
     net_view = ice.view.networkView.create()
     net_view:setIface("wlp6s0")
     netBase = ice.view.baseView.create(right_layout, net_view, 2)
-    netBase:setBgColor("#002b36")
-    netBase:setFgColor("#b58900")
-    netBase:setNextColor(beautiful.bg_normal)
+    netBase:setBgColor(beautiful.dark_bg)
+    netBase:setFgColor(beautiful.yellow)
+    netBase:setNextColor(beautiful.light_bg)
     netBase:setIcon(beautiful.net_wireless)
     netBase:init()
 
     memory_view = ice.view.memoryView.create()
     memoryBase = ice.view.baseView.create(right_layout, memory_view, 120)
-    memoryBase:setBgColor(beautiful.bg_normal)
-    memoryBase:setFgColor("#2aa198")
-    memoryBase:setNextColor("#002b36")
+    memoryBase:setBgColor(beautiful.light_bg)
+    memoryBase:setFgColor(beautiful.green)
+    memoryBase:setNextColor(beautiful.dark_bg)
     memoryBase:setIcon(beautiful.memory)
     memoryBase:init()
-    
-    cpu_view = ice.view.cpuView.create("#002b36", "#268bd2")
+
+    cpu_view = ice.view.cpuView.create(beautiful.dark_bg, beautiful.blue)
     cpuBase = ice.view.baseView.create(right_layout, cpu_view, 1)
-    cpuBase:setBgColor("#002b36")
-    cpuBase:setFgColor("#268bd2")
-    cpuBase:setNextColor(beautiful.bg_normal)
+    cpuBase:setBgColor(beautiful.dark_bg)
+    cpuBase:setFgColor(beautiful.blue)
+    cpuBase:setNextColor(beautiful.light_bg)
     cpuBase:setIcon(beautiful.cpu)
     cpuBase:init()
-    
+
     disk_view = ice.view.diskView.create()
     disk_view:setCurrentDisk("/home")
     diskBase = ice.view.baseView.create(right_layout, disk_view, 120)
-    diskBase:setBgColor(beautiful.bg_normal)
-    diskBase:setFgColor(beautiful.fg_normal)
-    diskBase:setNextColor("#002b36")
+    diskBase:setBgColor(beautiful.light_bg)
+    diskBase:setFgColor(beautiful.red)
+    diskBase:setNextColor(beautiful.dark_bg)
     diskBase:setIcon(beautiful.disk)
     diskBase:init()
-    
+
     ice.view.clockView.create(right_layout)
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -268,17 +279,19 @@ for s = 1, screen.count() do
 
     mywibox[s]:set_widget(layout)
 end
--- }}}
 
--- {{{ Mouse bindings
+--------------------
+-- Mouse bindings --
+--------------------
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
--- }}}
 
--- {{{ Key bindings
+------------------
+-- Key bindings --
+------------------
 globalkeys = awful.util.table.join(
 
    -- Tag browsing
@@ -356,14 +369,9 @@ globalkeys = awful.util.table.join(
     -- Resize clients in layouts, doesn't seem to work
     awful.key({ modkey,  }, "v", function() awful.client.incwfact(0.01) end),
     awful.key({ modkey, "Shift"}, "v", function() awful.client.incwfact(-0.01) end),
-    
+
     -- Dropdown terminal
     awful.key({ modkey,	          }, "z",      function () drop(terminal) end),
-
-    -- Widgets popups
-    -- awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
-    -- awful.key({ modkey,           }, "d",      function () fshomeupd.show(7) end),
-    -- awful.key({ altkey,           }, "w",      function () yawn.show(7) end),
 
     -- Copy to clipboard
     awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
@@ -372,7 +380,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "i", function () awful.util.spawn(browser) end),
     awful.key({ modkey }, "e", function () awful.util.spawn(gui_editor) end),
     awful.key({ modkey }, "$", function () awful.util.spawn("xset dpms force off") end),
-    
+
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "x",
@@ -431,15 +439,8 @@ for i = 1, 9 do
                       local tag = awful.tag.gettags(client.focus.screen)[i]
                       if client.focus and tag then
                           awful.client.movetotag(tag)
-                     end
-                  end),
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                  function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.toggletag(tag)
                       end
-                  end))
+    end))
 end
 
 clientbuttons = awful.util.table.join(
@@ -449,10 +450,10 @@ clientbuttons = awful.util.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
-
+-----------
+-- Rules --
+-----------
 function cleanTitleBar(c)
    awful.titlebar.hide(c, "top")
 end
@@ -496,10 +497,10 @@ awful.rules.rules = {
                       border_width = 0,
                       callback = cleanTitleBar}}
 }
--- }}}
 
--- {{{ Signals
--- Signal function to execute when a new client appears.
+-------------
+-- Signals --
+-------------
 client.connect_signal("manage", function (c, startup)
     -- Enable sloppy focus
     c:connect_signal("mouse::enter", function(c)
@@ -568,9 +569,10 @@ client.connect_signal("focus",
         end
     end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
 
--- {{{ Arrange signal handler
+----------------------------
+-- Arrange signal handler --
+----------------------------
 for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
         local clients = awful.client.visible(s)
         local layout  = awful.layout.getname(awful.layout.get(s))
@@ -591,4 +593,3 @@ for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
         end
       end)
 end
--- }}}

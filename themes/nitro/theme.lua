@@ -1,16 +1,14 @@
---[[
-                               
-     Copland Awesome WM config 
-     github.com/copycat-killer 
-                               
---]]
+
+---------------------------
+-- Nitro solarized theme --
+---------------------------
 
 theme                                           = {}
 
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/nitro"
 theme.wallpaper                                 = "/home/vercapi/backgrounds/theme_ntp_background.png"
 
--- theme base config
+-- theme base color config
 theme.dark_bg                                   = "#002b36"
 theme.light_bg                                  = "#eee8d5"
 theme.red                                       = "#cb4b16"
