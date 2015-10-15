@@ -7,20 +7,21 @@
 -- Required libraries --
 ------------------------
 
-local gears     = require("gears")
-local awful     = require("awful")
-awful.rules     = require("awful.rules")
+local gears          = require("gears")
+local awful          = require("awful")
+awful.rules          = require("awful.rules")
                   require("awful.autofocus")
-local wibox     = require("wibox")
-local beautiful = require("beautiful")
-local naughty   = require("naughty")
-local drop      = require("scratchdrop")
-local eminent   = require("eminent")
-local vicious   = require("vicious")
-local ice       = require("ice")
-local dbus      = require("lua-dbus")
-local separator  = require("ice.widgets.separator")
-local util      = require("ice.util")
+local wibox          = require("wibox")
+local beautiful      = require("beautiful")
+local naughty        = require("naughty")
+local drop           = require("scratchdrop")
+local eminent        = require("eminent")
+local vicious        = require("vicious")
+local ice            = require("ice")
+local dbus           = require("lua-dbus")
+local separator      = require("ice.widgets.separator")
+local util           = require("ice.util")
+local client_manager = require("ice.view.client_manager")
 
 --------------------
 -- Error handling --
@@ -378,7 +379,7 @@ globalkeys = awful.util.table.join(
 
     -- User programs
     awful.key({ modkey }, "i", function () awful.util.spawn(browser) end),
-    awful.key({ modkey }, "e", function () awful.util.spawn(gui_editor) end),
+    awful.key({ modkey }, "e", function () client_manager.spawn(gui_editor) end),
     awful.key({ modkey }, "$", function () awful.util.spawn("xset dpms force off") end),
 
     -- Prompt
@@ -450,7 +451,7 @@ clientbuttons = awful.util.table.join(
 
 -- Set keys
 root.keys(globalkeys)
-
+ 
 -----------
 -- Rules --
 -----------
