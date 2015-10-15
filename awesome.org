@@ -51,7 +51,6 @@
 | W-C-[0-9]   | What tags to show at the same time    |
 | W-S-[0-9]   | Move window to tag                    |
 
-
 ** TODO Required packages 
 
 *** Eminent
@@ -82,7 +81,7 @@ ice/view -> contains functionallity for showing things
 
 *** TODO Create a grey scale version
 
-* Functionallity
+* TODO [#B] Functionallity
 ** System info
 *** TODO Network
   
@@ -109,7 +108,8 @@ ice/view -> contains functionallity for showing things
    Show /home as first disk
    Drop down with all other disks
 *** TODO Calendar
-    Calendar should look 
+    Calendar should look
+*** TODO Music/volume
 ** Keybinding
 *** TODO clear up key bindings 
     How are things flagged urgent?
@@ -124,8 +124,25 @@ ice/view -> contains functionallity for showing things
     Battery will show dialog when the battery is empty.
     Warning and error icons will be shown on the battert icon
 
+*** Spotify
+    Seems to work out of the box
 *** TODO USB connection
 ** Applications
+*** TODO Autostart applications
+    - spotify & pavucontrol
+    - chromium
+    - emacs
+*** TODO Have correct tags, size, layout for used applications
+    - chromium
+    - emacs
+    - spotify & pavucontrol
+    - blender
+    - inkscape
+    - gimp
+    - jdeveloper & sqldeveloper
+*** Functionality to launch applications or switch to them
+    This results in only having one instance and the same shortcut to switch to or launch
+    implemented in ice.view.client_manager.spawn(p_command)
 ** TODO Icon bar
    A  list of use applications/actions on a side bar on the left.
    Should also correctly set screen. If application open it should go to the application instead of opening it
@@ -137,6 +154,8 @@ ice/view -> contains functionallity for showing things
    - Emacs
    - Chromium
    - Spotify
+   - jdeveloper -> Different versions
+   - sqldeveloper
 
 ** Screen behavior
 *** TODO Set window to not go transparent
@@ -148,7 +167,9 @@ ice/view -> contains functionallity for showing things
     - Small and thick bar -> icons and sepators need to scale
     - Hide aditional info so only the icons remain with the warning message
 *** TODO Popup with additional info
-    
+** Code
+*** TODO Make rc.lua in org mode
+*** TODO Make camle casing to use _
 * Technical documentation
   Documentation on tools, libraries, etc. that are used in this awesom configuratio
 
@@ -343,4 +364,4 @@ ice/view -> contains functionallity for showing things
     inlcude line that points to the parent of the ice folder
     #+BEGIN_SRC lua
     package.path = package.path .. ';../../../?.lua'
-    #+END_SRC  
+    #+END_SRC 
