@@ -48,22 +48,6 @@ do
                            )
 end
 
-----------------------------
--- Autostart applications --
-----------------------------
-
-function run_once(cmd)
-  findme = cmd
-  firstspace = cmd:find(" ")
-  if firstspace then
-     findme = cmd:sub(0, firstspace-1)
-  end
-  awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
-end
-
--- Start the composer for transparency etc.
-run_once("compton --config ~/.config/compton.cfg")
-
 -----------------
 -- definitions --
 -----------------
@@ -77,14 +61,6 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/nitro/theme.lua")
 -- common
 modkey     = "Mod4"
 altkey     = "Mod1"
-terminal   = "xterm"
-editor     = "emacs"
-editor_cmd = editor
-
--- user defined
-browser    = "chromium"
-gui_editor = "emacs"
-graphics   = "insckape"
 
 local layouts = {
    awful.layout.suit.floating,
@@ -99,6 +75,30 @@ local layouts = {
    awful.layout.suit.max,
    awful.layout.suit.magnifier
 }
+
+----------------------------
+-- Applications --
+----------------------------
+
+-- Application definitions
+terminal   = "urxvt"
+editor     = "emacs"
+editor_cmd = editor
+browser    = "chromium"
+gui_editor = "emacs"
+netflix    = "google-chrome-stable www.netflix.be --new-window"
+
+
+-- Start the composer for transparency etc.
+client_manager.run_once("compton --config ~/.config/compton.cfg")
+
+-- Media control
+client_manager.run_once("spotify")
+client_manager.run_once("pavucontrol")
+
+-- Applicaiton that are used always
+client_manager.run_once(browser)
+client_manager.run_once(editor_cmd)
 
 ----------
 -- Tags --
@@ -363,7 +363,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n",      awful.client.restore),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return", function () client_manager.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
@@ -381,6 +381,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "i", function () awful.util.spawn(browser) end),
     awful.key({ modkey }, "e", function () client_manager.spawn(gui_editor) end),
     awful.key({ modkey }, "$", function () awful.util.spawn("xset dpms force off") end),
+    awful.key({ modkey , "Shift"}, "n", function () client_manager.spawn(netflix) end),
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
@@ -468,20 +469,9 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
 	                   size_hints_honor = false } },
+    
     { rule = { class = "URxvt" },
-          properties = { opacity = 0.99 } },
-
-    { rule = { class = "MPlayer" },
-          properties = { floating = true } },
-
-    { rule = { class = "Dwb" },
-          properties = { tag = tags[1][1] } },
-
-    { rule = { class = "Iron" },
-          properties = { tag = tags[1][1] } },
-
-    { rule = { instance = "plugin-container" },
-          properties = { tag = tags[1][1] } },
+          properties = { opacity = 0.90 } },
 
 	  { rule = { class = "Gimp" },
      	    properties = { tag = tags[1][3] } },
@@ -489,14 +479,31 @@ awful.rules.rules = {
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized_horizontal = true,
                          maximized_vertical = true } },
+
     { rule = { class = "Chromium"},
       properties = {maximized = false,
                     border_width = 0,
-                    callback = cleanTitleBar }},
-      { rule = { class = "Emacs"},
+                    callback = cleanTitleBar,
+                    tag = tags[1][1]}},
+
+    { rule = { class = "Emacs"},
         properties = {maximized = false,
                       border_width = 0,
-                      callback = cleanTitleBar}}
+                      callback = cleanTitleBar,
+                      tag = tags[1][2]}},
+    
+    { rule = {class = "Google-chrome-stable"},
+      properties = {maximized = true,
+                    border_width = 0,
+                    callback = cleanTitleBar,
+                    tag = tags[1][5]}},
+
+    { rule = {class = "Spotify"},
+      properties = {tag = tags[1][4]}},
+
+    { rule = {class = "Pavucontrol"},
+      properties = {tag = tags[1][4]}}
+    
 }
 
 -------------

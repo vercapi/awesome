@@ -6,13 +6,14 @@ local client_manager = {}
 client_manager.__index = client_manager
 
 function client_manager.spawn(p_command)
-   
+
+   print("command: ", p_command)
    local pid = processes.get_pid(p_command)
    if pid > 0 then
       cl = client_manager.get_client(pid)
       awful.client.jumpto(cl, false)
    else
-      awful.client.spawn(p_command)
+      awful.util.spawn(p_command)
    end
 end
 
@@ -23,6 +24,13 @@ function client_manager.get_client(p_pid)
       if cl.pid == p_pid then
          return cl
       end
+   end
+end
+
+function client_manager.run_once(p_command)
+   local pid = processes.get_pid(p_command)
+   if pid == 0 then
+      awful.util.spawn(p_command)
    end
 end
 

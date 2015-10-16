@@ -18,8 +18,9 @@ function processes.get_current_user()
    return util.trim(username)
 end
 
-function processes.get_pid(pName)
-   local result = io.popen("ps aux -U " .. processes.get_current_user() .. " | grep " .. pName  .. " | grep -v grep | awk '{print $2}'")
+function processes.get_pid(p_name)
+   print("name: ", p_name)
+   local result = io.popen("ps aux -U $USER | grep " .. p_name  .. " | grep -v grep | awk '{print $2}'")
    local proces_list = result:read("*all")
    result:close()
 
