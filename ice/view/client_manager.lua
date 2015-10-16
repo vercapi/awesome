@@ -7,7 +7,6 @@ client_manager.__index = client_manager
 
 function client_manager.spawn(p_command)
 
-   print("command: ", p_command)
    local pid = processes.get_pid(p_command)
    if pid > 0 then
       cl = client_manager.get_client(pid)

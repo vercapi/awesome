@@ -21,7 +21,6 @@ end
 function battery:is_on_battery()
    local raw_state = self.parameters.state
    raw_state = util.trim(raw_state)
-   print('raw ', raw_state)
    return raw_state == 'discharging' --discharging doesn't happen with power plugged in
 end
 
