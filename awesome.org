@@ -52,17 +52,16 @@
 | W-S-[0-9]   | Move window to tag                    |
 
 ** TODO Required packages 
-
 *** Eminent
 
-[[https://awesome.naquadah.org/wiki/Eminent][Awesome wiki eminent]]
-This is for version 3.5. 
-
-#+BEGIN_SRC sh
-git clone https://github.com/guotsuan/eminent.git
-cp eminent/eminent.lua ~/.config/awesome/
-#+END_SRC
-
+    [[https://awesome.naquadah.org/wiki/Eminent][Awesome wiki eminent]]
+    This is for version 3.5. 
+    
+    #+BEGIN_SRC sh
+    git clone https://github.com/guotsuan/eminent.git
+    cp eminent/eminent.lua ~/.config/awesome/
+    #+END_SRC
+    
 ** ice package
 
 ice is a package for LUA that aims to sepparate data and UI. This should work more flexible for creating what I need.
@@ -81,37 +80,46 @@ ice/view -> contains functionallity for showing things
 
 *** TODO Create a grey scale version
 
-* TODO [#B] Functionallity
+* Functionallity
 ** System info
-*** TODO Network
+*** DONE Network
   
    Show only current trafic on graph (up and down)
    - Show wireless/wired
    - Show alternative connection if possible
    - Show disconnected
-     - Hide all graphs
-     - Show alert
-
+   - Show status warnings
+ 
+*** DONE Memory
+    Show free memory
+   
+*** DONE CPU
+   Show load with graph
+*** DONE Disk
+   Show /home as first disk
+   
+*** TODO Music/volume
+** Detailed system info
+    When clicking on the graphs addtional info and possible actions
+*** TODO Network
    Create a detail window with a list of every interface
    - with a hisotry graph
    - With total amount of MBs transferd up and down 
 
    Show wireless icon and show list available networks
-   Conenct via command line (xterm)
- 
+   Button to Connect/Disconnect
 *** TODO Memory
-   Add a drop down with a bar
-   
+    Show top 5 memory consumers with kill button
 *** TODO CPU
-   Show detail with all CPU's
+    Show top 5 cpu consumers with kill button
 *** TODO Disk
-   Show /home as first disk
-   Drop down with all other disks
+    Show all the disks and the % and bar of used space
 *** TODO Calendar
-    Calendar should look
-*** TODO Music/volume
+    Show calendar
+    If possible connected with google?
+
 ** Keybinding
-*** TODO clear up key bindings 
+*** DONE clear up key bindings 
     How are things flagged urgent?
     W-C-j and W-C-k seem useless now?
     W-Tab should handle more as useual
@@ -119,14 +127,14 @@ ice/view -> contains functionallity for showing things
 *** TODO General notifications
     Anroid like messaging
     Keep a list with all messages. Messages need to be dismissed. Or actions can be taken
-*** Battery 
-    
-    Battery will show dialog when the battery is empty.
-    Warning and error icons will be shown on the battert icon
+*** DONE Battery     
+    Battery will show dialog when the battery is empty. -> Default by awesome via system messages on dbus
+    Warning and error icons will be shown on the battert icon -> Implemented in the icon
 
-*** Spotify
+*** DONE Spotify
     Seems to work out of the box
 *** TODO USB connection
+    Should show when device is connected, possible actions
 ** Applications
 *** TODO Autostart applications
     - spotify & pavucontrol
@@ -140,7 +148,7 @@ ice/view -> contains functionallity for showing things
     - inkscape
     - gimp
     - jdeveloper & sqldeveloper
-*** Functionality to launch applications or switch to them
+*** DONE Functionality to launch applications or switch to them
     This results in only having one instance and the same shortcut to switch to or launch
     implemented in ice.view.client_manager.spawn(p_command)
 ** TODO Icon bar
@@ -157,19 +165,15 @@ ice/view -> contains functionallity for showing things
    - jdeveloper -> Different versions
    - sqldeveloper
 
-** Screen behavior
-*** TODO Set window to not go transparent
 ** Graphics
 *** TODO Theme based
     Make it possible to switch between colors and grey scale
 *** TODO Changable
-    
     - Small and thick bar -> icons and sepators need to scale
     - Hide aditional info so only the icons remain with the warning message
-*** TODO Popup with additional info
 ** Code
 *** TODO Make rc.lua in org mode
-*** TODO Make camle casing to use _
+*** TODO Change camel casing to use _
 * Technical documentation
   Documentation on tools, libraries, etc. that are used in this awesom configuratio
 
