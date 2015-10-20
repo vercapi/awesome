@@ -54,24 +54,12 @@ theme.tasklist_bg_normal                        = theme.dark_bg
 theme.tasklist_bg_focus                         = theme.focus_dark
 theme.tasklist_fg_normal                        = theme.inactive_fg
 
-theme.awesome_icon                              = theme.dir .."/icons/awesome.png"
-theme.menu_submenu_icon                         = theme.dir .."/icons/submenu.png"
-theme.taglist_squares_sel                       = theme.dir .. "/icons/square_unsel.png"
-theme.taglist_squares_unsel                     = theme.dir .. "/icons/square_unsel.png"
-theme.widget_bg                                 = theme.dir .. "/icons/widget_bg.png"
-theme.vol                                       = theme.dir .. "/icons/vol.png"
-theme.vol_low                                   = theme.dir .. "/icons/vol_low.png"
-theme.vol_no                                    = theme.dir .. "/icons/vol_no.png"
-theme.vol_mute                                  = theme.dir .. "/icons/vol_mute.png"
 theme.disk                                      = theme.dir .. "/icons/disk.svg"
-theme.ac                                        = theme.dir .. "/icons/ac.png"
 theme.bat_empty                                 = theme.dir .. "/icons/bat_empty.svg"
 theme.bat_low                                   = theme.dir .. "/icons/bat_low.svg"
 theme.bat_half                                  = theme.dir .. "/icons/bat_half.svg"
 theme.bat_full                                  = theme.dir .. "/icons/bat_full.svg"
 theme.bat_power                                 = theme.dir .. "/icons/bat_power.svg"
-theme.play                                      = theme.dir .. "/icons/play.png"
-theme.pause                                     = theme.dir .. "/icons/pause.png"
 theme.memory                                    = theme.dir .. "/icons/memory.svg"
 theme.cpu                                       = theme.dir .. "/icons/cpu.svg"
 theme.net_wired                                 = theme.dir .. "/icons/wired.svg"
@@ -85,19 +73,6 @@ theme.clock                                     = theme.dir .. "/icons/clock.svg
 
 theme.warning                                   = theme.dir .. "/icons/warning.svg"
 theme.error                                     = theme.dir .. "/icons/error.svg"
-
-theme.layout_tile                               = theme.dir .. "/icons/tile.png"
-theme.layout_tileleft                           = theme.dir .. "/icons/tileleft.png"
-theme.layout_tilebottom                         = theme.dir .. "/icons/tilebottom.png"
-theme.layout_tiletop                            = theme.dir .. "/icons/tiletop.png"
-theme.layout_fairv                              = theme.dir .. "/icons/fairv.png"
-theme.layout_fairh                              = theme.dir .. "/icons/fairh.png"
-theme.layout_spiral                             = theme.dir .. "/icons/spiral.png"
-theme.layout_dwindle                            = theme.dir .. "/icons/dwindle.png"
-theme.layout_max                                = theme.dir .. "/icons/max.png"
-theme.layout_fullscreen                         = theme.dir .. "/icons/fullscreen.png"
-theme.layout_magnifier                          = theme.dir .. "/icons/magnifier.png"
-theme.layout_floating                           = theme.dir .. "/icons/floating.png"
 
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
@@ -121,6 +96,5 @@ theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
-
 
 return theme

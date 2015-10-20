@@ -560,7 +560,7 @@ client.connect_signal("manage", function (c, startup)
         layout:set_right(right_layout)
         layout:set_middle(middle_layout)
 
-        awful.titlebar(c,{size=16}):set_widget(layout)
+        awful.titlebar(c,{size=22}):set_widget(layout)
     end
     awful.rules.apply(c)
 end)
