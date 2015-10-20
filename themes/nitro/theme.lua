@@ -1,4 +1,3 @@
-
 ---------------------------
 -- Nitro solarized theme --
 ---------------------------
@@ -16,6 +15,7 @@ theme.green                                     = "#2aa198"
 theme.blue                                      = "#268bd2"
 theme.yellow                                    = "#b58900"
 theme.inactive_fg                               = "#657b83"
+theme.focus_dark                                = "#003d4f"
 theme.font                                      = "SquareFont 14"
 
 -- basic config
@@ -33,11 +33,17 @@ theme.border_focus                              = "#000000"
 theme.taglist_fg_focus                          = theme.blue
 theme.taglist_bg_focus                          = theme.dark_bg
 
-theme.titlebar_bg_normal                        = "#eee8d5"
-theme.titlebar_bg_focus                         = "#eee8d5"
+-- title bar colors
+theme.titlebar_bg_normal                        = theme.dark_bg
+theme.titlebar_bg_focus                         = theme.focus_dark
+theme.titlebar_fg_normal                        = theme.inactive_fg
+theme.titlebar_fg_focus                         = theme.blue
+
+-- menu config
 theme.menu_height                               = "15"
 theme.menu_width                                = "150"
 
+-- tasklist properties
 theme.tasklist_sticky                           = ""
 theme.tasklist_ontop                            = ""
 theme.tasklist_floating                         = ""
@@ -45,7 +51,7 @@ theme.tasklist_maximized_horizontal             = ""
 theme.tasklist_maximized_vertical               = ""
 theme.tasklist_disable_icon                     = true
 theme.tasklist_bg_normal                        = theme.dark_bg
-theme.tasklist_bg_focus                         = "#003d4f"
+theme.tasklist_bg_focus                         = theme.focus_dark
 theme.tasklist_fg_normal                        = theme.inactive_fg
 
 theme.awesome_icon                              = theme.dir .."/icons/awesome.png"
@@ -116,18 +122,5 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
--- lain related
-theme.useless_gap_width                         = 10
-theme.layout_centerfair                         = theme.dir .. "/icons/centerfair.png"
-theme.layout_termfair                           = theme.dir .. "/icons/termfair.png"
-theme.layout_centerwork                         = theme.dir .. "/icons/centerwork.png"
-theme.layout_uselessfair                        = theme.dir .. "/icons/fairv.png"
-theme.layout_uselessfairh                       = theme.dir .. "/icons/fairh.png"
-theme.layout_uselessdwindle                     = theme.dir .. "/icons/dwindle.png"
-theme.layout_uselesstile                        = theme.dir .. "/icons/tile.png"
-theme.layout_uselesstiletop                     = theme.dir .. "/icons/tiletop.png"
-theme.layout_uselesstileleft                    = theme.dir .. "/icons/tileleft.png"
-theme.layout_uselesstilebottom                  = theme.dir .. "/icons/tilebottom.png"
-theme.layout_uselesspiral                       = theme.dir .. "/icons/spiral.png"
 
 return theme
