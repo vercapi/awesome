@@ -9,29 +9,30 @@ end
 
 function separator:draw(wibox, cr, width, height)
 
-   line_width = 10
+   line_width = util.round(height/4)
    
    local drawLine = function(pStart, pColor)
-      --line_width=10
       line_cap=CAIRO_LINE_CAP_BUTT
       red,green,blue,alpha=pColor.red(),pColor.green(),pColor.blue(),1
       startx=10+pStart
       starty=0
       ----------------------------
+      y_pos = util.round(height/2)
+      x_diff = util.round((height/4)*3)
+      ----------------------------
       cr:set_line_width(line_width)
       cr:set_line_cap(line_cap)
       cr:set_source_rgba(red,green,blue,alpha)
       cr:move_to(startx,starty)
-      cr:line_to(10+pStart,20)
-      cr:line_to(30+pStart, height+4)
+      cr:line_to(10+pStart, y_pos)
+      cr:line_to(x_diff+pStart, height+line_width)
       cr:stroke()
    end
 
    local drawSurface = function(pStart, pColor)
-      --line_width=0
       top_left_x=0
       top_left_y=0
-      rec_width=25
+      rec_width=line_width*2
       rec_height=height
       red=pColor.red()
       green=pColor.green()
@@ -47,7 +48,7 @@ function separator:draw(wibox, cr, width, height)
    drawSurface(0,self._color1)
    
    drawLine(0,self._color2)
-   drawLine(10,self._color3)
+   drawLine(line_width,self._color3)
 end
 
 
