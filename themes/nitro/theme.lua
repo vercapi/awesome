@@ -97,4 +97,18 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
+theme.layout_tile                               = theme.dir .. "/icons/tile.png"
+theme.layout_tileleft                           = theme.dir .. "/icons/tileleft.png"
+theme.layout_tilebottom                         = theme.dir .. "/icons/tilebottom.png"
+theme.layout_tiletop                            = theme.dir .. "/icons/tiletop.png"
+theme.layout_fairv                              = theme.dir .. "/icons/fairv.png"
+theme.layout_fairh                              = theme.dir .. "/icons/fairh.png"
+theme.layout_spiral                             = theme.dir .. "/icons/spiral.png"
+theme.layout_dwindle                            = theme.dir .. "/icons/dwindle.png"
+theme.layout_max                                = theme.dir .. "/icons/max.png"
+theme.layout_fullscreen                         = theme.dir .. "/icons/fullscreen.png"
+theme.layout_magnifier                          = theme.dir .. "/icons/magnifier.png"
+theme.layout_floating                           = theme.dir .. "/icons/floating.png"
+
+
 return theme
