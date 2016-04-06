@@ -86,7 +86,7 @@ editor     = "emacs"
 editor_cmd = editor
 browser    = "chromium"
 gui_editor = "emacs"
-netflix    = "google-chrome-stable www.netflix.be --new-window"
+netflix    = "optirun google-chrome-stable www.netflix.be --new-window"
 
 
 -- Start the composer for transparency etc.
