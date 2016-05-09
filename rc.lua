@@ -22,6 +22,7 @@ local dbus           = require("lua-dbus")
 local separator      = require("ice.widgets.separator")
 local util           = require("ice.util")
 local client_manager = require("ice.view.client_manager")
+local dimensions     = require("ice.view.dimensions")
 
 --------------------
 -- Error handling --
@@ -199,7 +200,7 @@ for s = 1, screen.count() do
     mytasklist[s] = tasklist
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 44 })
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = dimensions.get_height_header(s) })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -229,49 +230,51 @@ for s = 1, screen.count() do
        right_layout:add(systray)
     end
 
-    -- Battery view
-    bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
-    bat_base = ice.view.baseView.create(right_layout, bat_view, 10)
-    bat_base:set_use_separator(false)
-    bat_base:init()
+    if s == 1 then
+       -- Battery view
+       bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
+       bat_base = ice.view.baseView.create(right_layout, bat_view, 10)
+       bat_base:set_use_separator(false)
+       bat_base:init()
 
-    -- New Network
-    net_view = ice.view.networkView.create()
-    net_view:setIface("wlp6s0")
-    netBase = ice.view.baseView.create(right_layout, net_view, 2)
-    netBase:setBgColor(beautiful.dark_bg)
-    netBase:setFgColor(beautiful.yellow)
-    netBase:setNextColor(beautiful.light_bg)
-    netBase:setIcon(beautiful.net_wireless)
-    netBase:init()
+       -- New Network
+       net_view = ice.view.networkView.create()
+       net_view:setIface("wlp6s0")
+       netBase = ice.view.baseView.create(right_layout, net_view, 2)
+       netBase:setBgColor(beautiful.dark_bg)
+       netBase:setFgColor(beautiful.yellow)
+       netBase:setNextColor(beautiful.light_bg)
+       netBase:setIcon(beautiful.net_wireless)
+       netBase:init()
 
-    memory_view = ice.view.memoryView.create()
-    memoryBase = ice.view.baseView.create(right_layout, memory_view, 120)
-    memoryBase:setBgColor(beautiful.light_bg)
-    memoryBase:setFgColor(beautiful.green)
-    memoryBase:setNextColor(beautiful.dark_bg)
-    memoryBase:setIcon(beautiful.memory)
-    memoryBase:init()
+       memory_view = ice.view.memoryView.create()
+       memoryBase = ice.view.baseView.create(right_layout, memory_view, 120)
+       memoryBase:setBgColor(beautiful.light_bg)
+       memoryBase:setFgColor(beautiful.green)
+       memoryBase:setNextColor(beautiful.dark_bg)
+       memoryBase:setIcon(beautiful.memory)
+       memoryBase:init()
 
-    cpu_view = ice.view.cpuView.create(beautiful.dark_bg, beautiful.blue)
-    cpuBase = ice.view.baseView.create(right_layout, cpu_view, 1)
-    cpuBase:setBgColor(beautiful.dark_bg)
-    cpuBase:setFgColor(beautiful.blue)
-    cpuBase:setNextColor(beautiful.light_bg)
-    cpuBase:setIcon(beautiful.cpu)
-    cpuBase:init()
+       cpu_view = ice.view.cpuView.create(beautiful.dark_bg, beautiful.blue)
+       cpuBase = ice.view.baseView.create(right_layout, cpu_view, 1)
+       cpuBase:setBgColor(beautiful.dark_bg)
+       cpuBase:setFgColor(beautiful.blue)
+       cpuBase:setNextColor(beautiful.light_bg)
+       cpuBase:setIcon(beautiful.cpu)
+       cpuBase:init()
 
-    disk_view = ice.view.diskView.create()
-    disk_view:setCurrentDisk("/home")
-    diskBase = ice.view.baseView.create(right_layout, disk_view, 120)
-    diskBase:setBgColor(beautiful.light_bg)
-    diskBase:setFgColor(beautiful.red)
-    diskBase:setNextColor(beautiful.dark_bg)
-    diskBase:setIcon(beautiful.disk)
-    diskBase:init()
+       disk_view = ice.view.diskView.create()
+       disk_view:setCurrentDisk("/home")
+       diskBase = ice.view.baseView.create(right_layout, disk_view, 120)
+       diskBase:setBgColor(beautiful.light_bg)
+       diskBase:setFgColor(beautiful.red)
+       diskBase:setNextColor(beautiful.dark_bg)
+       diskBase:setIcon(beautiful.disk)
+       diskBase:init()
 
-    ice.view.clockView.create(right_layout)
-
+       ice.view.clockView.create(right_layout)
+    end
+       
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
@@ -295,6 +298,26 @@ root.buttons(awful.util.table.join(
 ------------------
 globalkeys = awful.util.table.join(
 
+   -- Screen browsing
+   awful.key({modkey }, "F1",     function () awful.screen.focus(1) end),
+   awful.key({modkey }, "F2",     function () awful.screen.focus(2) end),
+
+   awful.key({ modkey, "Shift" }, "F1",
+      function ()
+         local tag = awful.tag.gettags(client.focus.screen)[i]
+         if client.focus and tag then
+            awful.client.movetoscreen(client.focus, 1)
+         end
+   end),
+
+   awful.key({ modkey, "Shift" }, "F2",
+      function ()
+         local tag = awful.tag.gettags(client.focus.screen)[i]
+         if client.focus and tag then
+            awful.client.movetoscreen(client.focus, 2)
+         end
+   end),
+   
    -- Tag browsing
     awful.key({ modkey, "Control" }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey, "Control" }, "Right",  awful.tag.viewnext       ),
@@ -427,7 +450,7 @@ for i = 1, 9 do
                         if tag then
                            awful.tag.viewonly(tag)
                         end
-                  end),
+        end),
         awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
                       local screen = mouse.screen
@@ -435,12 +458,12 @@ for i = 1, 9 do
                       if tag then
                          awful.tag.viewtoggle(tag)
                       end
-                  end),
+        end),
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
                       local tag = awful.tag.gettags(client.focus.screen)[i]
                       if client.focus and tag then
-                          awful.client.movetotag(tag)
+                         awful.client.movetotag(tag)
                       end
     end))
 end
