@@ -390,6 +390,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
+    -- display manager keys
+
+    awful.key({modkey, "Shift"}, "Delete", function() os.execute("dm-tool lock") end),
+
     -- Resize clients in layouts, doesn't seem to work
     awful.key({ modkey,  }, "v", function() awful.client.incwfact(0.01) end),
     awful.key({ modkey, "Shift"}, "v", function() awful.client.incwfact(-0.01) end),
