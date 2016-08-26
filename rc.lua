@@ -14,8 +14,8 @@ awful.rules          = require("awful.rules")
 local wibox          = require("wibox")
 local beautiful      = require("beautiful")
 local naughty        = require("naughty")
+-- Drop down console
 local drop           = require("scratchdrop")
-local eminent        = require("eminent")
 local vicious        = require("vicious")
 local ice            = require("ice")
 local dbus           = require("lua-dbus")
@@ -210,7 +210,10 @@ for s = 1, screen.count() do
                                  util.createColor(beautiful.light_bg),
                                  util.createColor(beautiful.red)),
                        beautiful.light_bg))
-    left_layout:add(wibox.widget.background(mytaglist[s], beautiful.light_bg))
+    taglist_margin =  wibox.layout.margin(wibox.widget.background(mytaglist[s], beautiful.light_bg), 0, 0)
+    taglist_margin:set_top(4)
+    taglist_margin:set_bottom(4)
+    left_layout:add(taglist_margin)
     left_layout:add(wibox.widget.background(
                        separator(util.createColor(beautiful.light_bg),
                                  util.createColor(beautiful.tasklist_bg_focus),
