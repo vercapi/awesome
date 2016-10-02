@@ -211,8 +211,7 @@ for s = 1, screen.count() do
                                  util.createColor(beautiful.red)),
                        beautiful.light_bg))
     taglist_margin =  wibox.layout.margin(wibox.widget.background(mytaglist[s], beautiful.light_bg), 0, 0)
-    taglist_margin:set_top(4)
-    taglist_margin:set_bottom(4)
+    taglist_margin:set_bottom(2)
     left_layout:add(taglist_margin)
     left_layout:add(wibox.widget.background(
                        separator(util.createColor(beautiful.light_bg),
