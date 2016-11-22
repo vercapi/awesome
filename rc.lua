@@ -94,7 +94,7 @@ netflix    = "optirun google-chrome-stable www.netflix.be --new-window"
 client_manager.run_once("compton --config ~/.config/compton.cfg")
 
 -- Media control
-client_manager.run_once("spotify")
+client_manager.run_once("clementine")
 client_manager.run_once("pavucontrol")
 
 -- Applicaiton that are used always
@@ -527,7 +527,7 @@ awful.rules.rules = {
                     callback = cleanTitleBar,
                     tag = tags[1][5]}},
 
-    { rule = {class = "Spotify"},
+    { rule = {class = "Clementine"},
       properties = {tag = tags[1][4]}},
 
     { rule = {class = "Pavucontrol"},
