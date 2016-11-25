@@ -16,7 +16,7 @@ theme.blue                                      = "#268bd2"
 theme.yellow                                    = "#b58900"
 theme.inactive_fg                               = "#657b83"
 theme.focus_dark                                = "#003d4f"
-theme.font                                      = "SquareFont 14"
+theme.font                                      = "rexlia"
 
 -- basic config
 theme.fg_normal                                 = theme.red

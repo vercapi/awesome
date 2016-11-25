@@ -23,7 +23,7 @@ function clockView.create(pLayout)
 
       -- Technically draw text
       local drawText = function(pSize, pPos, pText)
-         font="SquareFont"
+         font=beautiful.font
          font_size=pSize
          text=pText
          xpos,ypos=0,pPos
@@ -41,9 +41,9 @@ function clockView.create(pLayout)
          cr:stroke ()
       end
 
-      drawText(28, 22, os.date('%H:%M'))
-      drawText(13, 33, os.date('%A'))
-      drawText(13, 43, os.date('%d/%b/%y'))
+      drawText(23, 19, os.date('%H:%M'))
+      drawText(12, 30, os.date('%A'))
+      drawText(12, 40, os.date('%d/%b/%y'))
    end
           
    clockIcon = wibox.widget.imagebox()
