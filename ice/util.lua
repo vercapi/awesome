@@ -21,7 +21,10 @@ function util.trim(s)
 end
 
 function util.round(num, idp)
-  local mult = 10^(idp or 0)
+   local mult = 10^(idp or 0)
+   if mult == 0 then
+      mutl = 1
+   end
   return math.floor(num * mult + 0.5) / mult
 end
 
