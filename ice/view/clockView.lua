@@ -41,7 +41,7 @@ function clockView.create(pLayout)
          cr:stroke ()
       end
 
-      drawText(23, 19, os.date('%H:%M'))
+      drawText(20, 17, os.date('%H:%M'))
       drawText(12, 30, os.date('%A'))
       drawText(12, 40, os.date('%d/%b/%y'))
    end
