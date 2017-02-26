@@ -7,7 +7,7 @@ local runner    = require("ice.core.Runner")
 local base = {}
 base.__index = base
 
-function base.create(pLayout, pContent, pCycle)
+function base.create(pContent, pCycle, pSeparator)
    local l_base = {}
    setmetatable(l_base, base)
 
@@ -18,9 +18,8 @@ function base.create(pLayout, pContent, pCycle)
    end
    
    l_base.layout = wibox.layout.fixed.horizontal()
-   l_base.globalLayout = pLayout
    l_base.cycle = pCycle
-   l_base.use_separator = true
+   l_base.use_separator = pSeparator
    
    return l_base
 end
@@ -39,10 +38,6 @@ end
 
 function base:setIcon(pIcon)
    self.icon = pIcon   
-end
-
-function base:set_use_separator(pBool)
-   self.use_separator = pBool
 end
 
 function base:getLayout()
@@ -98,13 +93,9 @@ function base:init()
       self.content:init()
    end
 
-
    if(self.cycle > 0) then
       runner.create(self.cycle, base.updator(self))
    end
-
-   --add everything to the correct background
-   self.globalLayout:add(wibox.widget.background(self:getLayout(), self:getBgColor()))
 end
 
 function base.updator(pBase)

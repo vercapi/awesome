@@ -25,7 +25,7 @@ function batteryView:drawContent()
    iconMargin:set_top(2)
    iconMargin:set_bottom(2)
 
-   layout:add(iconMargin)
+   layout:add(self.batteryIcon)
    return layout
 end
 

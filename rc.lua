@@ -12,6 +12,7 @@
    local menubar = require("menubar")  
    local hotkeys_popup = require("awful.hotkeys_popup").widget
    -- Custom libs
+   local ice            = require("ice")
    local separator      = require("ice.widgets.separator")
    local util           = require("ice.util")
    local client_manager = require("ice.view.client_manager")
@@ -229,6 +230,15 @@
                       util.createColor(beautiful.tasklist_bg_focus),
                       util.createColor(beautiful.dark_bg)),
             beautiful.dark_bg)
+
+         s.separator3 = separator(util.createColor(beautiful.dark_bg),
+                                  util.createColor(beautiful.inactive_fg),
+                                  util.createColor(beautiful.dark_bg))
+
+         -- Create batery widget
+         s.bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
+         s.bat_base = ice.view.baseView.create(s.bat_view, 10, false)
+         s.bat_base:init()
    
          -- @DOC_SETUP_WIDGETS@  
          -- Add widgets to the wibox  
@@ -244,9 +254,11 @@
             },  
             s.mytasklist, -- Middle widget  
             { -- Right widgets  
-               layout = wibox.layout.fixed.horizontal,  
-               mykeyboardlayout,  
-               wibox.widget.systray(),  
+               layout = wibox.layout.fixed.horizontal,
+               s.separator3,
+               mykeyboardlayout,
+               wibox.widget.systray(),
+               s.bat_base:getLayout(),
                mytextclock,  
                s.mylayoutbox,  
             },  
