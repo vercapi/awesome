@@ -44,6 +44,10 @@ function base:getLayout()
    return self.layout
 end
 
+function base:getFinalLayout()
+   return wibox.widget.background(self.layout, self:getBgColor())
+end
+
 function base:getBgColor()
    return self.bgColor
 end
@@ -78,7 +82,7 @@ function base.createIcon(pIcon, pBgColor)
    iconMargin:set_bottom(2)
    iconMargin:set_color(pBgColor)
 
-   return iconMargin
+   return wibox.widget.background(iconMargin, pBgColor)
 end
 
 function base:init()
