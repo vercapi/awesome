@@ -8,7 +8,9 @@ local separator = require("ice.widgets.separator")
 local clockView = {}
 clockView.__index = clockView
 
-function clockView.create(pLayout)
+function clockView.create()
+   v_layout =  wibox.layout.fixed.horizontal()
+   
    local clock = {}
    setmetatable(clock, clockView)
 
@@ -54,11 +56,11 @@ function clockView.create(pLayout)
    iconMargin:set_right(5)
    iconMargin:set_left(5)
 
-   pLayout:add(iconMargin)
+   v_layout:add(iconMargin)
    
-   pLayout:add(clockWidget)
+   v_layout:add(clockWidget)
 
-   return clock
+   return v_layout
 end
 
 return clockView

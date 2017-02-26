@@ -235,11 +235,12 @@
                                   util.createColor(beautiful.inactive_fg),
                                   util.createColor(beautiful.dark_bg))
 
-         -- Create batery widget
+         -- Add batery info
          s.bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
          s.bat_base = ice.view.baseView.create(s.bat_view, 10, false)
          s.bat_base:init()
 
+         -- Add network info
          s.net_view = ice.view.networkView.create()
          s.net_view:setIface("wlp6s0")
          s.netBase = ice.view.baseView.create(s.net_view, 2, true)
@@ -248,6 +249,32 @@
          s.netBase:setNextColor(beautiful.light_bg)
          s.netBase:setIcon(beautiful.net_wireless)
          s.netBase:init()
+
+         s.memory_view = ice.view.memoryView.create()
+         s.memoryBase = ice.view.baseView.create(s.memory_view, 120, true)
+         s.memoryBase:setBgColor(beautiful.light_bg)
+         s.memoryBase:setFgColor(beautiful.green)
+         s.memoryBase:setNextColor(beautiful.dark_bg)
+         s.memoryBase:setIcon(beautiful.memory)
+         s.memoryBase:init()
+
+         s.cpu_view = ice.view.cpuView.create(beautiful.dark_bg, beautiful.blue)
+         s.cpuBase = ice.view.baseView.create(s.cpu_view, 1, true)
+         s.cpuBase:setBgColor(beautiful.dark_bg)
+         s.cpuBase:setFgColor(beautiful.blue)
+         s.cpuBase:setNextColor(beautiful.light_bg)
+         s.cpuBase:setIcon(beautiful.cpu)
+         s.cpuBase:init()
+
+         s.disk_view = ice.view.diskView.create()
+         s.disk_view:setCurrentDisk("/home")
+         s.diskBase = ice.view.baseView.create(s.disk_view, 120, false)
+         s.diskBase:setBgColor(beautiful.light_bg)
+         s.diskBase:setFgColor(beautiful.red)
+         s.diskBase:setNextColor(beautiful.dark_bg)
+         s.diskBase:setIcon(beautiful.disk)
+         s.diskBase:init()
+
    
          -- @DOC_SETUP_WIDGETS@  
          -- Add widgets to the wibox  
@@ -255,6 +282,7 @@
             layout = wibox.layout.align.horizontal,  
             { -- Left widgets
                layout = wibox.layout.fixed.horizontal,
+               wibox.widget.background(s.mylayoutbox, beautiful.dark_bg), 
                s.separator1,
                mylauncher,  
                s.mytaglist,
@@ -269,8 +297,10 @@
                wibox.widget.systray(),
                s.bat_base:getFinalLayout(),
                s.netBase:getFinalLayout(),
-               mytextclock,  
-               s.mylayoutbox,  
+               s.memoryBase:getFinalLayout(),
+               s.cpuBase:getFinalLayout(),
+               s.diskBase:getFinalLayout(),
+               ice.view.clockView.create()
             },  
          }  
    end)  
