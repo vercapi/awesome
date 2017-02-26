@@ -3,7 +3,7 @@ local util  = require("ice.util")
 
 local separator = { mt = {} }
 
-function separator:fit(width, height)
+function separator:fit(context, width, height)
    return height, height
 end
 

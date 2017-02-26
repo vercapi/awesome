@@ -10,8 +10,13 @@
    -- Notification library  
    local naughty = require("naughty")  
    local menubar = require("menubar")  
-   local hotkeys_popup = require("awful.hotkeys_popup").widget  
-     
+   local hotkeys_popup = require("awful.hotkeys_popup").widget
+   -- Custom libs
+   local separator      = require("ice.widgets.separator")
+   local util           = require("ice.util")
+   local client_manager = require("ice.view.client_manager")
+   local dimensions     = require("ice.view.dimensions")
+   
    -- {{{ Error handling  
    -- @DOC_ERROR_HANDLING@  
    -- Check if awesome encountered an error during startup and fell back to  
@@ -211,17 +216,31 @@
          
          -- @DOC_WIBAR@  
          -- Create the wibox  
-         s.mywibox = awful.wibar({ position = "top", screen = s })  
-         
+         s.mywibox = awful.wibar({ position = "top", screen = s })
+
+         s.separator1 = wibox.widget.background(
+            separator(util.createColor(beautiful.dark_bg),
+                      util.createColor(beautiful.light_bg),
+                      util.createColor(beautiful.red)),
+            beautiful.light_bg)
+
+         s.separator2 = wibox.widget.background(
+            separator(util.createColor(beautiful.light_bg),
+                      util.createColor(beautiful.tasklist_bg_focus),
+                      util.createColor(beautiful.dark_bg)),
+            beautiful.dark_bg)
+   
          -- @DOC_SETUP_WIDGETS@  
          -- Add widgets to the wibox  
          s.mywibox:setup {  
             layout = wibox.layout.align.horizontal,  
-            { -- Left widgets  
-               layout = wibox.layout.fixed.horizontal,  
+            { -- Left widgets
+               layout = wibox.layout.fixed.horizontal,
+               s.separator1,
                mylauncher,  
-               s.mytaglist,  
-               s.mypromptbox,  
+               s.mytaglist,
+               s.separator2,
+               wibox.widget.background(s.mypromptbox, beautiful.dark_bg),
             },  
             s.mytasklist, -- Middle widget  
             { -- Right widgets  
