@@ -217,7 +217,7 @@
          
          -- @DOC_WIBAR@  
          -- Create the wibox  
-         s.mywibox = awful.wibar({ position = "top", screen = s })
+         s.mywibox = awful.wibar({ position = "top", screen = s, height = dimensions.get_height_header(s) })
 
          s.separator1 = wibox.widget.background(
             separator(util.createColor(beautiful.dark_bg),
@@ -259,7 +259,7 @@
          s.memoryBase:init()
 
          s.cpu_view = ice.view.cpuView.create(beautiful.dark_bg, beautiful.blue)
-         s.cpuBase = ice.view.baseView.create(s.cpu_view, 1, true)
+         s.cpuBase = ice.view.baseView.create(s.cpu_view, 120, true)
          s.cpuBase:setBgColor(beautiful.dark_bg)
          s.cpuBase:setFgColor(beautiful.blue)
          s.cpuBase:setNextColor(beautiful.light_bg)
@@ -268,7 +268,7 @@
 
          s.disk_view = ice.view.diskView.create()
          s.disk_view:setCurrentDisk("/home")
-         s.diskBase = ice.view.baseView.create(s.disk_view, 120, false)
+         s.diskBase = ice.view.baseView.create(s.disk_view, 120, true)
          s.diskBase:setBgColor(beautiful.light_bg)
          s.diskBase:setFgColor(beautiful.red)
          s.diskBase:setNextColor(beautiful.dark_bg)
