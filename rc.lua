@@ -246,6 +246,14 @@
 
       return disk_base:getFinalLayout()
    end
+
+   local function my_separator(p_color1, p_color2, p_color3)
+      return wibox.widget.background(
+            separator(util.createColor(p_color1),
+                      util.createColor(p_color2),
+                      util.createColor(p_color3)),
+            p_color2)
+   end
    -- }}}
      
    -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)  
@@ -257,7 +265,7 @@
          set_wallpaper(s)  
      
          -- Each screen has its own tag table.  
-         awful.tag({ "x00", "x01", "x02", "x03", "x04", "x05", "x06", "x07", "x08" }, s, awful.layout.layouts[1])  
+         awful.tag({ "x01", "x02", "x03", "x04", "x05", "x06", "x07", "x08", "x09"}, s, awful.layout.layouts[1])  
      
          -- Create a promptbox for each screen  
          s.mypromptbox = awful.widget.prompt()  
@@ -279,21 +287,11 @@
          -- Create the wibox  
          s.mywibox = awful.wibar({ position = "top", screen = s, height = dimensions.get_height_header(s) })
 
-         s.separator1 = wibox.widget.background(
+         s.separator3 = wibox.widget.background(
             separator(util.createColor(beautiful.dark_bg),
-                      util.createColor(beautiful.light_bg),
-                      util.createColor(beautiful.red)),
-            beautiful.light_bg)
-
-         s.separator2 = wibox.widget.background(
-            separator(util.createColor(beautiful.light_bg),
-                      util.createColor(beautiful.tasklist_bg_focus),
-                      util.createColor(beautiful.dark_bg)),
-            beautiful.dark_bg)
-
-         s.separator3 = separator(util.createColor(beautiful.dark_bg),
                                   util.createColor(beautiful.inactive_fg),
-                                  util.createColor(beautiful.dark_bg))
+                                  util.createColor(beautiful.dark_bg)),
+            beautiful.light_bg)
    
          -- @DOC_SETUP_WIDGETS@  
          -- Add widgets to the wibox  
@@ -302,10 +300,10 @@
             { -- Left widgets
                layout = wibox.layout.fixed.horizontal,
                wibox.widget.background(s.mylayoutbox, beautiful.dark_bg), 
-               s.separator1,
+               my_separator(beautiful.dark_bg, beautiful.light_bg, beautiful.red),
                mylauncher,  
                s.mytaglist,
-               s.separator2,
+               my_separator(beautiful.light_bg, beautiful.tasklist_bg_focus, beautiful.dark_bg),
                wibox.widget.background(s.mypromptbox, beautiful.dark_bg),
             },  
             s.mytasklist, -- Middle widget  
