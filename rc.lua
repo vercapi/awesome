@@ -98,7 +98,7 @@
          end  
       end  
    end  
-   -- }}}  
+   -- }}}
      
    -- {{{ Menu  
    -- @DOC_MENU@  
@@ -186,7 +186,67 @@
          end  
          gears.wallpaper.maximized(wallpaper, s, true)  
       end  
-   end  
+   end
+
+   -- {{{ Graphic elements
+   local function battery()
+      local bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
+      local bat_base = ice.view.baseView.create(bat_view, 10, false)
+      bat_base:init()
+
+      return bat_base:getFinalLayout()
+   end
+
+   local function network()
+      net_view = ice.view.networkView.create()
+      net_view:setIface("wlp6s0")
+      net_base = ice.view.baseView.create(net_view, 2, true)
+      net_base:setBgColor(beautiful.dark_bg)
+      net_base:setFgColor(beautiful.yellow)
+      net_base:setNextColor(beautiful.light_bg)
+      net_base:setIcon(beautiful.net_wireless)
+      net_base:init()
+
+      return net_base:getFinalLayout()
+   end
+
+   local function memory()
+      memory_view = ice.view.memoryView.create()
+      memory_base = ice.view.baseView.create(memory_view, 120, true)
+      memory_base:setBgColor(beautiful.light_bg)
+      memory_base:setFgColor(beautiful.green)
+      memory_base:setNextColor(beautiful.dark_bg)
+      memory_base:setIcon(beautiful.memory)
+      memory_base:init()
+
+      return memory_base:getFinalLayout()
+   end
+
+   local function cpu()
+      cpu_view = ice.view.cpuView.create(beautiful.dark_bg, beautiful.blue)
+      cpu_base = ice.view.baseView.create(cpu_view, 2, true)
+      cpu_base:setBgColor(beautiful.dark_bg)
+      cpu_base:setFgColor(beautiful.blue)
+      cpu_base:setNextColor(beautiful.light_bg)
+      cpu_base:setIcon(beautiful.cpu)
+      cpu_base:init()
+
+      return cpu_base:getFinalLayout()
+   end
+
+   local function hdd()
+      disk_view = ice.view.diskView.create()
+      disk_view:setCurrentDisk("/home")
+      disk_base = ice.view.baseView.create(disk_view, 120, true)
+      disk_base:setBgColor(beautiful.light_bg)
+      disk_base:setFgColor(beautiful.red)
+      disk_base:setNextColor(beautiful.dark_bg)
+      disk_base:setIcon(beautiful.disk)
+      disk_base:init()
+
+      return disk_base:getFinalLayout()
+   end
+   -- }}}
      
    -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)  
    screen.connect_signal("property::geometry", set_wallpaper)  
@@ -234,47 +294,6 @@
          s.separator3 = separator(util.createColor(beautiful.dark_bg),
                                   util.createColor(beautiful.inactive_fg),
                                   util.createColor(beautiful.dark_bg))
-
-         -- Add batery info
-         s.bat_view = ice.view.batteryView.create('/org/freedesktop/UPower/devices/battery_BAT1')
-         s.bat_base = ice.view.baseView.create(s.bat_view, 10, false)
-         s.bat_base:init()
-
-         -- Add network info
-         s.net_view = ice.view.networkView.create()
-         s.net_view:setIface("wlp6s0")
-         s.netBase = ice.view.baseView.create(s.net_view, 2, true)
-         s.netBase:setBgColor(beautiful.dark_bg)
-         s.netBase:setFgColor(beautiful.yellow)
-         s.netBase:setNextColor(beautiful.light_bg)
-         s.netBase:setIcon(beautiful.net_wireless)
-         s.netBase:init()
-
-         s.memory_view = ice.view.memoryView.create()
-         s.memoryBase = ice.view.baseView.create(s.memory_view, 120, true)
-         s.memoryBase:setBgColor(beautiful.light_bg)
-         s.memoryBase:setFgColor(beautiful.green)
-         s.memoryBase:setNextColor(beautiful.dark_bg)
-         s.memoryBase:setIcon(beautiful.memory)
-         s.memoryBase:init()
-
-         s.cpu_view = ice.view.cpuView.create(beautiful.dark_bg, beautiful.blue)
-         s.cpuBase = ice.view.baseView.create(s.cpu_view, 120, true)
-         s.cpuBase:setBgColor(beautiful.dark_bg)
-         s.cpuBase:setFgColor(beautiful.blue)
-         s.cpuBase:setNextColor(beautiful.light_bg)
-         s.cpuBase:setIcon(beautiful.cpu)
-         s.cpuBase:init()
-
-         s.disk_view = ice.view.diskView.create()
-         s.disk_view:setCurrentDisk("/home")
-         s.diskBase = ice.view.baseView.create(s.disk_view, 120, true)
-         s.diskBase:setBgColor(beautiful.light_bg)
-         s.diskBase:setFgColor(beautiful.red)
-         s.diskBase:setNextColor(beautiful.dark_bg)
-         s.diskBase:setIcon(beautiful.disk)
-         s.diskBase:init()
-
    
          -- @DOC_SETUP_WIDGETS@  
          -- Add widgets to the wibox  
@@ -295,11 +314,11 @@
                s.separator3,
                mykeyboardlayout,
                wibox.widget.systray(),
-               s.bat_base:getFinalLayout(),
-               s.netBase:getFinalLayout(),
-               s.memoryBase:getFinalLayout(),
-               s.cpuBase:getFinalLayout(),
-               s.diskBase:getFinalLayout(),
+               battery(),
+               network(),
+               memory(),
+               cpu(),
+               hdd(),
                ice.view.clockView.create()
             },  
          }  
