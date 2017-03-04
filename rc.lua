@@ -306,7 +306,7 @@
                my_separator(beautiful.light_bg, beautiful.tasklist_bg_focus, beautiful.dark_bg),
                wibox.widget.background(s.mypromptbox, beautiful.dark_bg),
             },  
-            s.mytasklist, -- Middle widget  
+            wibox.widget.background(s.mytasklist, beautiful.dark_bg), -- Middle widget  
             { -- Right widgets  
                layout = wibox.layout.fixed.horizontal,
                s.separator3,
@@ -544,33 +544,32 @@
                        screen = awful.screen.preferred,  
                        placement = awful.placement.no_overlap+awful.placement.no_offscreen  
         }  
-      },  
-     
+      },
       -- @DOC_FLOATING_RULE@  
       -- Floating clients.  
       { rule_any = {  
-   instance = {  
-      "DTA", -- Firefox addon DownThemAll.  
-      "copyq", -- Includes session name in class.  
-   },  
-   class = {  
-      "Arandr",  
-      "Gpick",  
-      "Kruler",  
-      "MessageWin", -- kalarm.  
-      "Sxiv",  
-      "Wpa_gui",  
-      "pinentry",  
-      "veromix",  
-      "xtightvncviewer"},  
-   
-   name = {  
-      "Event Tester", -- xev.  
-   },  
-   role = {  
-      "AlarmWindow", -- Thunderbird's calendar.  
-      "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.  
-   }  
+           instance = {  
+              "DTA", -- Firefox addon DownThemAll.  
+              "copyq", -- Includes session name in class.  
+           },  
+           class = {  
+              "Arandr",  
+              "Gpick",  
+              "Kruler",  
+              "MessageWin", -- kalarm.  
+              "Sxiv",  
+              "Wpa_gui",  
+              "pinentry",  
+              "veromix",  
+              "xtightvncviewer"},  
+           
+           name = {  
+              "Event Tester", -- xev.  
+           },  
+           role = {  
+              "AlarmWindow", -- Thunderbird's calendar.  
+              "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.  
+           }  
       }, properties = { floating = true }},  
       
       -- @DOC_DIALOG_RULE@  
@@ -581,7 +580,29 @@
       
       -- Set Firefox to always map on the tag named "2" on screen 1.  
       -- { rule = { class = "Firefox" },  
-      -- properties = { screen = 1, tag = "2" } },  
+      -- properties = { screen = 1, tag = "2" } },
+
+      -- @DOC_CUSTOM_RULE@
+      -- My custom rules
+      { rule = { class = "Emacs"},
+        properties = {
+           maximized = false,
+           titlebars_enabled = false,
+           tag = "x02"
+        }
+      },
+      { rule = { class = "Chromium"},
+        properties = {
+           maximized = false,
+           titlebars_enabled = false,
+           tag = "x01"
+        }
+      },
+      { rule = {class = "Clementine", "Pavucontrol", "Spotify"},
+        properties = {
+           tag = "x04"
+        }
+      }
    }  
    -- }}}  
    

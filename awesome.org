@@ -79,7 +79,7 @@ ice/view -> contains functionallity for showing things
    - [[https://github.com/altercation/solarized/tree/master/gimp-palette-solarized][Color codes (gimp)]]
 
 *** TODO Create a grey scale version
-
+    
 * Functionallity
 ** System info
 *** DONE Network
@@ -176,9 +176,13 @@ ice/view -> contains functionallity for showing things
 *** TODO Change camel casing to use _
 * Migration
 ** DONE Top bar to oringal state
-** TODO Migrate keybindings
-** TODO Migrate rules
+** DONE Migrate keybindings
+   Didn't migrate kep tnew standards as they were close enough.
+** DONE Migrate rules
+** TODO Migrate application shortcuts
+** TODO Re-enable open or goto functionality
 ** TODO Use new buttons in own theme
+** TODO Set good default layout
 * Bugs/Improvements
 ** TODO Current CPU not average
 ** TODO Not just free but available memeory
