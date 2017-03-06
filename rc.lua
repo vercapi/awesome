@@ -195,7 +195,11 @@
       local bat_base = ice.view.baseView.create(bat_view, 10, false)
       bat_base:init()
 
-      return bat_base:getFinalLayout()
+      v_layout = wibox.layout.margin(bat_base:getFinalLayout(), 5, 0)
+      v_layout:set_top(5)
+      v_layout:set_bottom(5)
+
+      return v_layout
    end
 
    local function network()
@@ -255,6 +259,14 @@
                       util.createColor(p_color3)),
             p_color2)
    end
+
+   local function my_systray()
+      v_systray = wibox.layout.margin(wibox.widget.systray(), 0, 0)
+      v_systray:set_bottom(5)
+      v_systray:set_top(5)
+
+      return v_systray
+   end
    -- }}}
      
    -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)  
@@ -312,7 +324,7 @@
                layout = wibox.layout.fixed.horizontal,
                s.separator3,
                mykeyboardlayout,
-               wibox.widget.systray(),
+               my_systray(),
                battery(),
                network(),
                memory(),
