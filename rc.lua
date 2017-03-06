@@ -51,9 +51,10 @@
      
    -- @DOC_DEFAULT_APPLICATIONS@  
    -- This is used later as the default terminal and editor to run.  
-   terminal = "xterm"  
-   editor = os.getenv("EDITOR") or "nano"  
-   editor_cmd = terminal .. " -e " .. editor  
+   terminal = "urxvt"  
+   editor = "emacs"  
+   editor_cmd = editor
+   browser =  "chromium"
      
    -- Default modkey.  
    -- Usually, Mod4 is the key with a logo between Control and Alt.  
@@ -379,9 +380,7 @@
       end,  
       {description = "go back", group = "client"}),  
    
-   -- Standard program  
-   awful.key({ modkey, }, "Return", function () awful.spawn(terminal) end,  
-      {description = "open a terminal", group = "launcher"}),  
+   -- Standard program    
    awful.key({ modkey, "Control" }, "r", awesome.restart,  
       {description = "reload awesome", group = "awesome"}),  
    awful.key({ modkey, "Shift" }, "q", awesome.quit,  
@@ -432,7 +431,7 @@
    -- Menubar  
    awful.key({ modkey }, "p", function() menubar.show() end,  
       {description = "show the menubar", group = "launcher"})  
-   )  
+   )
    
    -- @DOC_CLIENT_KEYBINDINGS@  
    clientkeys = awful.util.table.join(  
@@ -464,8 +463,13 @@
             c.maximized = not c.maximized  
             c:raise()  
          end ,  
-         {description = "maximize", group = "client"})  
-   )  
+         {description = "maximize", group = "client"})  ,
+      awful.key({modkey, "Shift"}, "Delete", function() os.execute("dm-tool lock") end),
+      
+         -- @DOC_LAUNCH_CODES@
+      awful.key({ modkey, }, "Return", function () client_manager.spawn(terminal) end,  
+         {description = "open a terminal", group = "launcher"})
+   )
    
    -- @DOC_NUMBER_KEYBINDINGS@  
    -- Bind all key numbers to tags.  
