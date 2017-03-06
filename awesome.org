@@ -179,13 +179,14 @@ ice/view -> contains functionallity for showing things
 ** DONE Migrate keybindings
    Didn't migrate kep tnew standards as they were close enough.
 ** DONE Migrate rules
-** TODO Migrate application shortcuts
-** TODO Re-enable open or goto functionality
-** TODO Use new buttons in own theme
+** DONE Migrate application shortcuts
+** DONE Re-enable open or goto functionality
+** DONE Use new buttons in own theme
 ** TODO Set good default layout
 * Bugs/Improvements
 ** TODO Current CPU not average
 ** TODO Not just free but available memeory
+** TODO No warning when network is wired
 * Technical documentation
   Documentation on tools, libraries, etc. that are used in this awesom configuratio
 
