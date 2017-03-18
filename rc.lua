@@ -307,32 +307,48 @@
             beautiful.light_bg)
    
          -- @DOC_SETUP_WIDGETS@  
-         -- Add widgets to the wibox  
-         s.mywibox:setup {  
-            layout = wibox.layout.align.horizontal,  
-            { -- Left widgets
-               layout = wibox.layout.fixed.horizontal,
-               wibox.widget.background(s.mylayoutbox, beautiful.dark_bg), 
-               my_separator(beautiful.dark_bg, beautiful.light_bg, beautiful.red),
-               mylauncher,  
-               s.mytaglist,
-               my_separator(beautiful.light_bg, beautiful.tasklist_bg_focus, beautiful.dark_bg),
-               wibox.widget.background(s.mypromptbox, beautiful.dark_bg),
-            },  
-            wibox.widget.background(s.mytasklist, beautiful.dark_bg), -- Middle widget  
-            { -- Right widgets  
-               layout = wibox.layout.fixed.horizontal,
-               s.separator3,
-               mykeyboardlayout,
-               my_systray(),
-               battery(),
-               network(),
-               memory(),
-               cpu(),
-               hdd(),
-               ice.view.clockView.create()
-            },  
-         }  
+         -- Add widgets to the wibox
+         if s.index == 1 then
+            s.mywibox:setup {  
+               layout = wibox.layout.align.horizontal,  
+               { -- Left widgets
+                  layout = wibox.layout.fixed.horizontal,
+                  wibox.widget.background(s.mylayoutbox, beautiful.dark_bg), 
+                  my_separator(beautiful.dark_bg, beautiful.light_bg, beautiful.red),
+                  mylauncher,  
+                  s.mytaglist,
+                  my_separator(beautiful.light_bg, beautiful.tasklist_bg_focus, beautiful.dark_bg),
+                  wibox.widget.background(s.mypromptbox, beautiful.dark_bg),
+               },  
+               wibox.widget.background(s.mytasklist, beautiful.dark_bg), -- Middle widget  
+               { -- Right widgets  
+                  layout = wibox.layout.fixed.horizontal,
+                  s.separator3,
+                  mykeyboardlayout,
+                  my_systray(),
+                  battery(),
+                  network(),
+                  memory(),
+                  cpu(),
+                  hdd(),
+                  ice.view.clockView.create()
+               },  
+            }
+         else
+            s.mywibox:setup {  
+               layout = wibox.layout.align.horizontal,  
+               { -- Left widgets
+                  layout = wibox.layout.fixed.horizontal,
+                  wibox.widget.background(s.mylayoutbox, beautiful.dark_bg), 
+                  my_separator(beautiful.dark_bg, beautiful.light_bg, beautiful.red),
+                  mylauncher,  
+                  s.mytaglist,
+                  my_separator(beautiful.light_bg, beautiful.tasklist_bg_focus, beautiful.dark_bg),
+                  wibox.widget.background(s.mypromptbox, beautiful.dark_bg),
+               },  
+               wibox.widget.background(s.mytasklist, beautiful.dark_bg)
+            }
+         end
    end)  
    -- }}}  
      
