@@ -28,14 +28,14 @@ function cpuView:drawContent()
 end
 
 function cpuView:drawGraph(pLayout)
-   self.cpuGraph = awful.widget.graph()
+   self.cpuGraph = wibox.widget.graph()
    self.cpuGraph:set_width(70)
    self.cpuGraph:set_background_color(self.bg_color)
    self.cpuGraph:set_color(self.fg_color)
    self.cpuGraph:set_scale(true)
 
    -- Ensuring the correct placement of the graph+box
-   cpu_margin = wibox.layout.margin(self.cpuGraph, 0, 0)
+   cpu_margin = wibox.container.margin(self.cpuGraph, 0, 0)
    cpu_margin:set_top(2)
    cpu_margin:set_bottom(0)
    

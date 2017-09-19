@@ -31,27 +31,28 @@ end
 
 
 function disk:showDiskGraph(pLayout)
-   self.diskGraph = awful.widget.progressbar()
+   self.diskGraph = wibox.widget.progressbar()
    self.diskGraph:set_color(beautiful.fg_normal)
    self.diskGraph:set_background_color(theme.bg_normal)
-   self.diskGraph:set_width(100)
-   self.diskGraph:set_height(15)
+   
    self.diskGraph:set_ticks(true)
    self.diskGraph:set_ticks_size(15)
 
+   constraintBox = wibox.container.constraint(self.diskGraph, 'max', 100, 15)
+   
    -- Create a whitespacing between the graph and the box
-   innerBox = wibox.layout.margin(self.diskGraph, 1, 1)
+   innerBox = wibox.container.margin(constraintBox, 1, 1)
    innerBox:set_top(1)
    innerBox:set_bottom(1)
 
    -- Drawing the actual box around the graph
-   box = wibox.layout.margin(innerBox, 1, 1)
+   box = wibox.container.margin(innerBox, 1, 1)
    box:set_top(1)
    box:set_bottom(1)
    box:set_color(beautiful.fg_normal)
 
    -- Ensuring the correct placement of the graph+box
-   diskmargin = wibox.layout.margin(box, 0, 0)
+   diskmargin = wibox.container.margin(box, 0, 0)
    diskmargin:set_top(2)
    diskmargin:set_bottom(0)
 

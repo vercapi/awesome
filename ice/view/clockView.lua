@@ -20,7 +20,7 @@ function clockView.create()
    clockWidget.fit = function(clockWidget, width, height)
        return 70, height
    end
-   
+
    clockWidget.draw = function(clockWidget, wibox, cr, width, height)
 
       -- Technically draw text
@@ -50,7 +50,7 @@ function clockView.create()
           
    clockIcon = wibox.widget.imagebox()
    clockIcon:set_image(beautiful.clock)
-   iconMargin = wibox.layout.margin(clockIcon, 0, 0)
+   iconMargin = wibox.container.margin(clockIcon, 0, 0)
    iconMargin:set_top(3)
    iconMargin:set_bottom(3)
    iconMargin:set_right(5)

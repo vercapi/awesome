@@ -21,7 +21,7 @@ function batteryView:drawContent()
    self.batteryIcon = wibox.widget.imagebox()
    self.batteryIcon:set_image(beautiful.bat_empty)
 
-   iconMargin = wibox.layout.margin(self.batteryIcon, 2, 2)
+   iconMargin = wibox.container.margin(self.batteryIcon, 2, 2)
    iconMargin:set_top(2)
    iconMargin:set_bottom(2)
 

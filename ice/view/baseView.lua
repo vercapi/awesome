@@ -1,7 +1,7 @@
 local wibox     = require("wibox")
 local util      = require("ice.util")
 local separator = require("ice.widgets.separator")
-local runner    = require("ice.core.Runner")
+local gears     = require("gears")
 
 
 local base = {}
@@ -45,7 +45,7 @@ function base:getLayout()
 end
 
 function base:getFinalLayout()
-   return wibox.widget.background(self.layout, self:getBgColor())
+   return wibox.container.background(self.layout, self:getBgColor())
 end
 
 function base:getBgColor()
@@ -77,12 +77,12 @@ end
 
 function base.createIcon(pIcon, pBgColor)
 
-   iconMargin = wibox.layout.margin(pIcon, 2, 2)
+   iconMargin = wibox.container.margin(pIcon, 2, 2)
    iconMargin:set_top(2)
    iconMargin:set_bottom(2)
    iconMargin:set_color(pBgColor)
 
-   return wibox.widget.background(iconMargin, pBgColor)
+   return wibox.container.background(iconMargin, pBgColor)
 end
 
 function base:init()
@@ -98,7 +98,12 @@ function base:init()
    end
 
    if(self.cycle > 0) then
-      runner.create(self.cycle, base.updator(self))
+      gears.timer {
+         timeout   = self.cycle,
+         autostart = true,
+         callback  = base.updator(self)
+      }
+
    end
 end
 
@@ -124,7 +129,7 @@ end
 function base:showStatus()
    self.statusImage = wibox.widget.imagebox()
 
-   imageMargin = wibox.layout.margin(self.statusImage, 2, 2)
+   imageMargin = wibox.container.margin(self.statusImage, 2, 2)
    imageMargin:set_top(2)
    imageMargin:set_bottom(25)
    imageMargin:set_color(self:getBgColor())

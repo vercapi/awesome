@@ -35,7 +35,7 @@ function networkView:drawContent()
 end
 
 function networkView.createGraph()
-   graph = awful.widget.graph()   
+   graph = wibox.widget.graph()   
    graph:set_width(70)
    graph:set_background_color("#002b36")
    graph:set_color("#b58900")
@@ -45,11 +45,11 @@ function networkView.createGraph()
 end
 
 function networkView.addGraph(pGraph, pLayout)
-   margin = wibox.layout.margin(pGraph, 2, 2)
+   margin = wibox.container.margin(pGraph, 2, 2)
    margin:set_top(5)
    margin:set_bottom(5)
 
-   pLayout:add(wibox.widget.background(margin, beautiful.dark_bg))
+   pLayout:add(wibox.container.background(margin, beautiful.dark_bg))
 end
 
 function networkView:init()

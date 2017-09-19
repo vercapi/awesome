@@ -128,8 +128,6 @@
    mykeyboardlayout = awful.widget.keyboardlayout()  
      
    -- {{{ Wibar  
-   -- Create a textclock widget  
-   mytextclock = wibox.widget.textclock()  
      
    -- Create a wibox for each screen and add it  
    -- @TAGLIST_BUTTON@  
@@ -195,7 +193,7 @@
       local bat_base = ice.view.baseView.create(bat_view, 10, false)
       bat_base:init()
 
-      v_layout = wibox.layout.margin(bat_base:getFinalLayout(), 5, 0)
+      v_layout = wibox.container.margin(bat_base:getFinalLayout(), 5, 0)
       v_layout:set_top(5)
       v_layout:set_bottom(5)
 
@@ -253,7 +251,7 @@
    end
 
    local function my_separator(p_color1, p_color2, p_color3)
-      return wibox.widget.background(
+      return wibox.container.background(
             separator(util.createColor(p_color1),
                       util.createColor(p_color2),
                       util.createColor(p_color3)),
@@ -261,7 +259,7 @@
    end
 
    local function my_systray()
-      v_systray = wibox.layout.margin(wibox.widget.systray(), 0, 0)
+      v_systray = wibox.container.margin(wibox.widget.systray(), 0, 0)
       v_systray:set_bottom(5)
       v_systray:set_top(5)
 
@@ -300,7 +298,7 @@
          -- Create the wibox  
          s.mywibox = awful.wibar({ position = "top", screen = s, height = dimensions.get_height_header(s) })
 
-         s.separator3 = wibox.widget.background(
+         s.separator3 = wibox.container.background(
             separator(util.createColor(beautiful.dark_bg),
                                   util.createColor(beautiful.inactive_fg),
                                   util.createColor(beautiful.dark_bg)),
@@ -313,14 +311,14 @@
                layout = wibox.layout.align.horizontal,  
                { -- Left widgets
                   layout = wibox.layout.fixed.horizontal,
-                  wibox.widget.background(s.mylayoutbox, beautiful.dark_bg), 
+                  wibox.container.background(s.mylayoutbox, beautiful.dark_bg), 
                   my_separator(beautiful.dark_bg, beautiful.light_bg, beautiful.red),
                   mylauncher,  
                   s.mytaglist,
                   my_separator(beautiful.light_bg, beautiful.tasklist_bg_focus, beautiful.dark_bg),
-                  wibox.widget.background(s.mypromptbox, beautiful.dark_bg),
+                  wibox.container.background(s.mypromptbox, beautiful.dark_bg),
                },  
-               wibox.widget.background(s.mytasklist, beautiful.dark_bg), -- Middle widget  
+               wibox.container.background(s.mytasklist, beautiful.dark_bg), -- Middle widget  
                { -- Right widgets  
                   layout = wibox.layout.fixed.horizontal,
                   s.separator3,
@@ -339,14 +337,14 @@
                layout = wibox.layout.align.horizontal,  
                { -- Left widgets
                   layout = wibox.layout.fixed.horizontal,
-                  wibox.widget.background(s.mylayoutbox, beautiful.dark_bg), 
+                  wibox.container.background(s.mylayoutbox, beautiful.dark_bg), 
                   my_separator(beautiful.dark_bg, beautiful.light_bg, beautiful.red),
                   mylauncher,  
                   s.mytaglist,
                   my_separator(beautiful.light_bg, beautiful.tasklist_bg_focus, beautiful.dark_bg),
-                  wibox.widget.background(s.mypromptbox, beautiful.dark_bg),
+                  wibox.container.background(s.mypromptbox, beautiful.dark_bg),
                },  
-               wibox.widget.background(s.mytasklist, beautiful.dark_bg)
+               wibox.container.background(s.mytasklist, beautiful.dark_bg)
             }
          end
    end)  
@@ -475,7 +473,7 @@
          {description = "toggle floating", group = "client"}),  
       awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,  
          {description = "move to master", group = "client"}),  
-      awful.key({ modkey, }, "o", function (c) c:move_to_screen() end,  
+      awful.key({ modkey, "Shift"}, "o", function (c) c:move_to_screen() end,  
          {description = "move to screen", group = "client"}),  
       awful.key({ modkey, }, "t", function (c) c.ontop = not c.ontop end,  
          {description = "toggle keep on top", group = "client"}),  
@@ -534,9 +532,9 @@
          client.focus:move_to_tag(tag)  
       end  
    end  
-                                            end,  
-                                            {description = "move focused client to tag #"..i, group = "tag"}),  
-                                         -- Toggle tag on focused client.  
+   end,  
+  {description = "move focused client to tag #"..i, group = "tag"}),  
+  -- Toggle tag on focused client.  
    awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,  
       function ()  
          if client.focus then  

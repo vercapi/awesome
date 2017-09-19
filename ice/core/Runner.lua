@@ -1,5 +1,6 @@
 
 local naughty = require("naughty")
+local gears = require("gears")
 local cp = {timer = timer}
 
 local SIGNAL = "timeout"
@@ -10,15 +11,13 @@ Runner.__index = Runner
 
 -- pTimeout for the refresh in seconds
 function Runner.create(pTimeout, pFunction)
-   local runner = {}
-   setmetatable(runner, Runner)
-   runner.listeners = {}
 
-   runner.myTimer = cp.timer({timeout = pTimeout})
-   runner.myTimer:connect_signal(SIGNAL, pFunction)
-   runner.myTimer:start()
-   
-   return runner
+   gears.timer {
+     timeout   = pTimeout,
+      autostart = true,
+     callback  = pFunction
+  }
+
 end
 
 return Runner

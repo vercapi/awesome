@@ -187,6 +187,8 @@ ice/view -> contains functionallity for showing things
 ** TODO Current CPU not average
 ** TODO Not just free but available memeory
 ** TODO No warning when network is wired
+** TODO Clock only updates every few minutes
+** TODO Switching to second screen doesn't work
 * Technical documentation
   Documentation on tools, libraries, etc. that are used in this awesom configuratio
 
@@ -225,7 +227,7 @@ ice/view -> contains functionallity for showing things
 
 *** Resize, layout component instead of using all available space
 #+BEGIN_SRC lua
-  iconMargin = wibox.layout.margin(clockIcon, 0, 0)
+  iconMargin = wibox.container.margin(clockIcon, 0, 0)
   iconMargin:set_top(3)
   iconMargin:set_bottom(3)
   iconMargin:set_right(5)
