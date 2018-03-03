@@ -97,10 +97,14 @@ ice/view -> contains functionallity for showing things
    Show load with graph
 *** DONE Disk
    Show /home as first disk
-   
+*** TODO Clock
+    
+    digital -> Doesn't update correctly
+    analog
+    
 *** TODO Music/volume
 ** Detailed system info
-    When clicking on the graphs addtional info and possible actions
+   When clicking on the graphs addtional info and possible actions
 *** TODO Network
    Create a detail window with a list of every interface
    - with a hisotry graph
