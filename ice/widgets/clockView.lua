@@ -5,12 +5,17 @@ local util      = require("ice.util")
 local beautiful = require("beautiful")
 local separator = require("ice.widgets.separator")
 local base = require("wibox.widget.base")
+local naughty = require("naughty")
 
 local clockView = { mt = {} }
 clockView.__index = clockView
 
 function clockView:fit(context, width, height)
    return 70, height
+end
+
+function clockView:refresh()
+   self:emit_signal("widget::redraw_needed")
 end
 
 function clockView:draw (wibox, cr, width, height)
@@ -35,7 +40,7 @@ function clockView:draw (wibox, cr, width, height)
       cr:stroke ()
    end
 
-   drawText(12, 17, os.date('%H:%M:%S'))
+   drawText(20, 17, os.date('%H:%M'))
    drawText(12, 30, os.date('%A'))
    drawText(12, 40, os.date('%d/%b/%y'))
 end

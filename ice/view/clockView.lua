@@ -5,6 +5,7 @@ local util      = require("ice.util")
 local beautiful = require("beautiful")
 local separator = require("ice.widgets.separator")
 local clockWidget = require("ice.widgets.clockView")
+local gears     = require("gears")
 
 local clockView = {}
 clockView.__index = clockView
@@ -22,7 +23,13 @@ function clockView.create()
 
    v_layout =  wibox.layout.fixed.horizontal()
    v_layout:add(iconMargin)
-   v_layout:add(clockWidget())
+   v_widget = clockWidget()
+   v_layout:add(v_widget)
+
+   v_clock_timer = gears.timer({timeout = 60})
+   v_clock_timer:connect_signal("timeout", function() v_widget:refresh()  end) 
+   v_clock_timer:start()
+   v_clock_timer:emit_signal("timeout") 
    
    return v_layout
 end
