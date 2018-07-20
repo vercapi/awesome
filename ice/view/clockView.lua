@@ -10,6 +10,10 @@ local gears     = require("gears")
 local clockView = {}
 clockView.__index = clockView
 
+local function get_timeout()
+   return 60 - os.time() % 60
+end
+
 function clockView.create()
 
    clockIcon = wibox.widget.imagebox()
@@ -26,8 +30,8 @@ function clockView.create()
    v_widget = clockWidget()
    v_layout:add(v_widget)
 
-   v_clock_timer = gears.timer({timeout = 60})
-   v_clock_timer:connect_signal("timeout", function() v_widget:refresh()  end) 
+   v_clock_timer = gears.timer({timeout = get_timeout()})
+   v_clock_timer:connect_signal("timeout", function() v_widget:refresh() v_clock_timer.timeout = get_timeout() end) 
    v_clock_timer:start()
    v_clock_timer:emit_signal("timeout") 
    

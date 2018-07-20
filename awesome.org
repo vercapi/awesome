@@ -99,9 +99,9 @@ ice/view -> contains functionallity for showing things
    Show /home as first disk
 *** TODO Clock
     
-    digital -> Doesn't update correctly
-    analog
+    Digital clock updates now on the minute. In practice this is sometimes a few seconds off.
     
+**** QAnalog clock
 *** TODO Music/volume
 ** Detailed system info
    When clicking on the graphs addtional info and possible actions
