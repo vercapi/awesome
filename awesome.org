@@ -178,6 +178,11 @@ ice/view -> contains functionallity for showing things
 ** Code
 *** TODO Make rc.lua in org mode
 *** TODO Change camel casing to use _
+** TODO Mutliple screen management
+
+   easy add/remove monitor
+   copy/move the windows between moinitors
+
 * Migration
 ** DONE Top bar to oringal state
 ** DONE Migrate keybindings
