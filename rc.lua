@@ -342,9 +342,14 @@
                   mylauncher,  
                   s.mytaglist,
                   my_separator(beautiful.light_bg, beautiful.tasklist_bg_focus, beautiful.dark_bg),
-                  wibox.container.background(s.mypromptbox, beautiful.dark_bg),
+                  wibox.container.background(s.mypromptbox, beautiful.dark_bg)
                },  
-               wibox.container.background(s.mytasklist, beautiful.dark_bg)
+               wibox.container.background(s.mytasklist, beautiful.dark_bg),
+               {
+                  layout = wibox.layout.fixed.horizontal,
+                  s.separator3,
+                  ice.view.clockView.create()
+               }
             }
          end
    end)  
