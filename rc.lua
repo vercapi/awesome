@@ -324,11 +324,11 @@
                   s.separator3,
                   mykeyboardlayout,
                   my_systray(),
-                  battery(),
-                  network(),
-                  memory(),
-                  cpu(),
-                  hdd(),
+                  --battery(),
+                  --network(),
+                  --memory(),
+                  --cpu(),
+                  --hdd(),
                   ice.view.clockView.create()
                },  
             }
