@@ -393,6 +393,23 @@ ice/view -> contains functionallity for showing things
     #+BEGIN_SRC lua
     package.path = package.path .. ';../../../?.lua'
     #+END_SRC 
+
+*** Testing awesome wm
+
+    Testing without actually needing to restart the running awesome wm.
+    
+    Install xephyr 
+    #+BEGIN_SRC shell
+    pacman -S xorg-server-xephyr
+    #+END_SRC
+    xephyr can show a x server inside of a window.
+
+    Get the testing tool [[https://github.com/serialoverflow/awmtt][awmtt]]
+    #+BEGIN_SRC sh
+    wget -O ./awmtt  https://raw.githubusercontent.com/mikar/awmtt/master/awmtt.sh
+    chmod u+x ./awmtt
+    #+END_SRC
+
 ** Tools
 *** xprop, check windows
     
