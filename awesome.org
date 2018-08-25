@@ -99,7 +99,9 @@ ice/view -> contains functionallity for showing things
    Show /home as first disk
 *** TODO Clock
     
-    Digital clock updates now on the minute. In practice this is sometimes a few seconds off.
+    - [ ] Digital clock updates now on the minute. In practice this is sometimes a few seconds off.
+    - [ ] Clock doesn't function whith 2 screens. Time only updates on screen that is added as last one.
+    - [ ] Only display time, hover shows the date
     
 **** QAnalog clock
 *** TODO Music/volume
@@ -180,8 +182,9 @@ ice/view -> contains functionallity for showing things
 *** TODO Change camel casing to use _
 ** TODO Mutliple screen management
 
-   easy add/remove monitor
-   copy/move the windows between moinitors
+   - [ ] easy add/remove monitor
+   - [ ] copy/move the windows between moinitors
+   - [ ] Select the main window (for interface components)
 
 * Migration
 ** DONE Top bar to oringal state
@@ -412,7 +415,7 @@ ice/view -> contains functionallity for showing things
 
 ** Tools
 *** xprop, check windows
-    
+kk    
     #+BEGIN_SRC sh
     xprop
     #+END_SRC
@@ -446,4 +449,3 @@ ice/view -> contains functionallity for showing things
     WM_COMMAND(STRING) = { "clementine" }
 
     More [[https://awesome.naquadah.org/wiki/Understanding_Rules][documentation]]
-
